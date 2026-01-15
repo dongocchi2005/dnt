@@ -1,0 +1,253 @@
+body.profile-settings {
+  --bg0: #0b1020;
+  --bg1: #070a12;
+  --card: rgba(255, 255, 255, 0.12);
+  --card2: rgba(255, 255, 255, 0.08);
+  --surface: rgba(255, 255, 255, 0.06);
+  --surface2: rgba(255, 255, 255, 0.1);
+  --line: rgba(255, 255, 255, 0.16);
+  --text: #e5e7eb;
+  --muted: #9ca3af;
+  --brand: #7c3aed;
+  --brand2: #22c55e;
+  --danger: #ef4444;
+  --r14: 14px;
+  --r18: 18px;
+  --shadow: 0 18px 60px rgba(0, 0, 0, 0.35);
+  --label: rgba(229, 231, 235, 0.9);
+  --placeholder: rgba(156, 163, 175, 0.78);
+  --input-bg: rgba(3, 6, 16, 0.35);
+  --input-bg-focus: rgba(3, 6, 16, 0.5);
+  --input-line: rgba(255, 255, 255, 0.16);
+  --btn-light-bg: rgba(255, 255, 255, 0.06);
+  --btn-light-bg-hover: rgba(255, 255, 255, 0.1);
+  margin: 0;
+  min-height: 100vh;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+  color: var(--text);
+  background:
+    radial-gradient(1000px 600px at 10% -10%, rgba(124, 58, 237, 0.55), transparent 60%),
+    radial-gradient(900px 520px at 95% 0%, rgba(34, 197, 94, 0.35), transparent 55%),
+    radial-gradient(1100px 800px at 50% 120%, rgba(59, 130, 246, 0.25), transparent 55%),
+    linear-gradient(180deg, var(--bg0), var(--bg1));
+}
+
+html[data-theme="light"] body.profile-settings {
+  --bg0: #f8fafc;
+  --bg1: #eef2ff;
+  --card: rgba(255, 255, 255, 0.92);
+  --card2: rgba(255, 255, 255, 0.82);
+  --surface: rgba(15, 23, 42, 0.04);
+  --surface2: rgba(15, 23, 42, 0.06);
+  --line: rgba(15, 23, 42, 0.12);
+  --text: #0f172a;
+  --muted: rgba(15, 23, 42, 0.7);
+  --label: rgba(15, 23, 42, 0.9);
+  --placeholder: rgba(15, 23, 42, 0.45);
+  --input-bg: rgba(255, 255, 255, 0.95);
+  --input-bg-focus: rgba(255, 255, 255, 1);
+  --input-line: rgba(15, 23, 42, 0.18);
+  --btn-light-bg: rgba(15, 23, 42, 0.04);
+  --btn-light-bg-hover: rgba(15, 23, 42, 0.07);
+  --shadow: 0 18px 60px rgba(2, 6, 23, 0.12);
+  background:
+    radial-gradient(1000px 600px at 10% -10%, rgba(124, 58, 237, 0.18), transparent 60%),
+    radial-gradient(900px 520px at 95% 0%, rgba(34, 197, 94, 0.14), transparent 55%),
+    radial-gradient(1100px 800px at 50% 120%, rgba(59, 130, 246, 0.12), transparent 55%),
+    linear-gradient(180deg, var(--bg0), var(--bg1));
+}
+
+body.profile-settings * { box-sizing: border-box; }
+
+.profile-settings .container {
+  max-width: 980px;
+  margin: 44px auto;
+  padding: 0 18px;
+}
+
+.profile-settings .topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.profile-settings .title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.profile-settings .title:before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: 99px;
+  background: linear-gradient(135deg, var(--brand), #60a5fa);
+  box-shadow: 0 0 0 6px rgba(124, 58, 237, 0.16);
+}
+
+.profile-settings .card {
+  position: relative;
+  background: linear-gradient(180deg, var(--card), var(--card2));
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  padding: 22px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+}
+
+.profile-settings .card:before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  background:
+    radial-gradient(500px 240px at 18% 10%, rgba(124, 58, 237, 0.25), transparent 60%),
+    radial-gradient(520px 260px at 85% 0%, rgba(34, 197, 94, 0.18), transparent 55%);
+  pointer-events: none;
+}
+
+.profile-settings .card > * { position: relative; }
+
+.profile-settings .row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.profile-settings .row-1 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+
+@media (max-width: 720px) {
+  .profile-settings .row { grid-template-columns: 1fr; }
+  .profile-settings .topbar { flex-direction: column; align-items: flex-start; }
+}
+
+.profile-settings .section-title {
+  margin: 0 0 6px;
+  font-size: 15px;
+  font-weight: 900;
+  letter-spacing: -0.01em;
+}
+
+.profile-settings .muted { color: var(--muted); font-size: 13px; line-height: 1.45; }
+
+.profile-settings .divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--line), transparent);
+  margin: 18px 0;
+}
+
+.profile-settings label {
+  font-weight: 700;
+  font-size: 13px;
+  display: block;
+  margin: 0 0 8px;
+  color: var(--label);
+}
+
+.profile-settings input {
+  width: 100%;
+  padding: 12px 12px;
+  border: 1px solid var(--input-line);
+  border-radius: var(--r18);
+  outline: none;
+  background: var(--input-bg);
+  color: var(--text);
+  font-size: 14px;
+  transition: border-color 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+}
+
+.profile-settings input:focus {
+  border-color: rgba(124, 58, 237, 0.55);
+  box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.22);
+  background: var(--input-bg-focus);
+}
+
+.profile-settings input::placeholder { color: var(--placeholder); }
+
+.profile-settings input[readonly] {
+  opacity: 0.75;
+  cursor: not-allowed;
+}
+
+.profile-settings .actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
+
+.profile-settings .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease, border-color 0.12s ease, opacity 0.12s ease;
+  user-select: none;
+}
+
+.profile-settings .btn:active { transform: translateY(1px); }
+
+.profile-settings .btn-primary {
+  color: white;
+  border-color: transparent;
+  background: linear-gradient(135deg, var(--brand), #3b82f6);
+  box-shadow: 0 10px 25px rgba(124, 58, 237, 0.28);
+}
+
+.profile-settings .btn-primary:hover {
+  box-shadow: 0 16px 35px rgba(124, 58, 237, 0.35);
+}
+
+.profile-settings .btn-light {
+  color: var(--text);
+  background: var(--btn-light-bg);
+}
+
+.profile-settings .btn-light:hover { background: var(--btn-light-bg-hover); }
+
+.profile-settings .alert {
+  padding: 12px 14px;
+  border-radius: 16px;
+  margin: 12px 0;
+  font-size: 14px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.profile-settings .alert-success {
+  border-color: rgba(34, 197, 94, 0.35);
+  background: linear-gradient(180deg, rgba(34, 197, 94, 0.14), rgba(34, 197, 94, 0.06));
+}
+
+.profile-settings .alert-error {
+  border-color: rgba(239, 68, 68, 0.35);
+  background: linear-gradient(180deg, rgba(239, 68, 68, 0.14), rgba(239, 68, 68, 0.06));
+}
+
+.profile-settings ul { margin: 8px 0 0 18px; }
+
+.profile-settings .actions-top {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}

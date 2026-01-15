@@ -1,0 +1,29 @@
+/* ================= BLOG INDEX ================= */
+body[data-page="blog.index"] .blog-title{ color: var(--text); }
+body[data-page="blog.index"] .blog-sub{ color: var(--muted); }
+body[data-page="blog.index"] .blog-link{ color: var(--text); }
+body[data-page="blog.index"] .blog-date{ color: var(--muted); }
+body[data-page="blog.index"] .blog-excerpt{ color: var(--muted); }
+body[data-page="blog.index"] .blog-empty-title{ color: var(--text); }
+body[data-page="blog.index"] .blog-empty-sub{ color: var(--muted); }
+.post-prose{
+  max-width: 68ch;
+  font-size: 16px;
+  line-height: 1.95;
+  color: rgba(255,255,255,.88);
+}
+
+.post-prose p{ margin: 0.95em 0; }
+.post-prose h2{
+  margin: 2.1em 0 .7em;
+  font-size: 1.45em;
+  font-weight: 900;
+}
+.post-prose h3{
+  margin: 1.7em 0 .6em;
+  font-size: 1.15em;
+  font-weight: 800;
+}
+.post-prose ul, .post-prose ol{
+  margin: 1em 0 1em 1.25em;
+}

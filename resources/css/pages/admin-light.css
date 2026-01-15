@@ -1,0 +1,462 @@
+/* ===== ADMIN LIGHT THEME - CYBER PREMIUM LIGHT ===== */
+/* Apply to html[data-theme="light"] body.ui-admin */
+
+html[data-theme="light"] body.ui-admin {
+  /* Page background - clean light gradient */
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #cbd5e1 100%);
+  color: #0f172a;
+}
+
+/* ===== SIDEBAR - LIGHT THEME ===== */
+html[data-theme="light"] body.ui-admin .sidebar {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-right: 1px solid rgba(34, 211, 238, 0.15);
+  box-shadow:
+    2px 0 20px rgba(0, 0, 0, 0.08),
+    0 0 40px rgba(34, 211, 238, 0.06);
+}
+
+html[data-theme="light"] body.ui-admin .brand-badge {
+  border-bottom: 1px solid rgba(34, 211, 238, 0.1);
+}
+
+html[data-theme="light"] body.ui-admin .brand-badge h1.neon {
+  color: #0f172a;
+  text-shadow: 0 0 12px rgba(34, 211, 238, 0.3);
+}
+
+html[data-theme="light"] body.ui-admin .brand-badge p {
+  color: #64748b;
+}
+
+/* Sidebar Links - Light */
+html[data-theme="light"] body.ui-admin .sidebar-link {
+  color: #475569;
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(34, 211, 238, 0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: all 0.3s ease;
+}
+
+html[data-theme="light"] body.ui-admin .sidebar-link:hover {
+  background: rgba(34, 211, 238, 0.08);
+  border-color: rgba(34, 211, 238, 0.2);
+  color: #0891b2;
+  box-shadow:
+    0 4px 16px rgba(34, 211, 238, 0.1),
+    0 0 12px rgba(34, 211, 238, 0.08);
+  transform: translateX(4px);
+}
+
+html[data-theme="light"] body.ui-admin .sidebar-link.active {
+  background: rgba(34, 211, 238, 0.1);
+  border-color: rgba(34, 211, 238, 0.3);
+  color: #0891b2;
+  box-shadow:
+    0 4px 20px rgba(34, 211, 238, 0.15),
+    0 0 16px rgba(34, 211, 238, 0.1);
+  font-weight: 600;
+}
+
+html[data-theme="light"] body.ui-admin .sidebar-link i {
+  color: #0891b2;
+  text-shadow: 0 0 6px rgba(34, 211, 238, 0.3);
+}
+
+/* ===== TOPBAR - LIGHT THEME ===== */
+html[data-theme="light"] body.ui-admin .topbar {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(34, 211, 238, 0.15);
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
+}
+
+html[data-theme="light"] body.ui-admin .topbar h2.neon {
+  color: #0f172a;
+  text-shadow: 0 0 8px rgba(34, 211, 238, 0.2);
+}
+
+html[data-theme="light"] body.ui-admin .hud-dot {
+  background: rgba(34, 211, 238, 0.6);
+  box-shadow: 0 0 12px rgba(34, 211, 238, 0.4);
+}
+
+html[data-theme="light"] body.ui-admin .hud-chip {
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(34, 211, 238, 0.2);
+  color: #475569;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Theme Toggle Button - Light */
+html[data-theme="light"] body.ui-admin #themeToggle {
+  background: rgba(34, 211, 238, 0.1) !important;
+  border-color: rgba(34, 211, 238, 0.3) !important;
+  color: #0891b2;
+  box-shadow:
+    0 2px 12px rgba(34, 211, 238, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+html[data-theme="light"] body.ui-admin #themeToggle:hover {
+  background: rgba(34, 211, 238, 0.15) !important;
+  border-color: rgba(34, 211, 238, 0.4) !important;
+  box-shadow:
+    0 4px 16px rgba(34, 211, 238, 0.15),
+    0 0 12px rgba(34, 211, 238, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+/* ===== MAIN CONTENT - LIGHT THEME ===== */
+html[data-theme="light"] body.ui-admin main {
+  background: transparent;
+}
+
+/* ===== CYBER PANELS - LIGHT THEME ===== */
+html[data-theme="light"] body.ui-admin .cyber-panel {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(34, 211, 238, 0.15);
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.08),
+    0 0 16px rgba(34, 211, 238, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+html[data-theme="light"] body.ui-admin .cyber-panel:hover {
+  border-color: rgba(34, 211, 238, 0.25);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.12),
+    0 0 24px rgba(34, 211, 238, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+/* ===== TYPOGRAPHY - LIGHT THEME ===== */
+html[data-theme="light"] body.ui-admin .neon {
+  color: #0f172a !important;
+  text-shadow: 0 0 8px rgba(34, 211, 238, 0.3) !important;
+}
+
+html[data-theme="light"] body.ui-admin h1, html[data-theme="light"] body.ui-admin h2,
+html[data-theme="light"] body.ui-admin h3, html[data-theme="light"] body.ui-admin h4 {
+  color: #0f172a;
+}
+
+html[data-theme="light"] body.ui-admin p, html[data-theme="light"] body.ui-admin span,
+html[data-theme="light"] body.ui-admin div {
+  color: #475569;
+}
+
+html[data-theme="light"] body.ui-admin .text-white\/70 {
+  color: #64748b !important;
+}
+
+html[data-theme="light"] body.ui-admin .text-cyan-200 {
+  color: #0891b2 !important;
+}
+
+html[data-theme="light"] body.ui-admin .text-emerald-200 {
+  color: #059669 !important;
+}
+
+html[data-theme="light"] body.ui-admin .text-purple-200 {
+  color: #7c3aed !important;
+}
+
+/* ===== TABLES - LIGHT THEME ===== */
+html[data-theme="light"] body.ui-admin table {
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(34, 211, 238, 0.1);
+}
+
+html[data-theme="light"] body.ui-admin thead th {
+  background: rgba(34, 211, 238, 0.05);
+  border-bottom: 1px solid rgba(34, 211, 238, 0.2);
+  color: #0f172a;
+  font-weight: 600;
+}
+
+html[data-theme="light"] body.ui-admin tbody tr {
+  border-bottom: 1px solid rgba(34, 211, 238, 0.08);
+  transition: all 0.2s ease;
+}
+
+html[data-theme="light"] body.ui-admin tbody tr:hover {
+  background: rgba(34, 211, 238, 0.03);
+}
+
+html[data-theme="light"] body.ui-admin tbody td {
+  color: #475569;
+  border-right: 1px solid rgba(34, 211, 238, 0.05);
+}
+
+html[data-theme="light"] body.ui-admin tbody tr:last-child {
+  border-bottom: 2px solid rgba(34, 211, 238, 0.15);
+  background: rgba(34, 211, 238, 0.02);
+}
+
+html[data-theme="light"] body.ui-admin tbody tr:last-child td {
+  font-weight: 600;
+  color: #0f172a;
+}
+
+/* ===== FORM CONTROLS - LIGHT THEME ===== */
+html[data-theme="light"] body.ui-admin input, html[data-theme="light"] body.ui-admin select,
+html[data-theme="light"] body.ui-admin textarea {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(34, 211, 238, 0.2);
+  color: #0f172a;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+html[data-theme="light"] body.ui-admin input:focus, html[data-theme="light"] body.ui-admin select:focus,
+html[data-theme="light"] body.ui-admin textarea:focus {
+  border-color: rgba(34, 211, 238, 0.4);
+  box-shadow:
+    0 0 0 3px rgba(34, 211, 238, 0.1),
+    0 2px 12px rgba(34, 211, 238, 0.08);
+  outline: none;
+}
+
+html[data-theme="light"] body.ui-admin input::placeholder, html[data-theme="light"] body.ui-admin textarea::placeholder {
+  color: #94a3b8;
+}
+
+/* ===== BUTTONS - LIGHT THEME ===== */
+html[data-theme="light"] body.ui-admin .cyber-btn {
+  background: rgba(34, 211, 238, 0.1);
+  border: 1px solid rgba(34, 211, 238, 0.3);
+  color: #0891b2;
+  box-shadow:
+    0 2px 12px rgba(34, 211, 238, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+html[data-theme="light"] body.ui-admin .cyber-btn:hover {
+  background: rgba(34, 211, 238, 0.15);
+  border-color: rgba(34, 211, 238, 0.4);
+  color: #0e7490;
+  box-shadow:
+    0 4px 16px rgba(34, 211, 238, 0.15),
+    0 0 12px rgba(34, 211, 238, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  transform: translateY(-1px);
+}
+
+html[data-theme="light"] body.ui-admin .cyber-btn.is-loading {
+  background: rgba(34, 211, 238, 0.2);
+  border-color: rgba(34, 211, 238, 0.5);
+}
+
+/* ===== STATUS BADGES - LIGHT THEME ===== */
+html[data-theme="light"] body.ui-admin .badge, html[data-theme="light"] body.ui-admin .status-badge {
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.75rem;
+  border: 1px solid;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Pending/Waiting Status */
+html[data-theme="light"] body.ui-admin .badge-yellow, html[data-theme="light"] body.ui-admin .status-pending {
+  background: rgba(245, 158, 11, 0.08);
+  color: #d97706;
+  border-color: rgba(245, 158, 11, 0.2);
+  box-shadow:
+    0 2px 8px rgba(245, 158, 11, 0.15),
+    inset 0 1px 0 rgba(245, 158, 11, 0.05);
+}
+
+/* Confirmed/Active Status */
+html[data-theme="light"] body.ui-admin .badge-green, html[data-theme="light"] body.ui-admin .status-confirmed {
+  background: rgba(34, 197, 94, 0.08);
+  color: #16a34a;
+  border-color: rgba(34, 197, 94, 0.2);
+  box-shadow:
+    0 2px 8px rgba(34, 197, 94, 0.15),
+    inset 0 1px 0 rgba(34, 197, 94, 0.05);
+}
+
+/* Completed/Done Status */
+html[data-theme="light"] body.ui-admin .badge-blue, html[data-theme="light"] body.ui-admin .status-completed {
+  background: rgba(59, 130, 246, 0.08);
+  color: #2563eb;
+  border-color: rgba(59, 130, 246, 0.2);
+  box-shadow:
+    0 2px 8px rgba(59, 130, 246, 0.15),
+    inset 0 1px 0 rgba(59, 130, 246, 0.05);
+}
+
+/* Cancelled/Rejected Status */
+html[data-theme="light"] body.ui-admin .badge-red, html[data-theme="light"] body.ui-admin .status-cancelled {
+  background: rgba(239, 68, 68, 0.08);
+  color: #dc2626;
+  border-color: rgba(239, 68, 68, 0.2);
+  box-shadow:
+    0 2px 8px rgba(239, 68, 68, 0.15),
+    inset 0 1px 0 rgba(239, 68, 68, 0.05);
+}
+
+/* ===== ALERTS/NOTIFICATIONS - LIGHT THEME ===== */
+html[data-theme="light"] body.ui-admin .alert {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(34, 211, 238, 0.15);
+  color: #475569;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+html[data-theme="light"] body.ui-admin .alert-success {
+  border-color: rgba(34, 197, 94, 0.3);
+  background: rgba(34, 197, 94, 0.05);
+}
+
+html[data-theme="light"] body.ui-admin .alert-error {
+  border-color: rgba(239, 68, 68, 0.3);
+  background: rgba(239, 68, 68, 0.05);
+}
+
+html[data-theme="light"] body.ui-admin .alert-warning {
+  border-color: rgba(245, 158, 11, 0.3);
+  background: rgba(245, 158, 11, 0.05);
+}
+
+html[data-theme="light"] body.ui-admin .alert-info {
+  border-color: rgba(59, 130, 246, 0.3);
+  background: rgba(59, 130, 246, 0.05);
+}
+
+/* ===== CHART CONTAINERS - LIGHT THEME ===== */
+html[data-theme="light"] body.ui-admin .bg-white\/5 {
+  background: rgba(241, 245, 249, 0.8) !important;
+  border: 1px solid rgba(34, 211, 238, 0.08);
+}
+
+html[data-theme="light"] body.ui-admin .border-white\/10 {
+  border-color: rgba(34, 211, 238, 0.1) !important;
+}
+
+/* ===== NOTIFICATION ITEMS - LIGHT THEME ===== */
+html[data-theme="light"] body.ui-admin .noti-cyber {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(34, 211, 238, 0.15);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+html[data-theme="light"] body.ui-admin .noti-item {
+  border-bottom: 1px solid rgba(34, 211, 238, 0.08);
+  color: #475569;
+}
+
+html[data-theme="light"] body.ui-admin .noti-item.is-unread {
+  background: rgba(34, 211, 238, 0.03);
+  border-left: 3px solid rgba(34, 211, 238, 0.4);
+}
+
+html[data-theme="light"] body.ui-admin .noti-title {
+  color: #0f172a;
+  font-weight: 600;
+}
+
+html[data-theme="light"] body.ui-admin .noti-msg {
+  color: #64748b;
+}
+
+html[data-theme="light"] body.ui-admin .noti-time {
+  color: #94a3b8;
+  font-size: 0.75rem;
+}
+
+/* ===== CONFIRM MODAL - LIGHT THEME ===== */
+html[data-theme="light"] .confirm-backdrop {
+  background: rgba(248, 250, 252, 0.8);
+  backdrop-filter: blur(4px);
+}
+
+html[data-theme="light"] .confirm-panel {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(34, 211, 238, 0.2);
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.15),
+    0 0 30px rgba(34, 211, 238, 0.08);
+}
+
+html[data-theme="light"] .confirm-title {
+  color: #0f172a;
+}
+
+html[data-theme="light"] .confirm-message {
+  color: #475569;
+}
+
+html[data-theme="light"] .confirm-cancel {
+  background: rgba(148, 163, 184, 0.1);
+  border-color: rgba(148, 163, 184, 0.2);
+  color: #475569;
+}
+
+html[data-theme="light"] .confirm-cancel:hover {
+  background: rgba(148, 163, 184, 0.15);
+  border-color: rgba(148, 163, 184, 0.3);
+}
+
+html[data-theme="light"] .confirm-ok {
+  background: rgba(239, 68, 68, 0.1);
+  border-color: rgba(239, 68, 68, 0.3);
+  color: #dc2626;
+}
+
+html[data-theme="light"] .confirm-ok:hover {
+  background: rgba(239, 68, 68, 0.15);
+  border-color: rgba(239, 68, 68, 0.4);
+}
+
+/* ===== RESPONSIVE ADJUSTMENTS ===== */
+@media (max-width: 768px) {
+  html[data-theme="light"] body.ui-admin .sidebar {
+    box-shadow: 2px 0 16px rgba(0, 0, 0, 0.1);
+  }
+
+  html[data-theme="light"] body.ui-admin .cyber-panel {
+    margin: 0 1rem;
+  }
+}
+
+/* ===== FOCUS STATES ===== */
+html[data-theme="light"] body.ui-admin a:focus,
+html[data-theme="light"] body.ui-admin button:focus,
+html[data-theme="light"] body.ui-admin input:focus,
+html[data-theme="light"] body.ui-admin select:focus,
+html[data-theme="light"] body.ui-admin textarea:focus {
+  outline: 2px solid rgba(34, 211, 238, 0.4);
+  outline-offset: 2px;
+}
+
+/* ===== LOADING STATES ===== */
+html[data-theme="light"] body.ui-admin .is-loading {
+  position: relative;
+  color: transparent !important;
+}
+
+html[data-theme="light"] body.ui-admin .is-loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 16px;
+  height: 16px;
+  margin: -8px 0 0 -8px;
+  border: 2px solid rgba(34, 211, 238, 0.3);
+  border-top: 2px solid #0891b2;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

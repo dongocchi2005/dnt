@@ -1,0 +1,60 @@
+/* =========================
+   APP ENTRY (imports only)
+   ========================= */
+
+/* Core + tokens + effects */
+@import "./components/ui-cyber-core.css" layer(components);
+@import "./theme/tokens.css" layer(base);
+@import "./theme/effects.css" layer(utilities);
+
+/* Themes */
+@import "./theme/light.css" layer(base);
+
+/* Components */
+@import "./components/ui-cyber-global.css" layer(components);
+@import "./components/ui-cyber-core.css" layer(components);
+@import "./components/product-card.css" layer(components);
+@import "./components/confirm-modal.css" layer(components);
+@import "./components/header.css" layer(components);
+@import "./components/footer.css" layer(components);
+@import "./components/ui-cyber-footer.css" layer(components);
+@import "./components/ui-scale.css" layer(components);
+@import "./components/header-icons.css" layer(components);
+@import "./components/cyber-toast.css" layer(components);
+
+/* Pages */
+@import "./pages/home.css" layer(components);
+@import "./pages/services.css" layer(components);
+@import "./pages/contact.css" layer(components);
+@import "./pages/blog.css" layer(components);
+
+@import "./pages/booking.css" layer(components);
+@import "./pages/booking-history.css" layer(components);
+
+@import "./pages/cart.css" layer(components);
+/* @import "./pages/clearance-index.css" layer(components); */
+@import "./pages/products.css" layer(components);
+@import "./pages/clearance-show.css" layer(components);
+@import "./pages/clearance-checkout.css" layer(components);
+@import "./pages/order-history.css" layer(components);
+
+@import "./pages/profile-settings.css" layer(components);
+@import "./pages/auth-cyber.css" layer(components);
+
+@import "./pages/admin.css" layer(components);
+/* @import "./pages/ui-header.css" layer(components); */
+/* @import"./components/mobile-bottom-nav.css" layer(components); */
+/* Tailwind */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply font-sans;
+  }
+
+  body {
+    @apply font-medium;
+  }
+}

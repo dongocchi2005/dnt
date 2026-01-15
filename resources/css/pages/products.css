@@ -1,0 +1,337 @@
+/* =========================================
+   CYBER PRO PRODUCT PAGE STYLES
+   ========================================= */
+
+@layer components {
+    /* --- SCOPE VARIABLES --- */
+    .cy-products-page {
+        --cy-bg-main: #0a0a0f;
+        --cy-bg-card: #12121a;
+        --cy-border: #00f3ff;
+        --cy-text-main: #e0e0e0;
+        --cy-text-sub: #9ca3af;
+        --cy-accent: #00f3ff;
+        --cy-accent-glow: 0 0 10px rgba(0, 243, 255, 0.5);
+        --cy-badge-bg: #ff0055;
+        --cy-badge-text: #fff;
+        --cy-card-hover-transform: translateY(-5px);
+        
+        /* Grid / Scanlines */
+        --cy-grid-color: rgba(0, 243, 255, 0.05);
+    }
+
+    /* --- LIGHT MODE OVERRIDES --- */
+    html[data-theme="light"] .cy-products-page {
+        --cy-bg-main: #FFFFFF;
+        --cy-bg-card: #FFFFFF;
+        --cy-border: #F2E6DC;
+        --cy-text-main: #2E1F17;
+        --cy-text-sub: #6B5B53;
+        --cy-accent: #FF6600; /* Commercial Orange */
+        --cy-accent-glow: 0 4px 12px rgba(255, 102, 0, 0.15);
+        --cy-badge-bg: #FF6600;
+        --cy-badge-text: #fff;
+        --cy-card-hover-transform: translateY(-3px);
+        
+        /* Remove cyber effects */
+        --cy-grid-color: transparent;
+    }
+
+    /* --- LAYOUT & UTILS --- */
+    .cy-container {
+        @apply container mx-auto px-4;
+    }
+    
+    .cy-grid-layout {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+    
+    @media (min-width: 1024px) {
+        .cy-grid-layout {
+            flex-direction: row;
+            align-items: flex-start;
+        }
+
+        .cy-grid-layout aside {
+            width: 280px;
+            flex-shrink: 0;
+        }
+
+        .cy-grid-layout main {
+            flex: 1;
+            min-width: 0;
+        }
+    }
+
+    /* --- HERO SECTION --- */
+    .cy-hero {
+        position: relative;
+        background: var(--cy-bg-main);
+        background-image: 
+            linear-gradient(to bottom, transparent 90%, var(--cy-bg-main)),
+            linear-gradient(90deg, var(--cy-grid-color) 1px, transparent 1px),
+            linear-gradient(var(--cy-grid-color) 1px, transparent 1px);
+        background-size: 100% 100%, 40px 40px, 40px 40px;
+        @apply py-12 mb-8 border-b border-gray-800 dark:border-cyan-900/30;
+    }
+    
+    html[data-theme="light"] .cy-hero {
+        background: radial-gradient(circle at top right, #fff5eb, #ffffff);
+        @apply border-orange-100;
+    }
+
+    /* --- TOOLBAR --- */
+    .cy-toolbar {
+        @apply flex flex-col md:flex-row justify-between items-center gap-4 mb-6 p-4 rounded-lg;
+        background: var(--cy-bg-card);
+        border: 1px solid var(--cy-border);
+    }
+    
+    html[data-theme="light"] .cy-toolbar {
+        @apply shadow-sm border-gray-200 bg-white;
+    }
+
+    /* --- FILTER SIDEBAR --- */
+    .cy-filter-sidebar {
+        @apply hidden lg:block sticky top-24 h-fit p-6 rounded-lg space-y-8;
+        background: var(--cy-bg-card);
+        border: 1px solid var(--cy-border);
+    }
+    
+    html[data-theme="light"] .cy-filter-sidebar {
+        @apply bg-white border-gray-100 shadow-sm;
+    }
+
+    /* Mobile Drawer */
+    .cy-filter-drawer {
+        @apply fixed inset-y-0 left-0 w-80 transform -translate-x-full transition-transform duration-300 z-50 p-6 overflow-y-auto lg:hidden;
+        background: var(--cy-bg-card);
+        border-right: 1px solid var(--cy-border);
+    }
+    
+    .cy-filter-drawer.open {
+        @apply translate-x-0;
+    }
+    
+    .cy-drawer-overlay {
+        @apply fixed inset-0 bg-black/50 z-40 hidden lg:hidden backdrop-blur-sm;
+    }
+    
+    .cy-drawer-overlay.open {
+        @apply block;
+    }
+
+    /* Filter Groups */
+    .cy-filter-group h4 {
+        color: var(--cy-text-main);
+        @apply font-bold mb-4 uppercase tracking-wider text-sm flex justify-between items-center;
+    }
+    
+    html[data-theme="dark"] .cy-filter-group h4 {
+        @apply text-cyan-400;
+    }
+
+    .cy-checkbox-label {
+        @apply flex items-center space-x-3 cursor-pointer py-1 text-sm transition-colors;
+        color: var(--cy-text-sub);
+    }
+    
+    .cy-checkbox-label:hover {
+        color: var(--cy-accent);
+    }
+    
+    .cy-checkbox {
+        @apply w-4 h-4 rounded border;
+        border-color: var(--cy-text-sub);
+        background: transparent;
+    }
+    
+    .cy-checkbox:checked {
+        background-color: var(--cy-accent);
+        border-color: var(--cy-accent);
+    }
+
+    /* --- PRODUCT GRID (Custom Grid to avoid conflicts) --- */
+    .cy-product-list {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+        width: 100%;
+    }
+
+    @media (min-width: 768px) {
+        .cy-product-list {
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .cy-product-list {
+            grid-template-columns: repeat(4, 1fr);
+        }
+    }
+
+    /* Grid toggles overrides */
+    .cy-product-list.cols-2 {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+
+    /* --- PRODUCT CARD --- */
+    .cy-card {
+        @apply relative flex flex-col h-full overflow-hidden transition-all duration-300 rounded-lg;
+        background: var(--cy-bg-card);
+        border: 1px solid transparent;
+        width: 100%; /* Force full width in grid cell */
+    }
+
+    /* Main container fix */
+    .cy-grid-layout main {
+        min-width: 0; /* Fix flex/grid overflow issues */
+        width: 100%;
+    }
+
+    /* Aspect Ratio Fix */
+    .cy-card-img-wrapper {
+        @apply relative overflow-hidden bg-gray-100 dark:bg-gray-900;
+        aspect-ratio: 1/1; /* Native CSS aspect-ratio */
+    }
+
+    html[data-theme="dark"] .cy-card {
+        border-color: rgba(0, 243, 255, 0.2);
+    }
+    
+    html[data-theme="light"] .cy-card {
+        @apply border-gray-100 shadow-sm;
+    }
+    
+    .cy-card:hover {
+        transform: var(--cy-card-hover-transform);
+    }
+    
+    html[data-theme="dark"] .cy-card:hover {
+        box-shadow: 0 0 15px rgba(0, 243, 255, 0.15);
+        border-color: var(--cy-accent);
+    }
+    
+    html[data-theme="light"] .cy-card:hover {
+        @apply shadow-md border-orange-200;
+    }
+
+    .cy-card-img {
+        @apply w-full h-full object-cover transition-transform duration-700;
+    }
+    
+    .cy-card:hover .cy-card-img {
+        @apply scale-110;
+    }
+
+    /* Badges */
+    .cy-badge {
+        @apply absolute top-2 right-2 px-2 py-1 text-xs font-bold uppercase rounded tracking-wide z-10;
+        background: var(--cy-badge-bg);
+        color: var(--cy-badge-text);
+    }
+    
+    .cy-badge-new {
+        @apply left-2 right-auto bg-blue-500 text-white;
+    }
+    
+    html[data-theme="light"] .cy-badge-new {
+        @apply bg-blue-600;
+    }
+
+    /* Card Content */
+    .cy-card-body {
+        @apply p-4 flex flex-col flex-grow;
+    }
+    
+    .cy-card-title {
+        color: var(--cy-text-main);
+        @apply text-base font-semibold mb-2 line-clamp-2 min-h-[3rem];
+    }
+    
+    .cy-card-price-box {
+        @apply mt-auto flex flex-wrap items-baseline gap-2;
+    }
+    
+    .cy-price-current {
+        color: var(--cy-accent);
+        @apply text-lg font-bold;
+        text-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+    
+    html[data-theme="dark"] .cy-price-current {
+        @apply text-pink-500;
+        text-shadow: 0 0 5px rgba(236, 72, 153, 0.5);
+    }
+    
+    .cy-price-old {
+        @apply text-sm text-gray-500 line-through;
+    }
+
+    /* CTA Button */
+    .cy-card-actions {
+        @apply mt-4 grid grid-cols-2 gap-2;
+    }
+    
+    .cy-btn-primary {
+        @apply w-full py-2 px-4 text-sm font-medium text-center transition-all duration-300 rounded uppercase tracking-wider;
+        background: transparent;
+        border: 1px solid var(--cy-accent);
+        color: var(--cy-accent);
+    }
+    
+    .cy-btn-primary:hover {
+        background: var(--cy-accent);
+        color: #000; /* Contrast text on hover */
+        box-shadow: var(--cy-accent-glow);
+    }
+    
+    html[data-theme="light"] .cy-btn-primary {
+        background: linear-gradient(to right, #FF6600, #FF8A3D);
+        border: none;
+        color: white;
+    }
+    
+    html[data-theme="light"] .cy-btn-primary:hover {
+        filter: brightness(110%);
+        color: white;
+    }
+    
+    .cy-btn-secondary {
+        @apply w-full py-2 px-4 text-sm font-medium text-center transition-all duration-300 rounded border border-gray-600 text-gray-400 hover:text-white hover:border-white;
+    }
+    
+    html[data-theme="light"] .cy-btn-secondary {
+        @apply border-gray-200 text-gray-600 hover:text-orange-600 hover:border-orange-200 hover:bg-orange-50;
+    }
+
+    /* --- PAGINATION --- */
+    .cy-pagination {
+        @apply flex justify-center mt-12 gap-2 flex-wrap;
+    }
+    
+    .cy-pagination-item {
+        @apply px-4 py-2 border rounded transition-all duration-300 min-w-[40px] text-center;
+        border-color: var(--cy-border);
+        color: var(--cy-text-sub);
+    }
+    
+    .cy-pagination-item.active {
+        background: var(--cy-accent);
+        color: #000;
+        box-shadow: var(--cy-accent-glow);
+        font-weight: bold;
+    }
+    
+    html[data-theme="light"] .cy-pagination-item {
+        @apply bg-white border-gray-200;
+    }
+    
+    html[data-theme="light"] .cy-pagination-item.active {
+        @apply bg-orange-500 text-white border-orange-500 shadow-orange-200;
+    }
+}

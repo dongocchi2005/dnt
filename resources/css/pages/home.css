@@ -1,0 +1,410 @@
+:root {
+    --cyber-black: #050505;
+    --cyber-cyan: #00f3ff;
+    --cyber-pink: #ff00ff;
+    --cyber-text: #ffffff;
+    --cyber-grid: rgba(0, 243, 255, 0.1);
+}
+
+/* Base Styles for Home Page */
+body[data-page="home"],
+body[data-page="dashboard"] {
+    background-color: var(--cyber-black);
+    color: var(--cyber-text);
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+    background-image: 
+        linear-gradient(var(--cyber-grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--cyber-grid) 1px, transparent 1px);
+    background-size: 50px 50px;
+    background-position: center top;
+}
+
+body[data-page="home"] .cp-main,
+body[data-page="dashboard"] .cp-main {
+    max-width: 100% !important; /* Override layout constraint */
+    padding: 0 !important;
+    margin-top: 0 !important;
+}
+
+/* Typography */
+body[data-page="home"] h1, 
+body[data-page="home"] h2, 
+body[data-page="home"] h3,
+body[data-page="home"] .hero-title,
+body[data-page="home"] .section-title,
+body[data-page="dashboard"] h1,
+body[data-page="dashboard"] h2,
+body[data-page="dashboard"] h3,
+body[data-page="dashboard"] .hero-title,
+body[data-page="dashboard"] .section-title {
+    font-family: 'DM Sans', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* Neon Text Glow */
+.neon-text-cyan {
+    color: var(--cyber-cyan);
+    text-shadow: 0 0 10px var(--cyber-cyan), 0 0 20px var(--cyber-cyan);
+}
+
+.neon-text-pink {
+    color: var(--cyber-pink);
+    text-shadow: 0 0 10px var(--cyber-pink), 0 0 20px var(--cyber-pink);
+}
+
+/* Glitch Effect */
+.glitch {
+    position: relative;
+    color: white;
+}
+
+.glitch::before,
+.glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--cyber-black);
+}
+
+.glitch::before {
+    left: 2px;
+    text-shadow: -1px 0 var(--cyber-pink);
+    clip: rect(24px, 550px, 90px, 0);
+    animation: glitch-anim-2 3s infinite linear alternate-reverse;
+}
+
+.glitch::after {
+    left: -2px;
+    text-shadow: -1px 0 var(--cyber-cyan);
+    clip: rect(85px, 550px, 140px, 0);
+    animation: glitch-anim 2.5s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim {
+    0% { clip: rect(10px, 9999px, 30px, 0); }
+    20% { clip: rect(60px, 9999px, 80px, 0); }
+    40% { clip: rect(20px, 9999px, 90px, 0); }
+    60% { clip: rect(80px, 9999px, 10px, 0); }
+    80% { clip: rect(10px, 9999px, 50px, 0); }
+    100% { clip: rect(50px, 9999px, 20px, 0); }
+}
+
+@keyframes glitch-anim-2 {
+    0% { clip: rect(80px, 9999px, 10px, 0); }
+    20% { clip: rect(10px, 9999px, 50px, 0); }
+    40% { clip: rect(50px, 9999px, 20px, 0); }
+    60% { clip: rect(20px, 9999px, 90px, 0); }
+    80% { clip: rect(60px, 9999px, 30px, 0); }
+    100% { clip: rect(10px, 9999px, 80px, 0); }
+}
+
+/* Angular Clip Path */
+.cyber-card {
+    background: rgba(10, 10, 10, 0.8);
+    border: 1px solid rgba(0, 243, 255, 0.3);
+    clip-path: polygon(
+        20px 0, 100% 0, 
+        100% calc(100% - 20px), calc(100% - 20px) 100%, 
+        0 100%, 0 20px
+    );
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.cyber-card:hover {
+    border-color: var(--cyber-cyan);
+    transform: translateY(-5px);
+    box-shadow: 0 0 20px rgba(0, 243, 255, 0.2);
+}
+
+/* Buttons */
+.cyber-btn {
+    position: relative;
+    padding: 1rem 2.5rem;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    background: transparent;
+    color: var(--cyber-cyan);
+    border: 1px solid var(--cyber-cyan);
+    clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.cyber-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 243, 255, 0.5), transparent);
+    transition: 0.5s;
+}
+
+.cyber-btn:hover {
+    background: var(--cyber-cyan);
+    color: var(--cyber-black);
+    box-shadow: 0 0 20px var(--cyber-cyan);
+}
+
+.cyber-btn:hover::before {
+    left: 100%;
+}
+
+.cyber-btn-pink {
+    color: var(--cyber-pink);
+    border-color: var(--cyber-pink);
+}
+
+.cyber-btn-pink::before {
+    background: linear-gradient(90deg, transparent, rgba(255, 0, 255, 0.5), transparent);
+}
+
+.cyber-btn-pink:hover {
+    background: var(--cyber-pink);
+    color: white;
+    box-shadow: 0 0 20px var(--cyber-pink);
+}
+
+/* Sections */
+.cyber-hero {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 2rem;
+    background: radial-gradient(circle at center, rgba(0, 243, 255, 0.05) 0%, transparent 70%);
+}
+
+.cyber-section {
+    padding: 6rem 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Grid Override */
+body[data-page="home"] .categories-grid,
+body[data-page="home"] .product-grid,
+body[data-page="dashboard"] .categories-grid,
+body[data-page="dashboard"] .product-grid {
+    display: grid;
+    gap: 2rem;
+}
+
+/* Product Card Specifics */
+.cyber-product-img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    margin-bottom: 1rem;
+    filter: grayscale(0.5);
+    transition: filter 0.3s ease;
+}
+
+.cyber-card:hover .cyber-product-img {
+    filter: grayscale(0) contrast(1.1);
+}
+
+/* Particles (Simulated via CSS) */
+.particles-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.particle {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: var(--cyber-cyan);
+    box-shadow: 0 0 5px var(--cyber-cyan);
+    animation: float-up linear infinite;
+    opacity: 0.5;
+}
+
+@keyframes float-up {
+    0% { transform: translateY(100vh) scale(0); opacity: 0; }
+    50% { opacity: 0.8; }
+    100% { transform: translateY(-100px) scale(1); opacity: 0; }
+}
+
+/* Header Overrides */
+#app-header {
+    background: rgba(5, 5, 5, 0.7) !important;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--cyber-cyan) !important;
+    box-shadow: 0 0 15px rgba(0, 243, 255, 0.2);
+}
+
+#app-header .logo-highlight {
+color: orange;
+    /* text-shadow: 0 0 10px var(--cyber-pink); */
+}
+
+#app-header .nav-link {
+    color: white !important;
+    font-family: 'DM Sans', sans-serif;
+}
+
+#app-header .nav-link:hover,
+#app-header .nav-link.active {
+    color: var(--cyber-cyan) !important;
+    text-shadow: 0 0 10px var(--cyber-cyan);
+}
+
+/* Service Cards */
+.cyber-service-icon {
+    font-size: 3rem;
+    color: var(--cyber-orange);
+    margin-bottom: 1.5rem;
+    filter: drop-shadow(0 0 5px var(--cyber-pink));
+}
+
+/* Footer CTA */
+.cyber-footer-cta {
+    background: linear-gradient(45deg, rgba(0, 0, 0, 0.9), rgba(10, 10, 10, 0.9));
+    border-top: 2px solid var(--cyber-cyan);
+    border-bottom: 2px solid var(--cyber-pink);
+    position: relative;
+    overflow: hidden;
+}
+
+.cyber-footer-cta::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 10px,
+        rgba(0, 243, 255, 0.05) 10px,
+        rgba(0, 243, 255, 0.05) 20px
+    );
+    animation: scan-grid 20s linear infinite;
+}
+
+@keyframes scan-grid {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* ==========================================================================
+   LIGHT MODE OVERRIDES FOR HOME PAGE
+   Strictly fixes the "black sections" issue in light mode
+   ========================================================================== */
+html[data-theme="light"] .trust-section {
+    background-color: #FFF0E6 !important; /* Very light warm orange */
+    border-top: 1px solid var(--cyber-border);
+    border-bottom: 1px solid var(--cyber-border);
+}
+
+html[data-theme="light"] .trust-section .text-cyan-400 {
+    color: var(--cyber-orange) !important; /* Change icons to orange */
+}
+
+html[data-theme="light"] .trust-section h3 {
+    color: var(--cyber-text) !important;
+    text-shadow: none;
+}
+
+html[data-theme="light"] .trust-section p {
+    color: var(--text-sub) !important;
+}
+
+/* Footer CTA Light Mode */
+html[data-theme="light"] .cyber-footer-cta {
+    background: linear-gradient(180deg, #FFFFFF 0%, #FFF0E6 100%) !important;
+    border-top: 1px solid var(--cyber-border);
+    border-bottom: 1px solid var(--cyber-border);
+}
+
+html[data-theme="light"] .cyber-footer-cta::before {
+    display: none; /* Remove scanlines */
+}
+
+html[data-theme="light"] .cyber-footer-cta h2 {
+    color: var(--cyber-text);
+    text-shadow: none;
+}
+
+html[data-theme="light"] .cyber-footer-cta p {
+    color: var(--text-sub);
+}
+
+/* Fix Hero Text Colors in Light Mode */
+html[data-theme="light"] .cyber-hero p {
+    color: var(--text-sub);
+}
+
+/* Fix Service Icons in Light Mode */
+html[data-theme="light"] .cyber-service-icon {
+    color: var(--cyber-orange);
+    filter: none;
+}
+
+/* Fix Category Icons in Light Mode */
+html[data-theme="light"] .categories-grid .text-cyan-400 {
+    color: var(--cyber-orange);
+}
+
+html[data-theme="light"] .categories-grid .text-gray-400 {
+    color: var(--text-muted);
+}
+
+/* Fix Product Price Colors */
+html[data-theme="light"] .product-grid .text-pink-500 {
+    color: #E55C12; /* Darker orange for price */
+}
+
+html[data-theme="light"] .product-grid .text-cyan-400 {
+    color: var(--cyber-orange);
+    border-color: var(--cyber-orange);
+}
+
+/* ==========================================================================
+   FIX REMAINING BLACK SPOTS (Body & Hero)
+   ========================================================================== */
+html[data-theme="light"] body[data-page="home"],
+html[data-theme="light"] body[data-page="dashboard"] {
+    background-color: #FFF6ED !important; /* Cream background */
+    background-image: none !important; /* Remove grid */
+    color: #2E1F17 !important; /* Dark brown text */
+}
+
+html[data-theme="light"] .cyber-hero {
+    background: radial-gradient(circle at center, #FFFFFF 0%, #FFF4EA 50%, #FDE7D6 100%) !important;
+}
+
+html[data-theme="light"] .cyber-hero h1 {
+    text-shadow: none !important;
+    color: #2E1F17 !important;
+}
+
+html[data-theme="light"] .cyber-hero .text-cyan-100 {
+    color: #6B5A50 !important; /* Subtext color */
+}
+
+/* Ensure sections have transparent background to show body cream color */
+html[data-theme="light"] .cyber-section {
+    background: transparent !important;
+}

@@ -1,0 +1,174 @@
+/* ===== MOBILE HUD MENU (GIỐNG ẢNH) ===== */
+.ui-header .mnav-overlay{
+  position: fixed; inset: 0;
+  background: rgba(2, 6, 23, .72);
+  backdrop-filter: blur(8px);
+  z-index: 40;
+}
+
+.ui-header .mnav-wrap{
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display:flex;
+  align-items:flex-start;
+  justify-content:center;
+  padding: 78px 14px 18px; /* chừa header */
+}
+
+.ui-header .mnav-panel{
+  width: min(420px, 96vw);
+  border-radius: 22px;
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(700px 380px at 15% 5%, rgba(34,211,238,.18), transparent 55%),
+    radial-gradient(700px 380px at 85% 12%, rgba(167,139,250,.18), transparent 60%),
+    linear-gradient(180deg, rgba(10,16,34,.86), rgba(7,10,20,.82));
+  border: 1px solid rgba(34,211,238,.22);
+  box-shadow:
+    0 22px 70px rgba(0,0,0,.55),
+    0 0 0 1px rgba(167,139,250,.12) inset;
+}
+
+.ui-header .mnav-panel::before{
+  content:"";
+  position:absolute; inset:0;
+  background:
+    linear-gradient(90deg, rgba(34,211,238,.25), transparent 35%, rgba(167,139,250,.22)),
+    repeating-linear-gradient(180deg, rgba(255,255,255,.06) 0 1px, transparent 1px 7px);
+  opacity:.22;
+  pointer-events:none;
+}
+
+.ui-header .mnav-panel::after{
+  content:"";
+  position:absolute; inset:-2px;
+  border-radius: 22px;
+  background: conic-gradient(from 210deg, rgba(34,211,238,.55), rgba(167,139,250,.55), rgba(34,211,238,.55));
+  filter: blur(16px);
+  opacity:.22;
+  pointer-events:none;
+}
+
+.ui-header .mnav-top{
+  position: relative;
+  z-index: 1;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding: 14px 14px 10px;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+.ui-header .mnav-logo{
+  font-weight: 900;
+  letter-spacing: .6px;
+  font-size: 20px;
+  background: linear-gradient(90deg, #22d3ee, #a78bfa, #22d3ee);
+  -webkit-background-clip: text;
+  background-clip:text;
+  color: transparent;
+  text-shadow: 0 0 18px rgba(34,211,238,.18);
+}
+.ui-header .mnav-logo span{ color: rgba(255,255,255,.92); background: none; -webkit-text-fill-color: rgba(255,255,255,.92); }
+
+.ui-header .mnav-close{
+  width: 40px; height: 40px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.14);
+  background: rgba(255,255,255,.06);
+  color: rgba(255,255,255,.9);
+  transition: .18s;
+}
+.ui-header .mnav-close:hover{ transform: translateY(-1px) scale(1.03); border-color: rgba(34,211,238,.35); }
+
+.ui-header .mnav-list{
+  position: relative;
+  z-index: 1;
+  padding: 10px 10px 8px;
+}
+
+.ui-header .mnav-item{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 12px;
+  padding: 14px 14px;
+  border-radius: 16px;
+  color: rgba(255,255,255,.92);
+  text-decoration:none;
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.08);
+  margin: 8px 0;
+  transition: .18s;
+}
+.ui-header .mnav-item i{ opacity:.85; }
+.ui-header .mnav-item:hover{
+  transform: translateY(-1px);
+  border-color: rgba(34,211,238,.30);
+  box-shadow: 0 0 0 1px rgba(167,139,250,.10) inset;
+}
+
+.ui-header .mnav-cta{
+  position: relative;
+  z-index: 1;
+  margin: 6px 12px 12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding: 14px 14px;
+  border-radius: 18px;
+  font-weight: 800;
+  letter-spacing: .3px;
+  color: rgba(255,255,255,.96);
+  text-decoration:none;
+  background:
+    linear-gradient(180deg, rgba(34,211,238,.20), rgba(34,211,238,.10));
+  border: 1px solid rgba(34,211,238,.36);
+  box-shadow:
+    0 10px 30px rgba(34,211,238,.12),
+    0 0 0 1px rgba(255,255,255,.06) inset;
+}
+.ui-header .mnav-cta:hover{ transform: translateY(-1px); }
+
+.ui-header .mnav-bottom{
+  position: relative;
+  z-index: 1;
+  display:flex;
+  gap: 10px;
+  padding: 12px;
+  border-top: 1px solid rgba(255,255,255,.08);
+}
+
+.ui-header .mnav-btn{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap: 10px;
+  padding: 12px 12px;
+  border-radius: 16px;
+  font-weight: 800;
+  width: 100%;
+  text-decoration:none;
+  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(255,255,255,.06);
+  color: rgba(255,255,255,.92);
+  transition: .18s;
+}
+.ui-header .mnav-btn:hover{ transform: translateY(-1px); }
+
+.ui-header .mnav-btn-primary{
+  border-color: rgba(34,211,238,.28);
+  background: linear-gradient(180deg, rgba(34,211,238,.14), rgba(167,139,250,.10));
+}
+
+.ui-header .mnav-btn-danger{
+  border-color: rgba(239,68,68,.30);
+  background: linear-gradient(180deg, rgba(239,68,68,.16), rgba(239,68,68,.10));
+}
+
+.ui-header .mnav-btn-ghost{
+  border-color: rgba(167,139,250,.22);
+  background: rgba(167,139,250,.08);
+}

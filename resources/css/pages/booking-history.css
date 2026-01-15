@@ -1,0 +1,86 @@
+/* ================= BOOKING HISTORY ================= */
+body[data-page="booking.history"] .bh-title{ color: var(--text); }
+body[data-page="booking.history"] .bh-title-accent{ color: var(--brand); }
+body[data-page="booking.history"] .bh-sub{ color: var(--muted); }
+body[data-page="booking.history"] .bh-card-title{ color: var(--text); }
+body[data-page="booking.history"] .bh-card-sub{ color: var(--muted); }
+body[data-page="booking.history"] .bh-pay-label{ color: var(--muted); }
+body[data-page="booking.history"] .bh-price{ color: var(--text); }
+body[data-page="booking.history"] .bh-price-label{ color: var(--muted); }
+body[data-page="booking.history"] .bh-notes-label{ color: var(--muted); }
+body[data-page="booking.history"] .bh-notes-text{ color: var(--text); }
+body[data-page="booking.history"] .bh-empty-title{ color: var(--text); }
+body[data-page="booking.history"] .bh-empty-sub{ color: var(--muted); }
+
+html[data-theme="light"] body[data-page="booking.history"] .bh-card{
+  background: linear-gradient(180deg, rgba(255,255,255,.86), rgba(255,255,255,.70)) !important;
+  border-color: rgba(255,106,0,.22) !important;
+  box-shadow: 0 0 0 1px rgba(255,106,0,.08) inset, 0 14px 34px rgba(18,20,28,.10) !important;
+}
+
+html[data-theme="light"] body[data-page="booking.history"] .bh-card:hover{
+  background: linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,255,255,.78)) !important;
+  border-color: rgba(255,106,0,.32) !important;
+  box-shadow: 0 0 0 1px rgba(255,106,0,.12) inset, 0 18px 44px rgba(18,20,28,.12) !important;
+}
+
+html[data-theme="light"] body[data-page="booking.history"] .bh-meta-label{
+  color: rgba(18,20,28,.70) !important;
+}
+
+html[data-theme="light"] body[data-page="booking.history"] .bh-notes{
+  background: rgba(255,106,0,.06) !important;
+  border: 1px solid rgba(255,106,0,.18) !important;
+}
+
+html[data-theme="light"] body[data-page="booking.history"] .bh-badge,
+html[data-theme="light"] body[data-page="booking.history"] .bh-pay-badge{
+  border: 1px solid rgba(18,20,28,.10) !important;
+  color: rgba(18,20,28,.90) !important;
+}
+
+html[data-theme="light"] body[data-page="booking.history"] .bh-badge--pending{
+  background: rgba(245,158,11,.18) !important;
+  border-color: rgba(245,158,11,.28) !important;
+}
+
+html[data-theme="light"] body[data-page="booking.history"] .bh-badge--confirmed{
+  background: rgba(59,130,246,.16) !important;
+  border-color: rgba(59,130,246,.26) !important;
+}
+
+html[data-theme="light"] body[data-page="booking.history"] .bh-badge--completed{
+  background: rgba(34,197,94,.16) !important;
+  border-color: rgba(34,197,94,.26) !important;
+}
+
+html[data-theme="light"] body[data-page="booking.history"] .bh-badge--cancelled{
+  background: rgba(239,68,68,.14) !important;
+  border-color: rgba(239,68,68,.24) !important;
+}
+
+html[data-theme="light"] body[data-page="booking.history"] .bh-badge--unknown{
+  background: rgba(107,114,128,.12) !important;
+  border-color: rgba(107,114,128,.22) !important;
+}
+
+html[data-theme="light"] body[data-page="booking.history"] .bh-pay-badge--pending{
+  background: rgba(255,106,0,.14) !important;
+  border-color: rgba(255,106,0,.26) !important;
+}
+
+html[data-theme="light"] body[data-page="booking.history"] .bh-pay-badge--completed{
+  background: rgba(34,197,94,.16) !important;
+  border-color: rgba(34,197,94,.26) !important;
+}
+
+html[data-theme="light"] body[data-page="booking.history"] .bh-pay-badge--failed{
+  background: rgba(239,68,68,.14) !important;
+  border-color: rgba(239,68,68,.24) !important;
+}
+
+html[data-theme="light"] body[data-page="booking.history"] .bh-pay-badge--unknown{
+  background: rgba(107,114,128,.12) !important;
+  border-color: rgba(107,114,128,.22) !important;
+}
+
