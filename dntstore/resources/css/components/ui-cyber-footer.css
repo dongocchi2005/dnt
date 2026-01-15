@@ -1,0 +1,299 @@
+/* =========================================
+  CYBER FOOTER COMPONENT
+  ========================================= */
+
+.cyber-footer {
+    /* --- CORE VARIABLES (DARK MODE DEFAULT) --- */
+    --cf-bg-start: #050505;
+    --cf-bg-end: #0B0B0B;
+    --cf-text-main: #e0e0e0;
+    --cf-text-muted: #8892b0;
+    --cf-accent-cyan: #00f3ff;
+    --cf-accent-orange: #ff6600;
+    --cf-accent-pink: #ff00ff;
+    --cf-border: rgba(0, 243, 255, 0.2);
+    --cf-glow: rgba(0, 243, 255, 0.15);
+    --cf-font-title: 'DM Sans', sans-serif;
+    --cf-font-body: 'DM Sans', sans-serif;
+    
+    position: relative;
+    background: linear-gradient(180deg, var(--cf-bg-start) 0%, var(--cf-bg-end) 100%);
+    border-top: 1px solid var(--cf-border);
+    box-shadow: 0 -4px 30px var(--cf-glow);
+    color: var(--cf-text-main);
+    font-family: var(--cf-font-body);
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+}
+
+/* --- SCANLINE EFFECT (DARK ONLY) --- */
+.cyber-footer::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 243, 255, 0.03) 2px,
+        rgba(0, 243, 255, 0.03) 4px
+    );
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* --- LAYOUT & TYPOGRAPHY --- */
+.cyber-footer .footer-wrap {
+    position: relative;
+    z-index: 1;
+}
+
+/* Brand & Titles */
+.cyber-footer .footer-brand {
+    font-family: var(--cf-font-title);
+    color: var(--cf-accent-orange);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px rgba(255, 102, 0, 0.4);
+}
+
+.cyber-footer .footer-title {
+    font-family: var(--cf-font-title);
+    color: #fff;
+    letter-spacing: 1px;
+}
+
+.cyber-footer .footer-heading {
+    font-family: var(--cf-font-title);
+    color: var(--cf-accent-cyan);
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 1.25rem;
+    position: relative;
+    display: inline-block;
+}
+
+.cyber-footer .footer-heading::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--cf-accent-cyan), transparent);
+    margin-top: 4px;
+    box-shadow: 0 0 5px var(--cf-accent-cyan);
+}
+
+/* Text & Links */
+.cyber-footer .footer-muted {
+    color: var(--cf-text-muted);
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.cyber-footer .footer-list li {
+    margin-bottom: 0.75rem;
+}
+
+.cyber-footer .footer-list a,
+.cyber-footer .footer-link {
+    color: var(--cf-text-muted);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-block;
+    position: relative;
+}
+
+.cyber-footer .footer-list a:hover,
+.cyber-footer .footer-link:hover {
+    color: var(--cf-accent-cyan);
+    padding-left: 8px;
+    text-shadow: 0 0 8px var(--cf-accent-cyan);
+}
+
+/* Icons & Badges */
+.cyber-footer .footer-badge {
+    background: rgba(0, 243, 255, 0.05);
+    border: 1px solid rgba(0, 243, 255, 0.2);
+    color: var(--cf-accent-cyan);
+    padding: 4px 10px;
+    border-radius: 2px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.cyber-footer .footer-social {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--cf-border);
+    color: var(--cf-text-main);
+    background: rgba(0, 0, 0, 0.3);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    clip-path: polygon(10% 0, 100% 0, 100% 90%, 90% 100%, 0 100%, 0 10%);
+}
+
+.cyber-footer .footer-social:hover {
+    background: var(--cf-accent-cyan);
+    color: #000;
+    box-shadow: 0 0 15px var(--cf-accent-cyan);
+    transform: translateY(-3px);
+    border-color: var(--cf-accent-cyan);
+}
+
+/* Buttons */
+.cyber-footer .footer-cta {
+    background: linear-gradient(45deg, var(--cf-accent-orange), #ff4500);
+    color: white;
+    padding: 10px 24px;
+    font-family: var(--cf-font-title);
+    font-weight: 700;
+    text-transform: uppercase;
+    clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+    transition: all 0.3s ease;
+    border: none;
+    letter-spacing: 1px;
+}
+
+.cyber-footer .footer-cta:hover {
+    box-shadow: 0 0 20px rgba(255, 102, 0, 0.6);
+    transform: scale(1.02);
+}
+
+.cyber-footer .footer-ghost {
+    background: transparent;
+    border: 1px solid var(--cf-text-muted);
+    color: var(--cf-text-muted);
+    padding: 9px 23px;
+    font-family: var(--cf-font-title);
+    font-weight: 600;
+    text-transform: uppercase;
+    clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+    transition: all 0.3s ease;
+}
+
+.cyber-footer .footer-ghost:hover {
+    border-color: var(--cf-accent-cyan);
+    color: var(--cf-accent-cyan);
+    box-shadow: 0 0 10px rgba(0, 243, 255, 0.2);
+}
+
+/* Divider */
+.cyber-footer .footer-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--cf-border), transparent);
+    border: none;
+}
+
+/* =========================================
+   LIGHT MODE (COMMERCIAL STYLE)
+   ========================================= */
+html[data-theme="light"] .cyber-footer {
+    /* Override Variables */
+    --cf-bg-start: #FFF6ED;
+    --cf-bg-end: #FFFFFF;
+    --cf-text-main: #2E1F17;
+    --cf-text-muted: #5C4A40;
+    --cf-accent-cyan: #2E1F17; /* Use dark text for headers instead of neon */
+    --cf-accent-orange: #FF6600;
+    --cf-border: rgba(255, 102, 0, 0.15);
+    --cf-glow: rgba(0, 0, 0, 0.05);
+    
+    background: linear-gradient(180deg, var(--cf-bg-start) 0%, var(--cf-bg-end) 100%);
+    border-top: 1px solid rgba(0,0,0,0.05);
+    box-shadow: 0 -10px 30px rgba(0,0,0,0.03);
+}
+
+/* Remove Cyber Elements in Light Mode */
+html[data-theme="light"] .cyber-footer::before {
+    display: none; /* No scanlines */
+}
+
+html[data-theme="light"] .cyber-footer .footer-heading::after {
+    background: var(--cf-accent-orange);
+    box-shadow: none;
+    height: 3px;
+    width: 40px; /* Minimal underline */
+    border-radius: 2px;
+}
+
+/* Adjust Typography for Light Mode */
+html[data-theme="light"] .cyber-footer .footer-heading {
+    color: var(--cf-accent-orange);
+    text-shadow: none;
+    letter-spacing: 0.5px;
+}
+
+html[data-theme="light"] .cyber-footer .footer-brand,
+html[data-theme="light"] .cyber-footer .footer-title {
+    text-shadow: none;
+    color: var(--cf-accent-orange);
+}
+
+html[data-theme="light"] .cyber-footer .footer-title {
+    color: var(--cf-text-main);
+}
+
+/* Cards & Interactables - Soft & Rounded */
+html[data-theme="light"] .cyber-footer .footer-social {
+    background: #fff;
+    border: 1px solid #eee;
+    color: var(--cf-accent-orange);
+    clip-path: none; /* Remove cyber corners */
+    border-radius: 50%; /* Circle */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+html[data-theme="light"] .cyber-footer .footer-social:hover {
+    background: var(--cf-accent-orange);
+    color: #fff;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(255, 102, 0, 0.2);
+    border-color: var(--cf-accent-orange);
+}
+
+html[data-theme="light"] .cyber-footer .footer-badge {
+    background: #fff;
+    border: 1px solid rgba(0,0,0,0.05);
+    color: var(--cf-text-muted);
+    border-radius: 20px; /* Rounded pill */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+}
+
+html[data-theme="light"] .cyber-footer .footer-cta {
+    border-radius: 6px;
+    clip-path: none;
+    box-shadow: 0 4px 10px rgba(255, 102, 0, 0.2);
+}
+
+html[data-theme="light"] .cyber-footer .footer-ghost {
+    border-radius: 6px;
+    clip-path: none;
+    border-color: #ddd;
+}
+
+html[data-theme="light"] .cyber-footer .footer-ghost:hover {
+    background: #fff;
+    border-color: var(--cf-accent-orange);
+    color: var(--cf-accent-orange);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+html[data-theme="light"] .cyber-footer .footer-list a:hover {
+    color: var(--cf-accent-orange);
+    text-shadow: none;
+    font-weight: 500;
+}
+
+/* Light Mode Input/Form tweak if needed */
+html[data-theme="light"] .cyber-footer .footer-divider {
+    background: #eee;
+}

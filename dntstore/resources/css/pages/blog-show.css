@@ -1,0 +1,299 @@
+/* ================= BLOG SHOW — CLEAN ARTICLE (LIKE IMAGE) ================= */
+body[data-page="blog.show"]{
+  --paper:#ffffff;
+  --ink:#111827;
+  --muted:#4b5563;
+  --line:rgba(15,23,42,.12);
+  --soft:rgba(15,23,42,.06);
+}
+
+/* HERO vẫn giữ ảnh nền nhưng làm nhẹ, không cyber */
+body[data-page="blog.show"] .blog-hero{
+  position: relative;
+  border-radius: 22px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: #0b1220;
+  box-shadow: 0 20px 60px rgba(0,0,0,.18);
+}
+
+body[data-page="blog.show"] .blog-hero-bg{
+  position:absolute; inset:0;
+  background-size: cover;
+  background-position: center;
+  filter: saturate(1.02) contrast(1.02);
+  opacity: .55;
+}
+
+/* overlay tối nhẹ để title nổi, không grid */
+body[data-page="blog.show"] .blog-hero-overlay{
+  position:absolute; inset:0;
+  background: linear-gradient(90deg,
+    rgba(3,7,18,.92),
+    rgba(3,7,18,.62) 55%,
+    rgba(3,7,18,.28)
+  );
+}
+body[data-page="blog.show"] .blog-hero-grid{ display:none; }
+
+body[data-page="blog.show"] .blog-hero-content{
+  position: relative;
+  z-index: 2;
+  padding: 22px 22px 18px;
+}
+@media (max-width:640px){
+  body[data-page="blog.show"] .blog-hero-content{ padding: 16px; }
+}
+
+body[data-page="blog.show"] .blog-back{
+  display:inline-flex; align-items:center; gap:8px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.12);
+  border: 1px solid rgba(255,255,255,.18);
+  color: rgba(255,255,255,.92);
+  font-weight: 700;
+}
+body[data-page="blog.show"] .blog-back:hover{ background: rgba(255,255,255,.18); }
+
+body[data-page="blog.show"] .blog-meta{
+  display:flex; flex-wrap:wrap; gap:8px;
+  margin-top: 12px;
+}
+body[data-page="blog.show"] .blog-chip{
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.90);
+  border: 1px solid rgba(255,255,255,.18);
+  background: rgba(255,255,255,.10);
+}
+
+body[data-page="blog.show"] .blog-title{
+  margin-top: 12px;
+  font-weight: 900;
+  letter-spacing: -.02em;
+  line-height: 1.08;
+  color: #fff;
+  font-size: clamp(26px, 3.2vw, 46px);
+}
+body[data-page="blog.show"] .blog-lede{
+  margin-top: 10px;
+  max-width: 70ch;
+  color: rgba(255,255,255,.82);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+/* Layout */
+body[data-page="blog.show"] .blog-grid{
+  display:grid;
+  gap: 18px;
+  grid-template-columns: minmax(0,1fr);
+}
+@media (min-width:1024px){
+  body[data-page="blog.show"] .blog-grid{
+    grid-template-columns: minmax(0,1fr) 320px;
+    align-items:start;
+  }
+  body[data-page="blog.show"] .blog-aside{ position: sticky; top: 88px; }
+}
+
+/* Article: nền trắng + chữ đen (giống ảnh) */
+body[data-page="blog.show"] .blog-article{
+  border-radius: 20px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  box-shadow: 0 16px 50px rgba(15,23,42,.08);
+  padding: 22px;
+  text-align: left; 
+}
+
+/* Prose */
+body[data-page="blog.show"] .post-prose{
+  max-width: 76ch;
+  margin: 0 auto;
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.95;
+}
+body[data-page="blog.show"] .post-prose p{ margin: 0.95em 0; }
+
+body[data-page="blog.show"] .post-prose h2{
+  margin: 1.8em 0 .6em;
+  font-size: 1.6em;
+  font-weight: 900;
+  letter-spacing: -.01em;
+  color: #0f172a;
+}
+body[data-page="blog.show"] .post-prose h3{
+  margin: 1.2em 0 .55em;
+  font-size: 1.2em;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+body[data-page="blog.show"] .post-prose ul,
+body[data-page="blog.show"] .post-prose ol{
+  margin: .9em 0 .9em 1.2em;
+}
+body[data-page="blog.show"] .post-prose li{ margin: .35em 0; }
+
+body[data-page="blog.show"] .post-prose a{
+  color: #d9692b;
+  text-decoration: underline;
+}
+
+/* Quote kiểu bài báo */
+body[data-page="blog.show"] .post-prose blockquote{
+  margin: 1.2em 0;
+  padding: 14px 16px;
+  border-left: 4px solid rgba(217,105,43,.75);
+  background: rgba(217,105,43,.08);
+  color: #1f2937;
+  border-radius: 12px;
+}
+
+/* ✅ FIX ẢNH: không zoom, không mờ, không ép crop */
+body[data-page="blog.show"] .post-prose img{
+  display:block;
+  max-width: 100%;
+  height: auto;
+  margin: 14px auto;
+  border-radius: 14px;
+  border: 1px solid var(--soft);
+  background: #fff;
+  object-fit: contain; /* quan trọng */
+}
+
+/* Nếu bạn có figure/caption */
+body[data-page="blog.show"] .post-prose figure{ margin: 16px 0; }
+body[data-page="blog.show"] .post-prose figcaption{
+  margin-top: 8px;
+  font-size: 13px;
+  color: var(--muted);
+  text-align: center;
+}
+
+/* Widget sidebar: cũng trắng, đồng bộ */
+body[data-page="blog.show"] .blog-widget{
+  border-radius: 18px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  box-shadow: 0 12px 36px rgba(15,23,42,.08);
+  padding: 18px;
+  text-align: left;
+}
+body[data-page="blog.show"] .blog-widget-title{
+  font-weight: 900;
+  font-size: 16px;
+  color: #0f172a;
+}
+body[data-page="blog.show"] .blog-widget-text{
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.65;
+}
+body[data-page="blog.show"] .blog-widget-sub{
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+/* CTA giữ màu cam nổi */
+body[data-page="blog.show"] .blog-cta{
+  margin-top: 12px;
+  display:inline-flex;
+  width:100%;
+  justify-content:center;
+  padding: 12px 14px;
+  border-radius: 14px;
+  font-weight: 900;
+  color:#fff;
+  background: linear-gradient(135deg, #ff7a1a, #ff4d1a);
+  box-shadow: 0 16px 40px rgba(255,122,26,.20);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+body[data-page="blog.show"] .blog-cta:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 22px 48px rgba(255,122,26,.28);
+}
+
+/* Light theme: giữ giống (vì đã trắng sẵn) */
+html[data-theme="light"] body[data-page="blog.show"] .blog-hero{
+  background:#0b1220;
+}
+html[data-theme="light"] body[data-page="blog.show"] .blog-article,
+
+html[data-theme="light"] body[data-page="blog.show"] .blog-widget{
+  background: #fff;
+}
+/* ================= BLOG SHOW — DARK CYBER OVERRIDE ================= */
+html[data-theme="dark"] body[data-page="blog.show"]{
+  --paper: rgba(9,14,22,.84);
+  --ink: rgba(234,242,255,.92);
+  --muted: rgba(234,242,255,.72);
+  --line: rgba(0,255,255,.16);
+  --soft: rgba(255,255,255,.08);
+}
+
+/* Article nền tối cyber */
+html[data-theme="dark"] body[data-page="blog.show"] .blog-article{
+  background:
+    radial-gradient(560px 240px at 12% 0%, rgba(0,255,255,.08), transparent 60%),
+    radial-gradient(520px 260px at 92% 85%, rgba(0,128,255,.08), transparent 60%),
+    linear-gradient(180deg, rgba(9,14,22,.92), rgba(9,14,22,.66));
+  border-color: rgba(0,255,255,.18);
+  box-shadow:
+    0 22px 70px rgba(0,0,0,.45),
+    0 0 0 1px rgba(255,255,255,.03) inset;
+}
+
+/* Prose chữ sáng */
+html[data-theme="dark"] body[data-page="blog.show"] .post-prose{
+  color: var(--ink);
+}
+html[data-theme="dark"] body[data-page="blog.show"] .post-prose h2,
+html[data-theme="dark"] body[data-page="blog.show"] .post-prose h3{
+  color: rgba(244,251,255,.96);
+}
+
+/* Link cyber */
+html[data-theme="dark"] body[data-page="blog.show"] .post-prose a{
+  color: #6ee7ff;
+  text-decoration: underline;
+}
+
+/* Blockquote cyber dark (đúng tông) */
+html[data-theme="dark"] body[data-page="blog.show"] .post-prose blockquote{
+  border-left: 4px solid rgba(0,255,255,.75);
+  background: linear-gradient(180deg, rgba(0,255,255,.08), rgba(0,128,255,.04));
+  color: rgba(224,247,255,.92);
+  box-shadow:
+    0 0 0 1px rgba(0,255,255,.16) inset,
+    0 10px 30px rgba(0,0,0,.45);
+}
+
+/* Ảnh trong bài: không bị “mờ/zoom”, vẫn hợp nền tối */
+html[data-theme="dark"] body[data-page="blog.show"] .post-prose img{
+  background: rgba(0,0,0,.18);
+  border-color: rgba(0,255,255,.14);
+}
+
+/* Sidebar widget cũng cyber */
+html[data-theme="dark"] body[data-page="blog.show"] .blog-widget{
+  background: linear-gradient(180deg, rgba(9,14,22,.80), rgba(9,14,22,.58));
+  border-color: rgba(0,255,255,.16);
+  box-shadow: 0 18px 50px rgba(0,0,0,.35);
+}
+html[data-theme="dark"] body[data-page="blog.show"] .blog-widget-title{
+  color: rgba(244,251,255,.96);
+}
+html[data-theme="dark"] body[data-page="blog.show"] .blog-widget-text,
+html[data-theme="dark"] body[data-page="blog.show"] .blog-widget-sub{
+  color: rgba(234,242,255,.70);
+}

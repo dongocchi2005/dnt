@@ -1,0 +1,173 @@
+/* ================= CART ================= */
+body[data-page="cart.index"] .cart-wrap{max-width:1050px;margin:0 auto}
+body[data-page="cart.index"] .cart-card{
+  background:linear-gradient(180deg, rgba(10,14,20,.55), rgba(10,14,20,.35));
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:20px;
+  box-shadow:0 22px 70px rgba(0,0,0,.55);
+  overflow:hidden;
+}
+body[data-page="cart.index"] .cart-row{
+  display:grid;
+  grid-template-columns: 44px 90px 1fr 160px 140px 54px;
+  gap:14px;
+  align-items:center;
+  padding:14px 16px;
+  border-top:1px solid rgba(255,255,255,.08);
+}
+@media(max-width:820px){
+  body[data-page="cart.index"] .cart-row{grid-template-columns:40px 80px 1fr 120px 120px 44px}
+}
+@media(max-width:640px){
+  body[data-page="cart.index"] .cart-row{grid-template-columns:40px 80px 1fr; gap:10px}
+  body[data-page="cart.index"] .cart-actions{grid-column:1 / -1; display:flex; gap:10px; justify-content:space-between}
+}
+body[data-page="cart.index"] .cart-thumb{width:90px;height:74px;border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.12)}
+body[data-page="cart.index"] .cart-thumb img{width:100%;height:100%;object-fit:cover}
+body[data-page="cart.index"] .cart-title{font-weight:900;color:#fff}
+body[data-page="cart.index"] .cart-sub{color:rgba(255,255,255,.65); font-size:13px}
+body[data-page="cart.index"] .cart-check{display:flex; align-items:center; justify-content:center}
+body[data-page="cart.index"] .cart-check input{width:18px;height:18px; accent-color:#22d3ee}
+body[data-page="cart.index"] .cart-qty .qty-control{display:flex; align-items:center; gap:8px}
+body[data-page="cart.index"] .cart-qty .qty-btn{
+  width:40px;height:40px;border-radius:12px;
+  border:1px solid rgba(255,255,255,.18);
+  background:rgba(255,255,255,.08);
+  color:#fff;
+}
+body[data-page="cart.index"] .cart-qty .qty-btn:hover{box-shadow:0 0 22px rgba(34,211,238,.18)}
+body[data-page="cart.index"] .cart-qty .qty-control input{
+  width:100%;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:12px;
+  padding:10px 12px;
+  color:#fff; outline:none;
+}
+body[data-page="cart.index"] .cart-price{font-weight:900;color:#22d3ee}
+body[data-page="cart.index"] .cart-remove{
+  width:44px;height:44px;border-radius:12px;
+  border:1px solid rgba(248,113,113,.35);
+  background:rgba(248,113,113,.10);
+  color:#fff;
+}
+body[data-page="cart.index"] .cart-remove:hover{box-shadow:0 0 22px rgba(248,113,113,.35)}
+body[data-page="cart.index"] .sum-box{
+  margin-top:16px;
+  display:flex; gap:12px; justify-content:flex-end; flex-wrap:wrap;
+}
+body[data-page="cart.index"] .sum-panel{
+  min-width:320px;
+  background:rgba(10,14,20,.55);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:18px;
+  padding:18px;
+}
+body[data-page="cart.index"] .btn-cyber{
+  display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  padding:12px 16px; border-radius:14px; font-weight:900;
+  background:linear-gradient(135deg, rgba(34,211,238,.3), rgba(167,139,250,.3));
+  border:1px solid rgba(34,211,238,.45);
+  transition:.25s;
+}
+body[data-page="cart.index"] .btn-cyber:hover{transform:translateY(-2px); box-shadow:0 0 30px rgba(34,211,238,.35)}
+body[data-page="cart.index"] .btn-outline{background:transparent;border:1px solid rgba(255,255,255,.22)}
+
+html[data-theme="light"] body[data-page="cart.index"] .cart-card{
+  background: linear-gradient(180deg, rgba(255,255,255,.86), rgba(255,255,255,.70)) !important;
+  border-color: rgba(255,106,0,.22) !important;
+  box-shadow: 0 0 0 1px rgba(255,106,0,.08) inset, 0 14px 34px rgba(18,20,28,.10) !important;
+}
+
+html[data-theme="light"] body[data-page="cart.index"] .cart-head{
+  border-bottom: 1px solid rgba(255,106,0,.14);
+  background: rgba(255,106,0,.06);
+  color: rgba(18,20,28,.86) !important;
+}
+
+html[data-theme="light"] body[data-page="cart.index"] .cart-row{
+  border-top-color: rgba(255,106,0,.12);
+}
+
+html[data-theme="light"] body[data-page="cart.index"] .cart-thumb{
+  border-color: rgba(255,106,0,.18);
+}
+
+html[data-theme="light"] body[data-page="cart.index"] .cart-title{
+  color: rgba(18,20,28,.92) !important;
+}
+
+html[data-theme="light"] body[data-page="cart.index"] .cart-sub{
+  color: rgba(18,20,28,.62) !important;
+}
+
+html[data-theme="light"] body[data-page="cart.index"] .cart-sub .bg-white\/10{
+  background: rgba(255,106,0,.08) !important;
+  border: 1px solid rgba(255,106,0,.16);
+  color: rgba(18,20,28,.78) !important;
+}
+
+html[data-theme="light"] body[data-page="cart.index"] .cart-check input{
+  accent-color: #FF6A00;
+}
+
+html[data-theme="light"] body[data-page="cart.index"] .cart-qty .qty-btn{
+  border-color: rgba(255,106,0,.22);
+  background: rgba(255,106,0,.06);
+  color: rgba(18,20,28,.90);
+}
+
+html[data-theme="light"] body[data-page="cart.index"] .cart-qty .qty-btn:hover{
+  box-shadow: 0 0 0 1px rgba(255,106,0,.12) inset, 0 10px 24px rgba(255,106,0,.14);
+}
+
+html[data-theme="light"] body[data-page="cart.index"] .cart-qty .qty-control input{
+  background: rgba(255,255,255,.86);
+  border-color: rgba(255,106,0,.22);
+  color: rgba(18,20,28,.92);
+}
+
+html[data-theme="light"] body[data-page="cart.index"] .cart-price{
+  color: #E55C12;
+}
+
+html[data-theme="light"] body[data-page="cart.index"] .cart-remove{
+  border-color: rgba(239,68,68,.26);
+  background: rgba(239,68,68,.10);
+  color: rgba(18,20,28,.88);
+}
+
+html[data-theme="light"] body[data-page="cart.index"] .cart-remove:hover{
+  box-shadow: 0 0 0 1px rgba(239,68,68,.10) inset, 0 12px 26px rgba(239,68,68,.14);
+}
+
+html[data-theme="light"] body[data-page="cart.index"] .sum-panel{
+  background: rgba(255,255,255,.78);
+  border-color: rgba(255,106,0,.18);
+}
+
+html[data-theme="light"] body[data-page="cart.index"] .btn-cyber{
+  background: linear-gradient(135deg, #FF6A00, #FF8A1F);
+  border-color: rgba(255,106,0,.38);
+  color: #fff;
+  box-shadow: 0 14px 34px rgba(255,106,0,.18), 0 8px 22px rgba(18,20,28,.10);
+}
+
+html[data-theme="light"] body[data-page="cart.index"] .btn-cyber:hover{
+  background: linear-gradient(135deg, #FF7A12, #FF9A33);
+  box-shadow: 0 18px 44px rgba(255,106,0,.22), 0 10px 26px rgba(18,20,28,.12);
+}
+
+html[data-theme="light"] body[data-page="cart.index"] .btn-outline{
+  background: transparent;
+  border-color: rgba(255,106,0,.26);
+  color: rgba(18,20,28,.86);
+}
+
+html[data-theme="light"] body[data-page="cart.index"] .cart-empty-title{
+  color: rgba(18,20,28,.92) !important;
+}
+
+html[data-theme="light"] body[data-page="cart.index"] .cart-empty-sub{
+  color: rgba(18,20,28,.62) !important;
+}

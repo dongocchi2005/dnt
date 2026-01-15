@@ -1,0 +1,141 @@
+body.auth-cyber {
+  --cy: #22d3ee;
+  --ne: #a78bfa;
+  background: url("/image/bg.jpg") center/cover no-repeat fixed;
+}
+
+body.auth-cyber::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    radial-gradient(circle at 50% 50%, rgba(34, 211, 238, 0.12), rgba(0, 0, 0, 0.6));
+  background-size: 32px 32px, 32px 32px, cover;
+  z-index: -2;
+  pointer-events: none;
+}
+
+body.auth-cyber .cyber-card {
+  position: relative;
+  z-index: 10;
+  background: linear-gradient(180deg, rgba(8, 12, 20, 0.78), rgba(8, 12, 20, 0.48));
+  backdrop-filter: blur(16px);
+  border-radius: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow:
+    0 30px 90px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(34, 211, 238, 0.15) inset;
+  overflow: hidden;
+}
+
+body.auth-cyber .cyber-card::after {
+  content: "";
+  position: absolute;
+  inset: -60%;
+  background: linear-gradient(120deg, transparent 40%, rgba(34, 211, 238, 0.18), rgba(167, 139, 250, 0.18), transparent 60%);
+  animation: sweep 6s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes sweep {
+  0% { transform: translateX(-40%); }
+  100% { transform: translateX(40%); }
+}
+
+body.auth-cyber .floating-label {
+  position: relative;
+}
+
+body.auth-cyber .floating-label input {
+  padding: 1.6rem 1rem 0.6rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 14px;
+  color: #fff;
+  width: 100%;
+  transition: 0.25s;
+}
+
+body.auth-cyber .floating-label input:focus {
+  border-color: var(--cy);
+  box-shadow:
+    0 0 0 1px rgba(34, 211, 238, 0.5),
+    0 0 25px rgba(34, 211, 238, 0.35);
+  outline: none;
+}
+
+body.auth-cyber .floating-label label {
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+  color: rgba(255, 255, 255, 0.6);
+  pointer-events: none;
+  transition: 0.2s;
+}
+
+body.auth-cyber .floating-label input:focus + label,
+body.auth-cyber .floating-label input:not(:placeholder-shown) + label {
+  transform: translateY(-1.2rem) scale(0.85);
+  color: var(--cy);
+}
+
+body.auth-cyber .cyber-btn {
+  position: relative;
+  background: linear-gradient(90deg, #22d3ee, #a78bfa);
+  border-radius: 14px;
+  padding: 0.9rem;
+  font-weight: 600;
+  color: #fff;
+  overflow: hidden;
+  transition: 0.25s;
+}
+
+body.auth-cyber .cyber-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent 30%, rgba(255, 255, 255, 0.45), transparent 60%);
+  transform: translateX(-100%);
+  pointer-events: none;
+}
+
+body.auth-cyber .cyber-btn:hover::before {
+  transform: translateX(100%);
+  transition: 0.6s;
+}
+
+body.auth-cyber .cyber-btn:hover {
+  box-shadow:
+    0 0 25px rgba(34, 211, 238, 0.6),
+    0 0 45px rgba(167, 139, 250, 0.45);
+  transform: translateY(-1px);
+}
+
+body.auth-cyber .cyber-link {
+  color: #93c5fd;
+  position: relative;
+}
+
+body.auth-cyber .cyber-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--cy), var(--ne));
+  transition: 0.3s;
+}
+
+body.auth-cyber .cyber-link:hover::after {
+  width: 100%;
+}
+
+body.auth-cyber #circuitCanvas {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}

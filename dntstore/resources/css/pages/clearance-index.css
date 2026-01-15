@@ -1,0 +1,124 @@
+/* ===== PREMIUM LIGHT THEME FOR PRODUCTS PAGES ===== */
+/* Targets: clearance.index, clearance.show, products.show */
+/* Goal: Apple/Stripe/Vercel-style premium design */
+
+html[data-theme="light"] body[data-page="clearance.index"],
+html[data-theme="light"] body[data-page="clearance.show"],
+html[data-theme="light"] body[data-page="products.show"]{
+  /* Premium color tokens - clean, readable, high contrast */
+  --bg: #ffffff;           /* Pure white background */
+  --bg2: #fafbfc;          /* Subtle off-white for depth */
+
+  /* Card backgrounds - white glass with subtle transparency */
+  --card: rgba(255,255,255,.95);
+  --card2: rgba(255,255,255,.88);
+
+  /* Typography - dark text for readability */
+  --text: #0f1419;         /* Deep charcoal for primary text */
+  --muted: rgba(15,20,25,.65);  /* Proper opacity for secondary text */
+
+  /* Borders - thin, elegant lines */
+  --line: rgba(15,20,25,.12);    /* Subtle borders */
+  --shadow: 0 4px 12px rgba(15,20,25,.08), 0 2px 4px rgba(15,20,25,.04);
+
+  /* Accent colors - pastel cyber (soft, not neon) */
+  --cy: #5bbad5;           /* Soft cyan */
+  --ne: #9b87f5;           /* Soft purple */
+}
+
+/* Apply premium background to body */
+html[data-theme="light"] body[data-page="clearance.index"],
+html[data-theme="light"] body[data-page="clearance.show"],
+html[data-theme="light"] body[data-page="products.show"]{
+  /* Clean white background with subtle pastel accents */
+  background:
+    radial-gradient(900px 520px at 20% 10%, rgba(91,186,213,.06), transparent 60%),
+    radial-gradient(900px 520px at 85% 15%, rgba(155,135,245,.06), transparent 62%),
+    linear-gradient(180deg, var(--bg), var(--bg2));
+  color: var(--text) !important;
+}
+
+/* ===== TẮT GLOW/NEON CHÓI TRONG LIGHT ===== */
+html[data-theme="light"] .neon,
+html[data-theme="light"] .brand-logo-shadow{
+  text-shadow: none !important;
+  filter: none !important;
+}
+
+/* Link/nav chữ không chói */
+html[data-theme="light"] .cyber-link{
+  color: rgba(10,15,30,.78) !important;
+}
+html[data-theme="light"] .cyber-link:hover{
+  color: rgba(10,15,30,.95) !important;
+}
+
+/* Premium cards - white glass with soft shadows */
+html[data-theme="light"] .cy-glass,
+html[data-theme="light"] .cy-glass-2,
+html[data-theme="light"] .cyber-dropdown,
+html[data-theme="light"] .cp-card,
+html[data-theme="light"] .filter-panel,
+html[data-theme="light"] .hero-card{
+  background: linear-gradient(180deg, var(--card), var(--card2)) !important;
+  border: 1px solid var(--line) !important;
+  box-shadow: var(--shadow) !important;
+  border-radius: 12px !important;
+  backdrop-filter: blur(10px) !important;
+}
+
+/* ===== HERO: thêm overlay để chữ đọc rõ, bỏ trắng lóa ===== */
+html[data-theme="light"] .clearance-hero,
+html[data-theme="light"] .hero{
+  position: relative;
+}
+
+html[data-theme="light"] .clearance-hero::before,
+html[data-theme="light"] .hero::before{
+  content:"";
+  position:absolute; inset:0;
+  background:
+    linear-gradient(90deg, rgba(255,255,255,.85), rgba(255,255,255,.55) 55%, rgba(255,255,255,.35));
+  pointer-events:none;
+  border-radius: inherit;
+}
+
+/* Text trong hero chuyển sang tối + bỏ opacity quá thấp */
+html[data-theme="light"] .clearance-hero h1,
+html[data-theme="light"] .hero h1{
+  color: var(--text) !important;
+  text-shadow: none !important;
+}
+html[data-theme="light"] .clearance-hero p,
+html[data-theme="light"] .hero p{
+  color: var(--muted) !important;
+}
+
+/* Premium inputs/selects - clear white backgrounds, subtle borders */
+html[data-theme="light"] input,
+html[data-theme="light"] select{
+  background: rgba(255,255,255,.95) !important;
+  border: 1px solid var(--line) !important;
+  color: var(--text) !important;
+  border-radius: 8px !important;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+html[data-theme="light"] input:focus,
+html[data-theme="light"] select:focus{
+  border-color: var(--cy) !important;
+  box-shadow: 0 0 0 3px rgba(91,186,213,.1) !important;
+  outline: none !important;
+}
+
+html[data-theme="light"] input::placeholder{
+  color: var(--muted) !important;
+}
+
+/* Button: vẫn cyber nhưng dịu */
+html[data-theme="light"] .cyber-btn{
+  background: linear-gradient(180deg, rgba(8,145,178,.16), rgba(124,58,237,.10)) !important;
+  border: 1px solid rgba(8,145,178,.22) !important;
+  color: rgba(10,15,30,.92) !important;
+  text-shadow:none !important;
+}

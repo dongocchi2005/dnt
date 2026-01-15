@@ -1,0 +1,154 @@
+body[data-page="orders.history"] .oh-title{ color: var(--text); }
+body[data-page="orders.history"] .oh-title-accent{ color: var(--brand); }
+body[data-page="orders.history"] .oh-sub{ color: var(--muted); }
+body[data-page="orders.history"] .oh-card-title{ color: var(--text); }
+body[data-page="orders.history"] .oh-card-sub{ color: var(--muted); }
+body[data-page="orders.history"] .oh-meta-label{ color: var(--muted); }
+body[data-page="orders.history"] .oh-total{ color: var(--text); }
+
+body[data-page="orders.history"] .oh-card{
+  background: linear-gradient(180deg, rgba(10,14,20,.55), rgba(10,14,20,.35));
+  border: 1px solid rgba(255,255,255,.12);
+  box-shadow: 0 22px 70px rgba(0,0,0,.55);
+}
+body[data-page="orders.history"] .oh-card-head{
+  border-bottom: 1px solid rgba(255,255,255,.10);
+}
+
+body[data-page="orders.history"] .oh-badge{
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: .02em;
+  border: 1px solid rgba(255,255,255,.14);
+  background: rgba(255,255,255,.06);
+  color: rgba(255,255,255,.86);
+}
+body[data-page="orders.history"] .oh-badge--paid{
+  border-color: rgba(34,197,94,.30);
+  background: rgba(34,197,94,.16);
+}
+body[data-page="orders.history"] .oh-badge--pending{
+  border-color: rgba(245,158,11,.30);
+  background: rgba(245,158,11,.16);
+}
+body[data-page="orders.history"] .oh-badge--failed{
+  border-color: rgba(239,68,68,.28);
+  background: rgba(239,68,68,.14);
+}
+body[data-page="orders.history"] .oh-badge--unknown{
+  border-color: rgba(148,163,184,.22);
+  background: rgba(148,163,184,.12);
+}
+
+body[data-page="orders.history"] .oh-action{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 14px;
+  font-weight: 900;
+  background: linear-gradient(135deg, rgba(34,211,238,.30), rgba(167,139,250,.30));
+  border: 1px solid rgba(34,211,238,.45);
+  color: rgba(255,255,255,.92);
+  transition: .25s;
+}
+body[data-page="orders.history"] .oh-action svg{ width: 18px; height: 18px; }
+body[data-page="orders.history"] .oh-action:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 0 30px rgba(34,211,238,.28);
+}
+
+body[data-page="orders.history"] .oh-item{
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.10);
+}
+body[data-page="orders.history"] .oh-noimg{
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.12);
+}
+
+body[data-page="orders.history"] .pagination .active{
+  background: rgba(34, 211, 238, 0.18);
+  border-color: rgba(34, 211, 238, 0.45);
+  color: rgba(255,255,255,.92);
+}
+
+html[data-theme="light"] body[data-page="orders.history"] .oh-card{
+  background: linear-gradient(180deg, rgba(255,255,255,.86), rgba(255,255,255,.70)) !important;
+  border-color: rgba(255,106,0,.22) !important;
+  box-shadow: 0 0 0 1px rgba(255,106,0,.08) inset, 0 14px 34px rgba(18,20,28,.10) !important;
+}
+html[data-theme="light"] body[data-page="orders.history"] .oh-card:hover{
+  border-color: rgba(255,106,0,.32) !important;
+  box-shadow: 0 0 0 1px rgba(255,106,0,.12) inset, 0 18px 44px rgba(18,20,28,.12) !important;
+}
+html[data-theme="light"] body[data-page="orders.history"] .oh-card-head{
+  border-bottom-color: rgba(255,106,0,.14) !important;
+}
+html[data-theme="light"] body[data-page="orders.history"] .oh-badge{
+  border-color: rgba(18,20,28,.10) !important;
+  color: rgba(18,20,28,.90) !important;
+}
+html[data-theme="light"] body[data-page="orders.history"] .oh-badge--paid{
+  background: rgba(34,197,94,.16) !important;
+  border-color: rgba(34,197,94,.26) !important;
+}
+html[data-theme="light"] body[data-page="orders.history"] .oh-badge--pending{
+  background: rgba(255,106,0,.14) !important;
+  border-color: rgba(255,106,0,.26) !important;
+}
+html[data-theme="light"] body[data-page="orders.history"] .oh-badge--failed{
+  background: rgba(239,68,68,.14) !important;
+  border-color: rgba(239,68,68,.24) !important;
+}
+html[data-theme="light"] body[data-page="orders.history"] .oh-badge--unknown{
+  background: rgba(107,114,128,.12) !important;
+  border-color: rgba(107,114,128,.22) !important;
+}
+html[data-theme="light"] body[data-page="orders.history"] .oh-action{
+  background: linear-gradient(135deg, #FF6A00, #FF8A1F) !important;
+  border-color: rgba(255,106,0,.38) !important;
+  color: #fff !important;
+  box-shadow: 0 14px 34px rgba(255,106,0,.18), 0 8px 22px rgba(18,20,28,.10) !important;
+}
+html[data-theme="light"] body[data-page="orders.history"] .oh-action:hover{
+  background: linear-gradient(135deg, #FF7A12, #FF9A33) !important;
+  box-shadow: 0 18px 44px rgba(255,106,0,.22), 0 10px 26px rgba(18,20,28,.12) !important;
+}
+html[data-theme="light"] body[data-page="orders.history"] .oh-item{
+  background: rgba(255,106,0,.06) !important;
+  border-color: rgba(255,106,0,.14) !important;
+}
+html[data-theme="light"] body[data-page="orders.history"] .oh-noimg{
+  background: rgba(255,106,0,.06) !important;
+  border-color: rgba(255,106,0,.18) !important;
+}
+html[data-theme="light"] body[data-page="orders.history"] .oh-empty-icon{
+  color: rgba(18,20,28,.35) !important;
+}
+html[data-theme="light"] body[data-page="orders.history"] .pagination{
+  background: rgba(255,255,255,.78) !important;
+  border: 1px solid rgba(255,106,0,.18) !important;
+  border-radius: 14px;
+  padding: 12px;
+  box-shadow: 0 12px 32px rgba(18,20,28,.10) !important;
+}
+html[data-theme="light"] body[data-page="orders.history"] .pagination a{
+  color: rgba(18,20,28,.86) !important;
+  border-color: rgba(255,106,0,.18) !important;
+  background: rgba(255,106,0,.06) !important;
+}
+html[data-theme="light"] body[data-page="orders.history"] .pagination a:hover{
+  background: rgba(255,106,0,.10) !important;
+  border-color: rgba(255,106,0,.28) !important;
+}
+html[data-theme="light"] body[data-page="orders.history"] .pagination .active{
+  background: rgba(255,106,0,.16) !important;
+  border-color: rgba(255,106,0,.34) !important;
+  color: rgba(18,20,28,.92) !important;
+}

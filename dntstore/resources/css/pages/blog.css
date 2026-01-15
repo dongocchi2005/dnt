@@ -1,0 +1,1017 @@
+:where(body[data-page^="blog."]) .page-blog{
+  --bg: #070b18;
+  --bg2: #0b1230;
+  --panel: rgba(255,255,255,.06);
+  --panel2: rgba(255,255,255,.085);
+  --stroke: rgba(255,255,255,.12);
+  --stroke2: rgba(34,211,238,.22);
+  --text: rgba(230,245,255,.92);
+  --muted: rgba(230,245,255,.70);
+  --cy: #22d3ee;
+  --ne: #a78bfa;
+  --shadow: 0 24px 70px rgba(0,0,0,.45);
+  --shadow-soft: 0 16px 40px rgba(0,0,0,.28);
+  --ring: 0 0 0 1px rgba(34,211,238,.20), 0 0 0 6px rgba(167,139,250,.10);
+  color: var(--text);
+}
+
+:where(html[data-theme="light"]) :where(body[data-page^="blog."]) .page-blog{
+  --bg: #fff7ef;
+  --bg2: #ffe9d6;
+  --panel: rgba(255,255,255,.72);
+  --panel2: rgba(255,255,255,.86);
+  --stroke: rgba(255,106,0,.18);
+  --stroke2: rgba(255,162,74,.26);
+  --brand: #ff6a00;
+  --brand2: #ffa24a;
+  --text: #1b1b1f;
+  --muted: #5a5a66;
+  --shadow: 0 22px 60px rgba(18,20,28,.10);
+  --shadow-soft: 0 14px 34px rgba(18,20,28,.10);
+  --ring: 0 0 0 1px rgba(255,106,0,.18), 0 0 0 6px rgba(255,162,74,.18);
+  color: var(--text);
+}
+
+:where(body[data-page^="blog."]) .page-blog{
+  position: relative;
+  padding-bottom: 28px;
+  border-radius: 18px;
+  background:
+    radial-gradient(1200px 600px at 12% -10%, rgba(34,211,238,.18), transparent 60%),
+    radial-gradient(900px 500px at 90% 10%, rgba(167,139,250,.16), transparent 55%),
+    linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,0));
+}
+
+:where(html[data-theme="light"]) :where(body[data-page^="blog."]) .page-blog{
+  background:
+    radial-gradient(1100px 580px at 10% -10%, rgba(255,106,0,.16), transparent 60%),
+    radial-gradient(820px 520px at 92% 12%, rgba(255,162,74,.18), transparent 56%),
+    linear-gradient(180deg, rgba(255,255,255,.52), rgba(255,255,255,.10));
+}
+
+:where(html[data-theme="light"]) :where(body[data-page^="blog."]) .site-header{
+  background: rgba(255,255,255,.78);
+  border-bottom: 1px solid rgba(255,106,0,.16);
+  -webkit-backdrop-filter: blur(12px) saturate(1.1);
+  backdrop-filter: blur(12px) saturate(1.1);
+}
+html[data-theme="light"] body[data-page^="blog."] .site-header .cyber-link{
+  color: rgba(27,27,31,.92);
+}
+html[data-theme="light"] body[data-page^="blog."] .site-header .icon-btn{
+  border-color: rgba(27,27,31,.14);
+  background: rgba(255,255,255,.65);
+}
+
+:where(body[data-page^="blog."]) .page-blog [data-reveal]{
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity .55s ease, transform .55s ease;
+  will-change: opacity, transform;
+}
+:where(body[data-page^="blog."]) .page-blog .is-revealed{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-kicker{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: color-mix(in oklab, var(--text) 70%, transparent);
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-h1{
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1.06;
+  font-size: clamp(30px, 5vw, 54px);
+  margin-top: 10px;
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-h2{
+  font-weight: 900;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+  font-size: clamp(22px, 2.6vw, 30px);
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-subtitle{
+  margin-top: 12px;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--muted);
+  max-width: 62ch;
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-muted{
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-sectionHead{
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 14px;
+}
+@media (max-width: 640px){
+  :where(body[data-page^="blog."]) .page-blog .blog-sectionHead{
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-heroPanel{
+  position: relative;
+  border-radius: 24px;
+  border: 1px solid var(--stroke);
+  background:
+    radial-gradient(900px 480px at 15% 0%, rgba(34,211,238,.18), transparent 60%),
+    radial-gradient(820px 460px at 95% 10%, rgba(167,139,250,.16), transparent 58%),
+    linear-gradient(180deg, color-mix(in oklab, var(--panel) 80%, transparent), color-mix(in oklab, var(--panel2) 70%, transparent));
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+html[data-theme="light"] body[data-page^="blog."] .page-blog .blog-heroPanel{
+  background:
+    radial-gradient(950px 540px at 15% 0%, rgba(255,106,0,.18), transparent 62%),
+    radial-gradient(840px 520px at 92% 12%, rgba(255,162,74,.20), transparent 60%),
+    linear-gradient(180deg, color-mix(in oklab, var(--panel) 92%, transparent), color-mix(in oklab, var(--panel2) 82%, transparent));
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-heroGrid{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  padding: 22px;
+}
+@media (min-width: 1024px){
+  :where(body[data-page^="blog."]) .page-blog .blog-heroGrid{
+    grid-template-columns: 1.1fr .9fr;
+    align-items: center;
+    gap: 22px;
+    padding: 34px;
+  }
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-heroActions{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-btn{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border-radius: 14px;
+  padding: 12px 14px;
+  font-weight: 800;
+  font-size: 14px;
+  border: 1px solid var(--stroke);
+  transition: transform .15s ease, box-shadow .15s ease, background .15s ease, border-color .15s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-btn:hover{
+  transform: translateY(-1px);
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-btnPrimary{
+  border-color: color-mix(in oklab, var(--cy) 40%, var(--stroke));
+  background: linear-gradient(135deg, color-mix(in oklab, var(--cy) 92%, white 0%), color-mix(in oklab, var(--ne) 76%, white 0%));
+  color: #061018;
+  box-shadow: 0 14px 40px rgba(34,211,238,.18);
+}
+
+html[data-theme="light"] body[data-page^="blog."] .page-blog .blog-btnPrimary{
+  border-color: rgba(255,106,0,.28);
+  background: linear-gradient(135deg, rgba(255,106,0,.95), rgba(255,162,74,.92));
+  color: #1b0f08;
+  box-shadow: 0 14px 40px rgba(255,106,0,.18);
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-btnGhost{
+  background: color-mix(in oklab, var(--panel) 70%, transparent);
+  color: var(--text);
+}
+:where(body[data-page^="blog."]) .page-blog .blog-btnGhost:hover{
+  border-color: color-mix(in oklab, var(--stroke2) 70%, var(--stroke));
+  box-shadow: var(--ring);
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-btnInline{
+  background: transparent;
+  padding: 10px 12px;
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-btnSm{
+  padding: 10px 12px;
+  border-radius: 12px;
+  font-size: 13px;
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-link{
+  font-weight: 800;
+  color: color-mix(in oklab, var(--cy) 80%, var(--text));
+}
+html[data-theme="light"] body[data-page^="blog."] .page-blog .blog-link{
+  color: color-mix(in oklab, var(--brand) 70%, var(--text));
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-stats{
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-stat{
+  border-radius: 16px;
+  border: 1px solid var(--stroke);
+  background: color-mix(in oklab, var(--panel) 78%, transparent);
+  padding: 12px 12px;
+  box-shadow: var(--shadow-soft);
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-stat dt{
+  font-size: 12px;
+  color: var(--muted);
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-stat dd{
+  margin-top: 4px;
+  font-weight: 900;
+  letter-spacing: -.01em;
+  font-size: 18px;
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-heroRight{
+  position: relative;
+}
+:where(body[data-page^="blog."]) .page-blog .blog-heroGlow{
+  position: absolute;
+  inset: -30px -40px -30px -40px;
+  background:
+    radial-gradient(420px 220px at 50% 40%, rgba(34,211,238,.26), transparent 60%),
+    radial-gradient(360px 240px at 65% 60%, rgba(167,139,250,.22), transparent 62%);
+  filter: blur(18px);
+  opacity: .9;
+  pointer-events: none;
+}
+html[data-theme="light"] body[data-page^="blog."] .page-blog .blog-heroGlow{
+  background:
+    radial-gradient(420px 220px at 45% 35%, rgba(255,106,0,.22), transparent 62%),
+    radial-gradient(360px 240px at 65% 60%, rgba(255,162,74,.22), transparent 64%);
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-heroCard{
+  position: relative;
+  border-radius: 20px;
+  border: 1px solid color-mix(in oklab, var(--stroke) 92%, transparent);
+  background: color-mix(in oklab, var(--panel) 82%, transparent);
+  box-shadow: var(--shadow);
+  padding: 18px;
+  overflow: hidden;
+}
+:where(body[data-page^="blog."]) .page-blog .blog-heroCardTop{
+  display: grid;
+  gap: 6px;
+}
+:where(body[data-page^="blog."]) .page-blog .blog-heroCardTitle{
+  font-weight: 900;
+  font-size: 16px;
+  letter-spacing: -.01em;
+}
+:where(body[data-page^="blog."]) .page-blog .blog-heroCardDesc{
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+:where(body[data-page^="blog."]) .page-blog .blog-heroCardBottom{
+  margin-top: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+:where(body[data-page^="blog."]) .page-blog .blog-pill{
+  border-radius: 999px;
+  border: 1px solid var(--stroke);
+  padding: 7px 10px;
+  font-size: 12px;
+  font-weight: 800;
+  background: color-mix(in oklab, var(--panel) 70%, transparent);
+  color: color-mix(in oklab, var(--text) 92%, transparent);
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-sentinel{
+  height: 1px;
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-filterWrap{
+  position: relative;
+  z-index: 40;
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-filterBar{
+  position: sticky;
+  top: 70px;
+  border-radius: 18px;
+  border: 1px solid var(--stroke);
+  background: color-mix(in oklab, var(--panel) 86%, transparent);
+  -webkit-backdrop-filter: blur(16px) saturate(1.1);
+  backdrop-filter: blur(16px) saturate(1.1);
+  box-shadow: var(--shadow-soft);
+  padding: 14px;
+  transition: padding .18s ease, transform .18s ease, border-color .18s ease, border-radius .18s ease;
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-filterBar[data-compact="1"]{
+  padding: 10px;
+  border-radius: 16px;
+  border-color: color-mix(in oklab, var(--stroke2) 60%, var(--stroke));
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-filterForm{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+@media (min-width: 768px){
+  :where(body[data-page^="blog."]) .page-blog .blog-filterForm{
+    grid-template-columns: 1.2fr .7fr .5fr auto auto;
+    align-items: center;
+  }
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-input,
+:where(body[data-page^="blog."]) .page-blog .blog-select{
+  width: 100%;
+  border-radius: 14px;
+  border: 1px solid var(--stroke);
+  background: color-mix(in oklab, var(--panel) 70%, transparent);
+  color: var(--text);
+  padding: 12px 12px;
+  font-weight: 700;
+  font-size: 14px;
+  outline: none;
+  transition: box-shadow .15s ease, border-color .15s ease, background .15s ease;
+}
+:where(body[data-page^="blog."]) .page-blog .blog-select{
+  padding-right: 34px;
+}
+:where(body[data-page^="blog."]) .page-blog .blog-input::placeholder{
+  color: color-mix(in oklab, var(--muted) 92%, transparent);
+}
+:where(body[data-page^="blog."]) .page-blog .blog-input:focus,
+:where(body[data-page^="blog."]) .page-blog .blog-select:focus{
+  border-color: color-mix(in oklab, var(--stroke2) 70%, var(--stroke));
+  box-shadow: var(--ring);
+}
+
+html[data-theme="light"] body[data-page^="blog."] .page-blog .blog-input,
+html[data-theme="light"] body[data-page^="blog."] .page-blog .blog-select{
+  background: rgba(255,255,255,.78);
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-featuredGrid{
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+@media (min-width: 1024px){
+  :where(body[data-page^="blog."]) .page-blog .blog-featuredGrid{
+    grid-template-columns: 1.35fr .65fr;
+    gap: 16px;
+  }
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-featuredSide{
+  display: grid;
+  gap: 14px;
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-card{
+  position: relative;
+  border-radius: 18px;
+  border: 1px solid var(--stroke);
+  background: color-mix(in oklab, var(--panel) 82%, transparent);
+  box-shadow: var(--shadow-soft);
+  overflow: hidden;
+  transform: translateZ(0);
+  transition: box-shadow .18s ease, border-color .18s ease, transform .18s ease;
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-card:hover{
+  border-color: color-mix(in oklab, var(--stroke2) 70%, var(--stroke));
+  box-shadow: 0 22px 70px rgba(34,211,238,.12), 0 18px 55px rgba(0,0,0,.35);
+}
+html[data-theme="light"] body[data-page^="blog."] .page-blog .blog-card:hover{
+  box-shadow: 0 18px 50px rgba(18,20,28,.12);
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-cardMedia{
+  display: block;
+  aspect-ratio: 16 / 9;
+  background: color-mix(in oklab, var(--panel2) 65%, transparent);
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-cardFeatured.blog-cardPrimary .blog-cardMedia{
+  aspect-ratio: 16 / 10;
+}
+@media (min-width: 1024px){
+  :where(body[data-page^="blog."]) .page-blog .blog-cardFeatured.blog-cardPrimary .blog-cardMedia{
+    aspect-ratio: 16 / 9;
+  }
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-imgCover{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-cardBody{
+  padding: 14px 14px 16px;
+  display: grid;
+  gap: 10px;
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-cardMeta{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-badge{
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  border: 1px solid color-mix(in oklab, var(--stroke2) 55%, var(--stroke));
+  padding: 6px 10px;
+  font-size: 12px;
+  font-weight: 900;
+  color: color-mix(in oklab, var(--cy) 70%, var(--text));
+  background: color-mix(in oklab, var(--panel2) 75%, transparent);
+}
+html[data-theme="light"] body[data-page^="blog."] .page-blog .blog-badge{
+  color: color-mix(in oklab, var(--brand) 76%, var(--text));
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-metaText{
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-metaDot{
+  color: color-mix(in oklab, var(--muted) 85%, transparent);
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-cardTitle{
+  font-weight: 900;
+  font-size: 16px;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+:where(body[data-page^="blog."]) .page-blog .blog-cardTitle a{
+  color: var(--text);
+  text-decoration: none;
+}
+:where(body[data-page^="blog."]) .page-blog .blog-cardTitle a:hover{
+  color: color-mix(in oklab, var(--cy) 70%, var(--text));
+}
+html[data-theme="light"] body[data-page^="blog."] .page-blog .blog-cardTitle a:hover{
+  color: color-mix(in oklab, var(--brand) 70%, var(--text));
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-cardExcerpt{
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--muted);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-cardActions{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-layout{
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+@media (min-width: 1024px){
+  :where(body[data-page^="blog."]) .page-blog .blog-layout{
+    grid-template-columns: minmax(0, 1fr) 340px;
+    align-items: start;
+  }
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-latestGrid{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+@media (min-width: 640px){
+  :where(body[data-page^="blog."]) .page-blog .blog-latestGrid{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (min-width: 1024px){
+  :where(body[data-page^="blog."]) .page-blog .blog-latestGrid{
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-widget{
+  border-radius: 18px;
+  border: 1px solid var(--stroke);
+  background: color-mix(in oklab, var(--panel) 84%, transparent);
+  box-shadow: var(--shadow-soft);
+  overflow: hidden;
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-widgetTitle{
+  font-weight: 900;
+  padding: 12px 14px;
+  border-bottom: 1px solid color-mix(in oklab, var(--stroke) 85%, transparent);
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-widgetBody{
+  padding: 12px 14px;
+  display: grid;
+  gap: 10px;
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-miniItem{
+  display: grid;
+  gap: 4px;
+  padding: 10px 10px;
+  border-radius: 14px;
+  border: 1px solid color-mix(in oklab, var(--stroke) 80%, transparent);
+  background: color-mix(in oklab, var(--panel2) 72%, transparent);
+  transition: transform .14s ease, border-color .14s ease, box-shadow .14s ease;
+}
+:where(body[data-page^="blog."]) .page-blog .blog-miniItem:hover{
+  transform: translateY(-1px);
+  border-color: color-mix(in oklab, var(--stroke2) 70%, var(--stroke));
+  box-shadow: var(--ring);
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-miniTitle{
+  font-weight: 900;
+  font-size: 13px;
+  line-height: 1.3;
+  color: var(--text);
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-miniMeta{
+  font-size: 12px;
+  color: var(--muted);
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-chipList{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-chip{
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 8px 10px;
+  font-size: 12px;
+  font-weight: 900;
+  border: 1px solid var(--stroke);
+  background: color-mix(in oklab, var(--panel2) 72%, transparent);
+  color: color-mix(in oklab, var(--text) 92%, transparent);
+  transition: border-color .14s ease, box-shadow .14s ease, transform .14s ease;
+}
+:where(body[data-page^="blog."]) .page-blog .blog-chip:hover{
+  transform: translateY(-1px);
+  border-color: color-mix(in oklab, var(--stroke2) 70%, var(--stroke));
+  box-shadow: var(--ring);
+}
+:where(body[data-page^="blog."]) .page-blog .blog-chip.is-active{
+  border-color: color-mix(in oklab, var(--stroke2) 85%, var(--stroke));
+  box-shadow: var(--ring);
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-asideMobile{
+  display: block;
+  gap: 10px;
+}
+:where(body[data-page^="blog."]) .page-blog .blog-asideDesktop{
+  display: none;
+}
+@media (min-width: 1024px){
+  :where(body[data-page^="blog."]) .page-blog .blog-asideMobile{
+    display: none;
+  }
+  :where(body[data-page^="blog."]) .page-blog .blog-asideDesktop{
+    display: grid;
+    gap: 14px;
+  }
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-accordion{
+  border-radius: 18px;
+  border: 1px solid var(--stroke);
+  background: color-mix(in oklab, var(--panel) 84%, transparent);
+  box-shadow: var(--shadow-soft);
+  overflow: hidden;
+}
+:where(body[data-page^="blog."]) .page-blog .blog-accordionSum{
+  cursor: pointer;
+  list-style: none;
+  font-weight: 900;
+  padding: 12px 14px;
+}
+:where(body[data-page^="blog."]) .page-blog .blog-accordionSum::-webkit-details-marker{
+  display: none;
+}
+:where(body[data-page^="blog."]) .page-blog .blog-accordionBody{
+  padding: 12px 14px;
+  border-top: 1px solid color-mix(in oklab, var(--stroke) 85%, transparent);
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-empty{
+  border-radius: 18px;
+  border: 1px solid var(--stroke);
+  background: color-mix(in oklab, var(--panel) 84%, transparent);
+  box-shadow: var(--shadow-soft);
+  padding: 22px;
+}
+:where(body[data-page^="blog."]) .page-blog .blog-emptyTitle{
+  font-weight: 900;
+  font-size: 16px;
+}
+:where(body[data-page^="blog."]) .page-blog .blog-emptySub{
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-pagination :where(a, span){
+  border-radius: 12px !important;
+}
+:where(body[data-page^="blog."]) .page-blog .blog-pagination nav{
+  border-radius: 18px;
+  border: 1px solid var(--stroke);
+  background: color-mix(in oklab, var(--panel) 84%, transparent);
+  box-shadow: var(--shadow-soft);
+  padding: 12px 12px;
+}
+:where(body[data-page^="blog."]) .page-blog .blog-pagination a{
+  border: 1px solid var(--stroke) !important;
+  background: color-mix(in oklab, var(--panel2) 74%, transparent) !important;
+  color: var(--text) !important;
+  font-weight: 900 !important;
+}
+:where(body[data-page^="blog."]) .page-blog .blog-pagination a:hover{
+  border-color: color-mix(in oklab, var(--stroke2) 70%, var(--stroke)) !important;
+  box-shadow: var(--ring) !important;
+}
+:where(body[data-page^="blog."]) .page-blog .blog-pagination span[aria-current="page"] span{
+  border: 1px solid color-mix(in oklab, var(--stroke2) 80%, var(--stroke)) !important;
+  background: color-mix(in oklab, var(--panel2) 78%, transparent) !important;
+  color: var(--text) !important;
+  box-shadow: var(--ring) !important;
+  font-weight: 900 !important;
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-catGrid{
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 12px;
+}
+@media (min-width: 640px){
+  :where(body[data-page^="blog."]) .page-blog .blog-catGrid{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (min-width: 1024px){
+  :where(body[data-page^="blog."]) .page-blog .blog-catGrid{
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-catCard{
+  border-radius: 18px;
+  border: 1px solid var(--stroke);
+  background: color-mix(in oklab, var(--panel) 84%, transparent);
+  box-shadow: var(--shadow-soft);
+  padding: 16px;
+  display: grid;
+  gap: 6px;
+  transition: transform .16s ease, border-color .16s ease, box-shadow .16s ease;
+}
+:where(body[data-page^="blog."]) .page-blog .blog-catCard:hover{
+  transform: translateY(-1px);
+  border-color: color-mix(in oklab, var(--stroke2) 70%, var(--stroke));
+  box-shadow: var(--ring);
+}
+:where(body[data-page^="blog."]) .page-blog .blog-catName{
+  font-weight: 900;
+  font-size: 16px;
+  letter-spacing: -.01em;
+}
+:where(body[data-page^="blog."]) .page-blog .blog-catHint{
+  color: var(--muted);
+  font-size: 13px;
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-newsPanel{
+  border-radius: 22px;
+  border: 1px solid var(--stroke);
+  background: linear-gradient(180deg, color-mix(in oklab, var(--panel) 88%, transparent), color-mix(in oklab, var(--panel2) 76%, transparent));
+  box-shadow: var(--shadow);
+  padding: 18px;
+  display: grid;
+  gap: 14px;
+}
+@media (min-width: 768px){
+  :where(body[data-page^="blog."]) .page-blog .blog-newsPanel{
+    padding: 22px;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+  }
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-newsForm{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+@media (min-width: 640px){
+  :where(body[data-page^="blog."]) .page-blog .blog-newsForm{
+    grid-template-columns: 1fr auto;
+    align-items: center;
+  }
+}
+:where(body[data-page^="blog."]) .page-blog .blog-inputLg{
+  padding: 12px 14px;
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-finalPanel{
+  border-radius: 22px;
+  border: 1px solid var(--stroke);
+  background:
+    radial-gradient(820px 440px at 20% 0%, rgba(34,211,238,.18), transparent 62%),
+    radial-gradient(760px 460px at 92% 12%, rgba(167,139,250,.16), transparent 60%),
+    linear-gradient(180deg, color-mix(in oklab, var(--panel) 90%, transparent), color-mix(in oklab, var(--panel2) 72%, transparent));
+  box-shadow: var(--shadow);
+  padding: 18px;
+  display: grid;
+  gap: 14px;
+}
+@media (min-width: 768px){
+  :where(body[data-page^="blog."]) .page-blog .blog-finalPanel{
+    padding: 22px;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+  }
+}
+html[data-theme="light"] body[data-page^="blog."] .page-blog .blog-finalPanel{
+  background:
+    radial-gradient(860px 480px at 20% 0%, rgba(255,106,0,.16), transparent 62%),
+    radial-gradient(780px 500px at 92% 12%, rgba(255,162,74,.18), transparent 60%),
+    linear-gradient(180deg, color-mix(in oklab, var(--panel) 92%, transparent), color-mix(in oklab, var(--panel2) 82%, transparent));
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-finalActions{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-backLink{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 800;
+  font-size: 13px;
+  color: var(--muted);
+}
+:where(body[data-page^="blog."]) .page-blog .blog-backLink:hover{
+  color: var(--text);
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-articleHeroInner{
+  padding: 18px;
+}
+@media (min-width: 768px){
+  :where(body[data-page^="blog."]) .page-blog .blog-articleHeroInner{
+    padding: 22px;
+  }
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-articleHead{
+  margin-top: 12px;
+  display: grid;
+  gap: 10px;
+  max-width: 78ch;
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-articleTitle{
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1.06;
+  font-size: clamp(26px, 3.6vw, 46px);
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-articleLede{
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-articleMeta{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-articleCover{
+  margin-top: 16px;
+  border-radius: 18px;
+  border: 1px solid var(--stroke);
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+  background: color-mix(in oklab, var(--panel2) 72%, transparent);
+}
+:where(body[data-page^="blog."]) .page-blog .blog-coverPlaceholder{
+  aspect-ratio: 16 / 9;
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-summaryBox{
+  border-radius: 18px;
+  border: 1px solid var(--stroke);
+  background: color-mix(in oklab, var(--panel) 88%, transparent);
+  box-shadow: var(--shadow-soft);
+  padding: 16px;
+}
+:where(body[data-page^="blog."]) .page-blog .blog-summaryTitle{
+  font-weight: 900;
+  font-size: 14px;
+}
+:where(body[data-page^="blog."]) .page-blog .blog-summaryText{
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.75;
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-articleCard{
+  border-radius: 18px;
+  border: 1px solid var(--stroke);
+  background: color-mix(in oklab, var(--panel) 86%, transparent);
+  box-shadow: var(--shadow);
+  padding: 16px;
+}
+@media (min-width: 768px){
+  :where(body[data-page^="blog."]) .page-blog .blog-articleCard{
+    padding: 18px;
+  }
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-prose{
+  max-width: 76ch;
+  font-size: 15px;
+  line-height: 1.9;
+  color: color-mix(in oklab, var(--text) 92%, transparent);
+}
+
+html[data-theme="light"] body[data-page^="blog."] .page-blog .blog-prose{
+  color: rgba(27,27,31,.92);
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-prose :where(p){
+  margin: 1em 0;
+}
+:where(body[data-page^="blog."]) .page-blog .blog-prose :where(h1,h2,h3,h4){
+  margin-top: 1.7em;
+  margin-bottom: .65em;
+  font-weight: 900;
+  letter-spacing: -0.01em;
+}
+:where(body[data-page^="blog."]) .page-blog .blog-prose :where(h1){ font-size: 1.65em; }
+:where(body[data-page^="blog."]) .page-blog .blog-prose :where(h2){ font-size: 1.35em; }
+:where(body[data-page^="blog."]) .page-blog .blog-prose :where(h3){ font-size: 1.15em; }
+:where(body[data-page^="blog."]) .page-blog .blog-prose :where(h4){ font-size: 1.05em; }
+
+:where(body[data-page^="blog."]) .page-blog .blog-prose :where(ul,ol){
+  margin: .9em 0 .9em 1.15em;
+}
+:where(body[data-page^="blog."]) .page-blog .blog-prose :where(li){
+  margin: .35em 0;
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-prose :where(a){
+  color: color-mix(in oklab, var(--cy) 78%, var(--text));
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+html[data-theme="light"] body[data-page^="blog."] .page-blog .blog-prose :where(a){
+  color: color-mix(in oklab, var(--brand) 78%, var(--text));
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-prose :where(img,video,iframe){
+  max-width: 100%;
+  height: auto;
+  border-radius: 14px;
+  border: 1px solid var(--stroke);
+  box-shadow: var(--shadow-soft);
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-prose :where(blockquote){
+  margin: 1.2em 0;
+  padding: 12px 14px;
+  border-radius: 16px;
+  border: 1px solid color-mix(in oklab, var(--stroke2) 70%, var(--stroke));
+  background: color-mix(in oklab, var(--panel2) 72%, transparent);
+  color: color-mix(in oklab, var(--text) 92%, transparent);
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-prose :where(table){
+  width: 100%;
+  border-collapse: collapse;
+  overflow: hidden;
+  border-radius: 14px;
+  border: 1px solid var(--stroke);
+}
+:where(body[data-page^="blog."]) .page-blog .blog-prose :where(th,td){
+  padding: 10px 12px;
+  border-bottom: 1px solid color-mix(in oklab, var(--stroke) 85%, transparent);
+  border-right: 1px solid color-mix(in oklab, var(--stroke) 85%, transparent);
+  font-size: 13px;
+}
+:where(body[data-page^="blog."]) .page-blog .blog-prose :where(th){
+  background: color-mix(in oklab, var(--panel2) 72%, transparent);
+  font-weight: 900;
+}
+
+:where(body[data-page^="blog."]) .page-blog .blog-relatedGrid{
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+@media (min-width: 640px){
+  :where(body[data-page^="blog."]) .page-blog .blog-relatedGrid{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (min-width: 1024px){
+  :where(body[data-page^="blog."]) .page-blog .blog-relatedGrid{
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (hover: hover) and (pointer: fine){
+  :where(body[data-page^="blog."]) .page-blog [data-tilt]{
+    transform:
+      perspective(950px)
+      rotateX(var(--tiltX, 0deg))
+      rotateY(var(--tiltY, 0deg))
+      translateY(var(--tiltT, 0px));
+  }
+}
+
+@media (prefers-reduced-motion: reduce){
+  :where(body[data-page^="blog."]) .page-blog [data-reveal]{
+    transition: none;
+    transform: none;
+  }
+  :where(body[data-page^="blog."]) .page-blog .blog-btn,
+  :where(body[data-page^="blog."]) .page-blog .blog-card,
+  :where(body[data-page^="blog."]) .page-blog .blog-miniItem,
+  :where(body[data-page^="blog."]) .page-blog .blog-chip,
+  :where(body[data-page^="blog."]) .page-blog .blog-catCard{
+    transition: none;
+  }
+}
+

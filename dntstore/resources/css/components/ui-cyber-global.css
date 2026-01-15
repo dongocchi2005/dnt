@@ -1,0 +1,433 @@
+/* =====================================================================
+   ui-cyber-global.css  (FULL FILE - FIXED + LIGHT MODE COLOR MATCH)
+   - Dark mode giữ nguyên cyber (cyan/pink + grid + glitch)
+   - Light mode chuyển sang tone "trắng kem / cam đào" theo ảnh tham chiếu
+   - Đã dọn các block light mode trùng lặp, tránh override lung tung
+   - Đảm bảo CSS hợp lệ (không thiếu/ thừa dấu })
+===================================================================== */
+
+/* =========================
+   1) GLOBAL TOKENS (DARK)
+========================= */
+:root{
+  --cyber-black:#050505;
+  --cyber-cyan:#00f3ff;
+  --cyber-pink:#ff00ff;
+  --cyber-orange:#ff6600; /* dark chỉ để phụ, không ảnh hưởng nhiều */
+  --cyber-text:#ffffff;
+
+  --cyber-grid:rgba(0,243,255,.10);
+  --cyber-dark-bg:rgba(10,10,10,.80);
+  --cyber-border:rgba(0,243,255,.30);
+
+  --text-sub:rgba(255,255,255,.70);
+  --text-muted:rgba(255,255,255,.55);
+}
+
+/* =========================
+   2) LIGHT MODE TOKENS (MATCH IMAGE)
+   Tone: trắng kem + cam đào + shadow ấm nhẹ
+========================= */
+html[data-theme="light"]{
+  /* Background & surfaces */
+  --cyber-black:#FFF6ED;          /* kem sữa */
+  --cyber-dark-bg:#FFFFFF;        /* card trắng */
+  --cyber-grid:transparent;       /* bỏ grid */
+
+  /* Brand oranges (soft) */
+  --cyber-cyan:#F37021;           /* cam chủ đạo (dùng lại token cyan để reuse class) */
+  --cyber-orange:#F37021;
+  --cyber-pink:#FF9A5C;           /* cam nhạt phụ */
+
+  /* Text */
+  --cyber-text:#2E1F17;           /* nâu đậm (giống ảnh) */
+  --text-sub:#6B5A50;
+  --text-muted:#9A8F88;
+
+  /* Borders */
+  --cyber-border:#F3E1D4;         /* viền kem cam */
+}
+
+/* =========================
+   3) GLOBAL LIGHT RESET
+========================= */
+html[data-theme="light"] body.cyber-theme{
+  background-color:var(--cyber-black) !important;
+  background-image:none !important;
+  color:var(--cyber-text) !important;
+}
+
+/* =========================
+   4) TYPOGRAPHY
+   - Dark: Orbitron uppercase (giữ nguyên)
+   - Light: Rajdhani thương mại, không uppercase
+========================= */
+.cyber-font-orbitron,
+h1,h2,h3,
+.hero-title,.section-title,
+.cyber-btn{
+  font-family:'DM Sans',sans-serif;
+  text-transform:uppercase;
+  letter-spacing:2px;
+}
+
+html[data-theme="light"] .cyber-font-orbitron,
+html[data-theme="light"] h1,
+html[data-theme="light"] h2,
+html[data-theme="light"] h3,
+html[data-theme="light"] .hero-title,
+html[data-theme="light"] .section-title,
+html[data-theme="light"] .cyber-btn{
+  font-family:'DM Sans',sans-serif !important;
+  text-transform:none !important;
+  letter-spacing:0 !important;
+  font-weight:800;
+}
+
+/* =========================
+   5) HEADER (LIGHT)
+========================= */
+html[data-theme="light"] #app-header{
+  background:#FFFFFF !important;
+  border-bottom:1px solid var(--cyber-border) !important;
+  box-shadow:0 6px 18px rgba(0,0,0,.06) !important;
+  backdrop-filter:none !important;
+}
+
+html[data-theme="light"] #app-header .logo-highlight{
+  color:orange;
+  text-shadow:none !important;
+}
+
+html[data-theme="light"] #app-header .nav-link{
+  color:var(--cyber-text) !important;
+  font-weight:700;
+  text-shadow:none !important;
+}
+
+html[data-theme="light"] #app-header .nav-link:hover,
+html[data-theme="light"] #app-header .nav-link.active{
+  color:var(--cyber-orange) !important;
+  background:#FFF0E6 !important;
+  border-radius:10px;
+}
+
+html[data-theme="light"] #app-header .icon-btn{
+  color:var(--cyber-text) !important;
+  background:transparent !important;
+  border:1px solid transparent !important;
+}
+
+html[data-theme="light"] #app-header .icon-btn:hover{
+  color:var(--cyber-orange) !important;
+  background:#FFF0E6 !important;
+}
+
+/* =========================
+   6) HERO (LIGHT) - MATCH IMAGE
+   Nền trắng -> kem -> be, glow rất nhẹ
+========================= */
+html[data-theme="light"] .cyber-hero-small,
+html[data-theme="light"] .hero,
+html[data-theme="light"] .hero-section{
+  background:radial-gradient(circle at 30% 30%,
+      #FFFFFF 0%,
+      #FFF4EA 45%,
+      #FDE7D6 100%) !important;
+}
+
+/* =========================
+   7) CARD
+========================= */
+/* Dark base */
+.cyber-card{
+  background:var(--cyber-dark-bg);
+  border:1px solid var(--cyber-border);
+  clip-path:polygon(
+      20px 0, 100% 0,
+      100% calc(100% - 20px), calc(100% - 20px) 100%,
+      0 100%, 0 20px
+  );
+  transition:all .3s ease;
+  backdrop-filter:blur(10px);
+  padding:1.5rem;
+}
+
+.cyber-card:hover{
+  border-color:var(--cyber-cyan);
+  transform:translateY(-5px);
+  box-shadow:0 0 20px rgba(0,243,255,.20);
+}
+
+/* Light override (soft commercial) */
+html[data-theme="light"] .cyber-card{
+  background:#FFFFFF !important;
+  border:1px solid var(--cyber-border) !important;
+  border-radius:18px !important;
+  clip-path:none !important;
+  box-shadow:0 10px 28px rgba(0,0,0,.06) !important;
+  backdrop-filter:none !important;
+  padding:2rem !important;
+}
+
+html[data-theme="light"] .cyber-card:hover{
+  transform:translateY(-4px);
+  border-color:#F6C7A5 !important;
+  box-shadow:0 16px 40px rgba(243,112,33,.18) !important;
+}
+
+/* =========================
+   8) BUTTONS
+========================= */
+/* Dark base */
+.cyber-btn{
+  position:relative;
+  padding:1rem 2.5rem;
+  font-weight:700;
+  text-decoration:none;
+  display:inline-block;
+  cursor:pointer;
+  background:transparent;
+  color:var(--cyber-cyan);
+  border:1px solid var(--cyber-cyan);
+  clip-path:polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+  transition:all .3s ease;
+}
+
+.cyber-btn::before{
+  content:'';
+  position:absolute;
+  top:0;
+  left:-100%;
+  width:100%;
+  height:100%;
+  background:linear-gradient(90deg, transparent, rgba(0,243,255,.50), transparent);
+  transition:.5s;
+}
+
+.cyber-btn:hover{
+  background:var(--cyber-cyan);
+  color:var(--cyber-black);
+  box-shadow:0 0 20px var(--cyber-cyan);
+}
+.cyber-btn:hover::before{ left:100%; }
+
+/* Dark pink variant */
+.cyber-btn-pink{
+  color:var(--cyber-pink);
+  border-color:var(--cyber-pink);
+}
+.cyber-btn-pink:hover{
+  background:var(--cyber-pink);
+  color:#fff;
+  box-shadow:0 0 20px var(--cyber-pink);
+}
+
+/* Light override (match image CTA) */
+html[data-theme="light"] .cyber-btn{
+  background:linear-gradient(180deg, #FF8A3D, #F37021) !important;
+  color:#FFFFFF !important;
+  border:none !important;
+  border-radius:999px !important;
+  clip-path:none !important;
+  text-shadow:none !important;
+  padding:.85rem 2rem !important;
+  box-shadow:
+    inset 0 0 0 2px rgba(255,255,255,.40),
+    0 6px 16px rgba(243,112,33,.35) !important;
+}
+
+html[data-theme="light"] .cyber-btn::before{
+  display:none !important;
+}
+
+html[data-theme="light"] .cyber-btn:hover{
+  background:linear-gradient(180deg, #F37021, #E55C12) !important;
+  transform:translateY(-2px);
+  box-shadow:
+    inset 0 0 0 2px rgba(255,255,255,.40),
+    0 10px 22px rgba(243,112,33,.40) !important;
+}
+
+/* Light “secondary button” (tương tự nút phụ / outline) */
+html[data-theme="light"] .cyber-btn-pink{
+  background:#FFF0E6 !important;
+  color:var(--cyber-orange) !important;
+  border:1px solid var(--cyber-orange) !important;
+  box-shadow:none !important;
+  border-radius:999px !important;
+}
+
+html[data-theme="light"] .cyber-btn-pink:hover{
+  background:var(--cyber-orange) !important;
+  color:#FFFFFF !important;
+}
+
+/* =========================
+   9) NEON TEXT + GLITCH
+========================= */
+.neon-text-cyan{
+  color:var(--cyber-cyan);
+  text-shadow:0 0 10px var(--cyber-cyan), 0 0 20px var(--cyber-cyan);
+}
+.neon-text-pink{
+  color:var(--cyber-pink);
+  text-shadow:0 0 10px var(--cyber-pink), 0 0 20px var(--cyber-pink);
+}
+
+/* Light: bỏ glow, đổi thành cam ấm */
+html[data-theme="light"] .neon-text-cyan,
+html[data-theme="light"] .neon-text-pink{
+  text-shadow:none !important;
+  font-weight:900;
+}
+html[data-theme="light"] .neon-text-cyan{ color:var(--cyber-orange) !important; }
+html[data-theme="light"] .neon-text-pink{ color:#E55C12 !important; }
+
+/* Glitch (dark only). Light mode tắt hoàn toàn */
+.glitch{
+  position:relative;
+  color:var(--cyber-text);
+}
+.glitch::before,
+.glitch::after{
+  content:attr(data-text);
+  position:absolute;
+  top:0; left:0;
+  width:100%; height:100%;
+  background:var(--cyber-black);
+}
+.glitch::before{
+  left:2px;
+  text-shadow:-1px 0 var(--cyber-pink);
+  clip:rect(24px, 550px, 90px, 0);
+  animation:glitch-anim-2 3s infinite linear alternate-reverse;
+}
+.glitch::after{
+  left:-2px;
+  text-shadow:-1px 0 var(--cyber-cyan);
+  clip:rect(85px, 550px, 140px, 0);
+  animation:glitch-anim 2.5s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim{
+  0%{ clip:rect(10px,9999px,30px,0); }
+  20%{ clip:rect(60px,9999px,80px,0); }
+  40%{ clip:rect(20px,9999px,90px,0); }
+  60%{ clip:rect(80px,9999px,10px,0); }
+  80%{ clip:rect(10px,9999px,50px,0); }
+  100%{ clip:rect(50px,9999px,20px,0); }
+}
+@keyframes glitch-anim-2{
+  0%{ clip:rect(80px,9999px,10px,0); }
+  20%{ clip:rect(10px,9999px,50px,0); }
+  40%{ clip:rect(50px,9999px,20px,0); }
+  60%{ clip:rect(20px,9999px,90px,0); }
+  80%{ clip:rect(60px,9999px,30px,0); }
+  100%{ clip:rect(10px,9999px,80px,0); }
+}
+
+html[data-theme="light"] .glitch{
+  color:inherit !important;
+}
+html[data-theme="light"] .glitch-dnt{
+  color:var(--cyber-orange) !important;
+}
+html[data-theme="light"] .glitch::before,
+html[data-theme="light"] .glitch::after{
+  display:none !important;
+}
+
+/* =========================
+   10) SECTIONS
+========================= */
+.cyber-hero-small{
+  min-height:40vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  padding:2rem;
+  background:radial-gradient(circle at center, rgba(0,243,255,.05) 0%, transparent 70%);
+  text-align:center;
+}
+
+/* =========================
+   11) INPUTS
+========================= */
+.cyber-input{
+  background:rgba(0,0,0,.60);
+  border:1px solid var(--cyber-cyan);
+  color:#fff;
+  padding:.75rem;
+  width:100%;
+  font-family:'DM Sans',sans-serif;
+  transition:all .3s;
+}
+.cyber-input:focus{
+  outline:none;
+  box-shadow:0 0 10px var(--cyber-cyan);
+}
+
+html[data-theme="light"] .cyber-input{
+  background:#FFFFFF !important;
+  border:1px solid #E6D8CF !important;
+  border-radius:12px !important;
+  color:#2E1F17 !important;
+  box-shadow:inset 0 2px 4px rgba(0,0,0,.02) !important;
+}
+html[data-theme="light"] .cyber-input:focus{
+  border-color:var(--cyber-orange) !important;
+  box-shadow:0 0 0 3px rgba(243,112,33,.14) !important;
+}
+
+/* =========================
+   12) PARTICLES
+========================= */
+.particles-container{
+  position:fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  pointer-events:none;
+  z-index:-1;
+  overflow:hidden;
+}
+
+.particle{
+  position:absolute;
+  width:2px; height:2px;
+  background:var(--cyber-cyan);
+  box-shadow:0 0 5px var(--cyber-cyan);
+  animation:float-up linear infinite;
+  opacity:.5;
+}
+
+@keyframes float-up{
+  0%{ transform:translateY(100vh) scale(0); opacity:0; }
+  50%{ opacity:.8; }
+  100%{ transform:translateY(-100px) scale(1); opacity:0; }
+}
+
+/* Light: “bụi ấm” nhẹ */
+html[data-theme="light"] .particles-container{ opacity:.35; }
+html[data-theme="light"] .particle{
+  background:#F6B38A !important;
+  box-shadow:none !important;
+  border-radius:50%;
+}
+
+/* =========================
+   13) BODY BASE (DARK MODE GRID)
+========================= */
+body.cyber-theme{
+  background-color:var(--cyber-black);
+  color:var(--cyber-text);
+  font-family:'DM Sans',sans-serif;
+  overflow-x:hidden;
+  background-image:
+    linear-gradient(var(--cyber-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--cyber-grid) 1px, transparent 1px);
+  background-size:50px 50px;
+  background-position:center top;
+  transition:background-color .3s, color .3s;
+}

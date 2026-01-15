@@ -1,0 +1,40 @@
+.cyber-toast {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: rgba(5, 5, 5, 0.95);
+  border: 1px solid rgba(10, 255, 0, 0.85);
+  color: rgba(10, 255, 0, 0.92);
+  padding: 16px 24px;
+  border-radius: 10px;
+  box-shadow: 0 0 22px rgba(10, 255, 0, 0.18);
+  z-index: 9999;
+  transform: translateY(150px);
+  transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 700;
+  pointer-events: none;
+}
+
+.cyber-toast.show {
+  transform: translateY(0);
+}
+
+html[data-theme="light"] .cyber-toast {
+  background: rgba(255, 255, 255, 0.96);
+  border-color: rgba(217, 105, 43, 0.65);
+  color: rgba(217, 105, 43, 0.95);
+  box-shadow: 0 0 22px rgba(217, 105, 43, 0.14);
+}
+
+@media (max-width: 768px) {
+  .cyber-toast {
+    left: 16px;
+    right: 16px;
+    bottom: 16px;
+    justify-content: center;
+  }
+}
+

@@ -1,0 +1,228 @@
+/* ====== CYBER CHECKOUT UI ====== */
+body[data-page="checkout.buyNow"]{
+  --bg0:#070A12;
+  --bg1:#0B1020;
+  --line:rgba(44,251,255,.18);
+  --line2:rgba(255,255,255,.10);
+  --cyan:rgba(44,251,255,.95);
+  --cyan2:rgba(44,251,255,.45);
+  --pink:rgba(255,52,191,.95);
+  --txt:rgba(240,250,255,.92);
+  --muted:rgba(240,250,255,.62);
+}
+html[data-theme="light"] body[data-page="checkout.buyNow"]{
+  --bg0:#fff8f1;
+  --bg1:#fff2e6;
+  --line:rgba(217,105,43,.22);
+  --line2:rgba(27,34,48,.10);
+  --cyan:#d9692b;
+  --cyan2:rgba(217,105,43,.30);
+  --pink:rgba(255,140,42,.45);
+  --txt:rgba(27,34,48,.92);
+  --muted:rgba(27,34,48,.62);
+}
+
+body[data-page="checkout.buyNow"] .checkout-wrap{
+  background: radial-gradient(900px 420px at 25% 0%, rgba(44,251,255,.12), transparent 60%),
+              radial-gradient(900px 420px at 75% 0%, rgba(255,52,191,.10), transparent 60%),
+              linear-gradient(180deg, var(--bg0), var(--bg1));
+}
+html[data-theme="light"] body[data-page="checkout.buyNow"] .checkout-wrap{
+  background:
+    radial-gradient(900px 420px at 25% 0%, rgba(255,176,120,.22), transparent 60%),
+    radial-gradient(900px 420px at 75% 0%, rgba(138,200,255,.18), transparent 60%),
+    linear-gradient(180deg, var(--bg0), var(--bg1));
+}
+
+body[data-page="checkout.buyNow"] .cyber-panel{
+  position:relative;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: rgba(255,255,255,.03);
+  box-shadow: 0 24px 70px rgba(0,0,0,.38);
+  overflow:hidden;
+}
+html[data-theme="light"] body[data-page="checkout.buyNow"] .cyber-panel{
+  background: rgba(255,255,255,.92);
+  box-shadow: 0 18px 46px rgba(27,34,48,.10);
+}
+body[data-page="checkout.buyNow"] .cyber-panel:before{
+  content:"";
+  position:absolute; inset:-2px;
+  background: linear-gradient(135deg, rgba(44,251,255,.18), transparent 45%, rgba(255,52,191,.14));
+  pointer-events:none;
+}
+html[data-theme="light"] body[data-page="checkout.buyNow"] .cyber-panel:before{
+  background: linear-gradient(135deg, rgba(255,176,120,.25), transparent 45%, rgba(138,200,255,.22));
+}
+body[data-page="checkout.buyNow"] .cyber-panel > *{ position:relative; z-index:1; }
+
+body[data-page="checkout.buyNow"] .cyber-head{
+  display:flex; align-items:flex-end; justify-content:space-between;
+  gap:12px;
+  padding: 18px 18px 14px;
+  border-bottom: 1px solid var(--line2);
+}
+body[data-page="checkout.buyNow"] .cyber-title{
+  margin:0;
+  font-size: 26px;
+  font-weight: 900;
+  letter-spacing: .3px;
+  color: var(--txt);
+  text-shadow: 0 0 22px rgba(44,251,255,.18);
+}
+body[data-page="checkout.buyNow"] .cyber-sub{ margin:4px 0 0; color: var(--muted); font-size: 13px; }
+body[data-page="checkout.buyNow"] .cy-strong{ color: var(--cyan); }
+body[data-page="checkout.buyNow"] .cy-section{ margin: 16px; }
+
+body[data-page="checkout.buyNow"] .grid{
+  display:grid;
+  grid-template-columns: 1.25fr .75fr;
+  gap: 16px;
+  padding: 16px;
+}
+@media (max-width: 980px){
+  body[data-page="checkout.buyNow"] .grid{ grid-template-columns: 1fr; }
+}
+
+body[data-page="checkout.buyNow"] .section{
+  padding: 16px;
+  border: 1px solid var(--line2);
+  border-radius: 16px;
+  background: rgba(0,0,0,.16);
+}
+html[data-theme="light"] body[data-page="checkout.buyNow"] .section{
+  background: rgba(255,255,255,.86);
+}
+body[data-page="checkout.buyNow"] .section + .section{ margin-top: 14px; }
+
+body[data-page="checkout.buyNow"] .sec-title{
+  display:flex; align-items:center; justify-content:space-between;
+  gap: 10px;
+  margin:0 0 10px;
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--txt);
+}
+body[data-page="checkout.buyNow"] .badge{
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  color: rgba(44,251,255,.9);
+  background: rgba(44,251,255,.06);
+}
+
+body[data-page="checkout.buyNow"] .field{ margin-top: 10px; }
+body[data-page="checkout.buyNow"] .label{ display:block; font-size: 12px; color: var(--muted); margin-bottom: 6px; }
+body[data-page="checkout.buyNow"] .input,
+body[data-page="checkout.buyNow"] .select,
+body[data-page="checkout.buyNow"] .textarea{
+  width:100%;
+  border-radius: 14px;
+  border: 1px solid var(--line2);
+  background: rgba(255,255,255,.03);
+  color: var(--txt);
+  padding: 11px 12px;
+  outline:none;
+  transition: .15s;
+}
+html[data-theme="light"] body[data-page="checkout.buyNow"] .input,
+html[data-theme="light"] body[data-page="checkout.buyNow"] .select,
+html[data-theme="light"] body[data-page="checkout.buyNow"] .textarea{
+  background: #fff;
+}
+body[data-page="checkout.buyNow"] .textarea{ min-height: 92px; resize: vertical; }
+body[data-page="checkout.buyNow"] .input:focus,
+body[data-page="checkout.buyNow"] .select:focus,
+body[data-page="checkout.buyNow"] .textarea:focus{
+  border-color: var(--cyan2);
+  box-shadow: 0 0 0 3px rgba(44,251,255,.10);
+}
+
+body[data-page="checkout.buyNow"] .row2{ display:grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+@media (max-width: 520px){
+  body[data-page="checkout.buyNow"] .row2{ grid-template-columns: 1fr; }
+}
+
+body[data-page="checkout.buyNow"] .pay-method{
+  display:flex; flex-direction:column; gap: 10px;
+}
+body[data-page="checkout.buyNow"] .pay-item{
+  display:flex; gap: 10px; align-items:flex-start;
+  padding: 12px 12px;
+  border-radius: 14px;
+  border: 1px solid var(--line2);
+  background: rgba(255,255,255,.02);
+  cursor:pointer;
+}
+html[data-theme="light"] body[data-page="checkout.buyNow"] .pay-item{
+  background: rgba(255,255,255,.92);
+}
+body[data-page="checkout.buyNow"] .pay-item:hover{ border-color: rgba(44,251,255,.25); }
+body[data-page="checkout.buyNow"] .pay-item input{ margin-top: 3px; }
+body[data-page="checkout.buyNow"] .pay-name{ font-weight: 800; color: var(--txt); font-size: 13px; }
+body[data-page="checkout.buyNow"] .pay-desc{ color: var(--muted); font-size: 12px; margin-top: 2px; }
+
+body[data-page="checkout.buyNow"] .summary-item{
+  display:flex; gap: 12px; align-items:center;
+  padding: 12px;
+  border-radius: 14px;
+  border: 1px solid var(--line2);
+  background: rgba(255,255,255,.02);
+}
+html[data-theme="light"] body[data-page="checkout.buyNow"] .summary-item{
+  background: rgba(255,255,255,.92);
+}
+body[data-page="checkout.buyNow"] .sum-img{
+  width: 68px; height: 68px; border-radius: 14px;
+  border: 1px solid var(--line);
+  overflow:hidden; flex: 0 0 auto;
+  background: rgba(0,0,0,.22);
+}
+body[data-page="checkout.buyNow"] .sum-img img{ width:100%; height:100%; object-fit:cover; display:block; }
+body[data-page="checkout.buyNow"] .sum-name{ color: var(--txt); font-weight: 900; font-size: 13px; line-height: 1.2; }
+body[data-page="checkout.buyNow"] .sum-meta{ color: var(--muted); font-size: 12px; margin-top: 4px; }
+body[data-page="checkout.buyNow"] .sum-price{ margin-left:auto; text-align:right; }
+body[data-page="checkout.buyNow"] .sum-price .p{ color: rgba(44,251,255,.92); font-weight: 900; }
+body[data-page="checkout.buyNow"] .sum-price .q{ color: var(--muted); font-size: 12px; margin-top: 2px; }
+
+body[data-page="checkout.buyNow"] .hr{ height:1px; background: var(--line2); margin: 12px 0; }
+
+body[data-page="checkout.buyNow"] .tot-row{ display:flex; justify-content:space-between; color: var(--muted); font-size: 13px; margin-top: 8px; }
+body[data-page="checkout.buyNow"] .tot-row strong{ color: var(--txt); }
+body[data-page="checkout.buyNow"] .tot-row.total{ font-size: 14px; }
+body[data-page="checkout.buyNow"] .tot-row.total strong{ color: rgba(44,251,255,.95); font-size: 16px; }
+
+body[data-page="checkout.buyNow"] .btn-cyber{
+  width: 100%;
+  display:inline-flex; align-items:center; justify-content:center;
+  gap: 10px;
+  padding: 13px 16px;
+  border-radius: 16px;
+  border: 1px solid rgba(44,251,255,.35);
+  color: #061018;
+  font-weight: 900;
+  letter-spacing: .2px;
+  background: linear-gradient(135deg, rgba(44,251,255,.95), rgba(44,251,255,.55));
+  box-shadow: 0 22px 70px rgba(44,251,255,.18);
+  transition: .16s;
+}
+html[data-theme="light"] body[data-page="checkout.buyNow"] .btn-cyber{
+  border-color: rgba(217,105,43,.30);
+  color: #2b1b10;
+  background: linear-gradient(135deg, rgba(255,176,120,.95), rgba(255,210,170,.75));
+  box-shadow: 0 16px 40px rgba(217,105,43,.18);
+}
+body[data-page="checkout.buyNow"] .btn-cyber:hover{ transform: translateY(-1px); filter: brightness(1.02); }
+body[data-page="checkout.buyNow"] .btn-cyber:active{ transform: translateY(0); }
+
+body[data-page="checkout.buyNow"] .note{
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 12px;
+}
+body[data-page="checkout.buyNow"] .small{
+  font-size: 12px;
+  color: var(--muted);
+}
