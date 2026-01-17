@@ -46,7 +46,8 @@ class LoginController extends Controller
         // Đăng nhập
         Auth::login($user, $request->filled('remember'));
 
-        return redirect()->intended(route('dashboard'));
+      return redirect()->intended('/');
+
     }
 
     public function logout()
