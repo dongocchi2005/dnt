@@ -19,19 +19,27 @@ class AdminServiceController extends Controller
         return view('admin.services.create');
     }
 
-    public function store(Request $request)
-    {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'required|string',
-            'price' => 'required|integer|min:0',
-            'status' => 'in:active,inactive',
-        ]);
+public function store(Request $request)
+{
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'description' => 'required|string',
+        'price' => 'required|integer|min:0',
+        'status' => 'nullable|in:active,inactive',
+    ]);
 
-        Service::create($request->all());
+    Service::create([
+        'name' => $request->name,
+        'description' => $request->description,
+        'price' => $request->price,
+        'status' => $request->status ?? 'active',
+    ]);
 
-        return redirect()->route('admin.services.index')->with('success', 'Service created successfully.');
-    }
+    return redirect()
+        ->route('admin.services.index')
+        ->with('success', 'Service created successfully.');
+}
+
 
     public function show(Service $service)
     {

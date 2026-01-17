@@ -13,7 +13,8 @@
             </div>
             
             <div class="flex items-center gap-3">
-                <a href="{{ route('admin.services.create') }}"
+      <a href="{{ route('admin.services.create') }}">
+
                    class="cyber-btn bg-blue-600 hover:bg-blue-500 text-white">
                     <i class="fa-solid fa-plus"></i> Thêm dịch vụ mới
                 </a>
