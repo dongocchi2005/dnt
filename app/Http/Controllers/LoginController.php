@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use App\Models\User;
 
 class LoginController extends Controller
 {
     public function showLoginForm()
     {
-        return view('auth.login'); // tạo resources/views/auth/login.blade.php
+        return view('auth.login');
     }
 
     public function login(Request $request)
@@ -20,23 +22,31 @@ class LoginController extends Controller
             'password' => 'required|string',
         ]);
 
-        $login = trim((string)$request->input('login'));
-        $field = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'phone';
+        $login = trim($request->input('login'));
 
-        if ($field === 'phone') {
-            $login = preg_replace('/[^0-9]/', '', $login);
+        // Tìm user theo email hoặc phone
+        $user = User::where('email', $login)
+            ->orWhere('phone', $login)
+            ->first();
+
+        // Không tồn tại user
+        if (!$user) {
+            return back()->withErrors([
+                'login' => 'Tài khoản không tồn tại',
+            ]);
         }
 
-        $credentials = [
-            $field => $login,
-            'password' => $request->input('password'),
-        ];
-
-        if (Auth::attempt($credentials, $request->filled('remember'))) {
-            return redirect()->intended(route('dashboard'));
+        // Sai mật khẩu
+        if (!Hash::check($request->password, $user->password)) {
+            return back()->withErrors([
+                'login' => 'Mật khẩu không đúng',
+            ]);
         }
 
-        return back()->withErrors(['login' => 'Số điện thoại hoặc email hoặc mật khẩu không đúng']);
+        // Đăng nhập
+        Auth::login($user, $request->filled('remember'));
+
+        return redirect()->intended(route('dashboard'));
     }
 
     public function logout()
