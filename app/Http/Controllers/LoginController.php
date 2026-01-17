@@ -15,40 +15,34 @@ class LoginController extends Controller
         return view('auth.login');
     }
 
-    public function login(Request $request)
-    {
-        $request->validate([
-            'login' => 'required|string',
-            'password' => 'required|string',
-        ]);
+   public function login(Request $request)
+{
+    $request->validate([
+        'login' => 'required|string',
+        'password' => 'required|string',
+    ]);
 
-        $login = trim($request->input('login'));
+    $login = trim($request->login);
+    $field = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'phone';
 
-        // Tìm user theo email hoặc phone
-        $user = User::where('email', $login)
-            ->orWhere('phone', $login)
-            ->first();
-
-        // Không tồn tại user
-        if (!$user) {
-            return back()->withErrors([
-                'login' => 'Tài khoản không tồn tại',
-            ]);
-        }
-
-        // Sai mật khẩu
-        if (!Hash::check($request->password, $user->password)) {
-            return back()->withErrors([
-                'login' => 'Mật khẩu không đúng',
-            ]);
-        }
-
-        // Đăng nhập
-        Auth::login($user, $request->filled('remember'));
-
-      return redirect()->intended('/');
-
+    if ($field === 'phone') {
+        $login = preg_replace('/\D/', '', $login);
     }
+
+    if (Auth::attempt([
+        $field => $login,
+        'password' => $request->password,
+    ], $request->boolean('remember'))) {
+
+        $request->session()->regenerate();
+        return redirect()->intended('/');
+    }
+
+    return back()->withErrors([
+        'login' => 'Email / SĐT hoặc mật khẩu không đúng',
+    ]);
+}
+
 
     public function logout()
     {
