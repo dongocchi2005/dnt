@@ -39,18 +39,16 @@ XEM NGAY
                     </a>
                 </div>
             @empty
-                 <!-- Dummy Data for Visual -->
-                 @for($i=1; $i<=4; $i++)
-                    <div class="cyber-card flex flex-col h-full">
-                        <img src="{{ asset('image/macbook.jpg') }}" class="w-full h-48 object-cover mb-4 border border-cyan-900/50 grayscale hover:grayscale-0 transition-all">
-                        <div class="flex-1">
-                            <div class="text-xs text-cyan-400 mb-2 font-mono">[2026-01-{{ 10+$i }}] // SYSTEM_UPDATE</div>
-                            <h3 class="text-xl font-bold mb-3 text-white">System Update v{{ $i }}.0 Released</h3>
-                            <p class="text-gray-400 text-sm mb-4">Critical security patches and performance enhancements for all neural link interfaces.</p>
-                        </div>
-                        <a href="#" class="text-pink-500 hover:text-pink-400 font-bold text-sm tracking-wider mt-auto">READ_LOG >></a>
+                <div class="col-span-full flex flex-col items-center justify-center py-16 text-center">
+                    <div class="w-24 h-24 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mb-6 animate-pulse">
+                        <i class="fas fa-satellite-dish text-4xl text-cyan-500/50"></i>
                     </div>
-                 @endfor
+                    <h3 class="text-2xl font-bold text-white mb-2 neon-text-pink">NO_DATA_FOUND</h3>
+                    <p class="text-gray-400 font-mono text-sm max-w-md">
+                        // Dữ liệu tin tức đang được cập nhật từ máy chủ.
+                        <br>Vui lòng quay lại sau.
+                    </p>
+                </div>
             @endforelse
         </div>
 
