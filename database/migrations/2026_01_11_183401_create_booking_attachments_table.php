@@ -11,9 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
+        if (Schema::hasTable('booking_attachments')) {
+            return;
+        }
+
         Schema::create('booking_attachments', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('booking_id')->constrained('bookings')->onDelete('cascade');
+            $table->string('path');
+            $table->string('original_name')->nullable();
+            $table->string('mime')->nullable();
+            $table->unsignedBigInteger('size')->nullable();
             $table->timestamps();
+            $table->index(['booking_id']);
         });
     }
 
