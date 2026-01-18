@@ -35,7 +35,7 @@ class PostController extends Controller
             'slug' => 'nullable|string|max:255|unique:posts,slug',
             'excerpt' => 'nullable|string',
             'content' => 'nullable|string',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:10240',
+            'image' => 'nullable|file|mimes:jpg,jpeg,png,webp|max:10240',
             'is_active' => 'nullable|boolean',
         ]);
 
@@ -79,7 +79,7 @@ class PostController extends Controller
             'slug' => 'nullable|string|max:255|unique:posts,slug,' . $post->id,
             'excerpt' => 'nullable|string',
             'content' => 'nullable|string',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:10240',
+            'image' => 'nullable|file|mimes:jpg,jpeg,png,webp|max:10240',
             'is_active' => 'nullable|boolean',
         ]);
 
