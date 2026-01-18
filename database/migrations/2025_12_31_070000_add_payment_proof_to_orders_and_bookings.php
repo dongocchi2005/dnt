@@ -12,11 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('orders', function (Blueprint $table) {
-            $table->string('payment_proof')->nullable()->after('payment_status');
+            if (!Schema::hasColumn('orders', 'payment_proof')) {
+                $table->string('payment_proof')->nullable()->after('payment_status');
+            }
         });
 
         Schema::table('bookings', function (Blueprint $table) {
-            $table->string('payment_proof')->nullable()->after('payment_status');
+            if (!Schema::hasColumn('bookings', 'payment_proof')) {
+                $table->string('payment_proof')->nullable()->after('payment_status');
+            }
         });
     }
 

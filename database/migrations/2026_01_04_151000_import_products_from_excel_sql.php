@@ -31,8 +31,14 @@ return new class extends Migration
             return;
         }
 
-        // Use INSERT IGNORE to avoid duplicate slug errors
-        $sql = str_replace('INSERT INTO `products`', 'INSERT IGNORE INTO `products`', $sql);
+        // Use INSERT IGNORE (MySQL) or INSERT OR IGNORE (SQLite) to avoid duplicate slug errors
+        $driver = DB::connection()->getDriverName();
+        if ($driver === 'sqlite') {
+            $sql = str_replace('INSERT INTO `products`', 'INSERT OR IGNORE INTO `products`', $sql);
+            $sql = str_replace('NOW()', "datetime('now')", $sql);
+        } else {
+            $sql = str_replace('INSERT INTO `products`', 'INSERT IGNORE INTO `products`', $sql);
+        }
 
         // Execute import
         DB::unprepared($sql);

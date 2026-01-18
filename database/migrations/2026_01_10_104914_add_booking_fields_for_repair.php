@@ -13,13 +13,23 @@ return new class extends Migration
     {
         Schema::table('bookings', function (Blueprint $table) {
             // Change booking_date from date to datetime
-            $table->datetime('booking_date')->change();
+            if (Schema::hasColumn('bookings', 'booking_date')) {
+                $table->datetime('booking_date')->change();
+            }
 
             // Add new fields for receive method and shipping
-            $table->enum('receive_method', ['store', 'ship'])->default('store')->after('device_issue');
-            $table->string('shipping_provider')->nullable()->after('receive_method');
-            $table->text('pickup_address')->nullable()->after('shipping_provider');
-            $table->text('notes')->nullable()->after('pickup_address');
+            if (!Schema::hasColumn('bookings', 'receive_method')) {
+                $table->enum('receive_method', ['store', 'ship'])->default('store')->after('device_issue');
+            }
+            if (!Schema::hasColumn('bookings', 'shipping_provider')) {
+                $table->string('shipping_provider')->nullable()->after('receive_method');
+            }
+            if (!Schema::hasColumn('bookings', 'pickup_address')) {
+                $table->text('pickup_address')->nullable()->after('shipping_provider');
+            }
+            if (!Schema::hasColumn('bookings', 'notes')) {
+                $table->text('notes')->nullable()->after('pickup_address');
+            }
         });
     }
 

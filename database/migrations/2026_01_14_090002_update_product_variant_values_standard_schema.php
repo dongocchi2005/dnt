@@ -45,14 +45,24 @@ return new class extends Migration
             && Schema::hasColumn('product_variant_values', 'name')
             && Schema::hasColumn('product_variant_values', 'value')
         ) {
-            DB::statement(
-                "UPDATE product_variant_values pvv
-                 JOIN product_options po ON po.id = pvv.option_id
-                 JOIN product_option_values pov ON pov.id = pvv.option_value_id
-                 SET pvv.name = COALESCE(pvv.name, po.name),
-                     pvv.value = COALESCE(pvv.value, pov.value)
-                 WHERE (pvv.name IS NULL OR pvv.value IS NULL)"
-            );
+            $driver = DB::connection()->getDriverName();
+            if ($driver === 'sqlite') {
+                DB::statement(
+                    "UPDATE product_variant_values
+                     SET name = COALESCE(name, (SELECT name FROM product_options WHERE product_options.id = product_variant_values.option_id)),
+                         value = COALESCE(value, (SELECT value FROM product_option_values WHERE product_option_values.id = product_variant_values.option_value_id))
+                     WHERE (name IS NULL OR value IS NULL)"
+                );
+            } else {
+                DB::statement(
+                    "UPDATE product_variant_values pvv
+                     JOIN product_options po ON po.id = pvv.option_id
+                     JOIN product_option_values pov ON pov.id = pvv.option_value_id
+                     SET pvv.name = COALESCE(pvv.name, po.name),
+                         pvv.value = COALESCE(pvv.value, pov.value)
+                     WHERE (pvv.name IS NULL OR pvv.value IS NULL)"
+                );
+            }
         }
 
         Schema::table('product_variant_values', function (Blueprint $table) {

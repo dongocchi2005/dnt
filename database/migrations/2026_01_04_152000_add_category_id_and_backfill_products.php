@@ -46,12 +46,21 @@ return new class extends Migration
             }
         }
 
-        DB::statement("
-            UPDATE products p
-            JOIN categories c ON c.name = p.category
-            SET p.category_id = c.id
-            WHERE p.category_id IS NULL
-        ");
+        $driver = DB::connection()->getDriverName();
+        if ($driver === 'sqlite') {
+            DB::statement("
+                UPDATE products
+                SET category_id = (SELECT id FROM categories WHERE categories.name = products.category)
+                WHERE category_id IS NULL
+            ");
+        } else {
+            DB::statement("
+                UPDATE products p
+                JOIN categories c ON c.name = p.category
+                SET p.category_id = c.id
+                WHERE p.category_id IS NULL
+            ");
+        }
     }
 
     public function down(): void
