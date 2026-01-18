@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Booking;
 use App\Models\Service;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Schema;
 
@@ -77,6 +78,24 @@ class BookingController extends Controller
                 $existingNotes = (string) $request->input('notes', '');
                 $prefix = $existingNotes !== '' ? $existingNotes . "\n" : '';
                 $data['notes'] = $prefix . 'appointment_at: ' . (string) $request->input('appointment_at');
+            }
+        }
+
+        if (Schema::hasTable('bookings') && Schema::hasColumn('bookings', 'booking_date') && !array_key_exists('booking_date', $data)) {
+            if ($request->filled('appointment_at')) {
+                $dt = Carbon::parse($request->input('appointment_at'));
+                $data['booking_date'] = $dt->toDateString();
+            } else {
+                $data['booking_date'] = now()->toDateString();
+            }
+        }
+
+        if (Schema::hasTable('bookings') && Schema::hasColumn('bookings', 'time_slot') && !array_key_exists('time_slot', $data)) {
+            if ($request->filled('appointment_at')) {
+                $dt = Carbon::parse($request->input('appointment_at'));
+                $data['time_slot'] = $dt->format('H:i');
+            } else {
+                $data['time_slot'] = $request->input('receive_method') === 'ship' ? 'ship' : now()->format('H:i');
             }
         }
 
