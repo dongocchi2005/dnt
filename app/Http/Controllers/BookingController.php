@@ -7,6 +7,7 @@ use App\Models\Booking;
 use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Schema;
 
 class BookingController extends Controller
 {
@@ -56,7 +57,6 @@ class BookingController extends Controller
             $phone = '0' . $phone;
         }
 
-        // Prepare data
         $data = [
             'user_id' => $user->id,
             'service_id' => $service->id,
@@ -70,32 +70,14 @@ class BookingController extends Controller
             'status' => 'pending',
         ];
 
-        // Only add appointment_at if it is provided and column exists (or just passed if provided)
-        // Since we are having migration issues on VPS, we can temporarily exclude it if null, or just check input
         if ($request->filled('appointment_at')) {
-             $data['appointment_at'] = $request->input('appointment_at');
-        }
-
-        // Add shipping_code if present (it's not in fillable usually, check model)
-        if ($request->has('shipping_code')) {
-             // Assuming you might want to store this somewhere, but based on error it was not in the insert list causing issue if it was.
-             // But wait, the error was about 'appointment_at'.
-             // The error "Column not found: 1054 Unknown column 'appointment_at'" confirms DB schema is missing it.
-             // We are fixing the code to match schema OR fixing schema.
-             // User wants to FIX the error.
-             // If migration failed on VPS, we should remove 'appointment_at' from here temporarily IF we cannot migrate.
-             // BUT user said "git pull" and "migrate" showed "Nothing to migrate".
-             // This implies migration MIGHT have been marked as run but column is missing?
-             // OR migration file is new and not on VPS?
-             // Image 1 shows "2026_01_17_... DONE" is NOT in the list.
-             // Wait, Image 1 shows:
-             // 2025_12_24_084351_create_bookings_table ... DONE
-             // ...
-             // It does NOT show 2026_01_17_000000_add_appointment_at_to_bookings_table.php in the list of "Nothing to migrate" implies it thinks it is done?
-             // No, "Nothing to migrate" means all files in `migrations` folder are recorded in `migrations` table.
-             // IF the file `2026_01_17...` exists on VPS but `migrate` says nothing, it means it is in the table.
-             // IF it is in the table but column is missing in DB -> DB is out of sync.
-             // We should create a NEW migration to add it again or check if file exists.
+            if (Schema::hasTable('bookings') && Schema::hasColumn('bookings', 'appointment_at')) {
+                $data['appointment_at'] = $request->input('appointment_at');
+            } else {
+                $existingNotes = (string) $request->input('notes', '');
+                $prefix = $existingNotes !== '' ? $existingNotes . "\n" : '';
+                $data['notes'] = $prefix . 'appointment_at: ' . (string) $request->input('appointment_at');
+            }
         }
 
         // Add notes if provided
