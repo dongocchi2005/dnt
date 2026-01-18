@@ -50,35 +50,46 @@
 
                 <!-- Social Links -->
                 <div class="grid grid-cols-1 gap-4">
-                    <a href="https://facebook.com" target="_blank" class="flex items-center p-4 bg-blue-600/5 border border-blue-500/30 rounded-lg hover:bg-blue-600/20 hover:border-blue-400 hover:shadow-[0_0_15px_rgba(37,99,235,0.3)] transition-all group">
+                    <a href="https://www.facebook.com/share/1H3uwkNsie/?mibextid=wwXIfr" target="_blank" class="flex items-center p-4 bg-blue-600/5 border border-blue-500/30 rounded-lg hover:bg-blue-600/20 hover:border-blue-400 hover:shadow-[0_0_15px_rgba(37,99,235,0.3)] transition-all group">
                         <div class="w-12 h-12 flex items-center justify-center bg-blue-600/20 rounded-lg mr-4 group-hover:scale-110 transition-transform border border-blue-500/30">
                             <i class="fab fa-facebook-f text-2xl text-blue-400"></i>
                         </div>
                         <div>
                             <div class="text-blue-400 font-bold font-display tracking-wide group-hover:text-blue-300">FACEBOOK</div>
-                            <div class="text-gray-500 text-xs font-mono group-hover:text-gray-400">Cập nhật tin tức & ưu đãi</div>
+                            <div class="text-gray-500 text-xs font-mono group-hover:text-gray-400">DNT STORE | Quận Tân Phú</div>
                         </div>
                         <i class="fas fa-external-link-alt ml-auto text-blue-500/50 group-hover:text-blue-400"></i>
                     </a>
 
-                    <a href="https://zalo.me" target="_blank" class="flex items-center p-4 bg-cyan-600/5 border border-cyan-500/30 rounded-lg hover:bg-cyan-600/20 hover:border-cyan-400 hover:shadow-[0_0_15px_rgba(8,145,178,0.3)] transition-all group">
+                    <a href="https://zalo.me/84987833560" target="_blank" class="flex items-center p-4 bg-cyan-600/5 border border-cyan-500/30 rounded-lg hover:bg-cyan-600/20 hover:border-cyan-400 hover:shadow-[0_0_15px_rgba(8,145,178,0.3)] transition-all group">
                         <div class="w-12 h-12 flex items-center justify-center bg-cyan-600/20 rounded-lg mr-4 group-hover:scale-110 transition-transform border border-cyan-500/30">
                             <i class="fas fa-comment-dots text-2xl text-cyan-400"></i>
                         </div>
                         <div>
                             <div class="text-cyan-400 font-bold font-display tracking-wide group-hover:text-cyan-300">ZALO CHAT</div>
-                            <div class="text-gray-500 text-xs font-mono group-hover:text-gray-400">Tư vấn trực tiếp 24/7</div>
+                            <div class="text-gray-500 text-xs font-mono group-hover:text-gray-400">0987.833.560</div>
                         </div>
                         <i class="fas fa-external-link-alt ml-auto text-cyan-500/50 group-hover:text-cyan-400"></i>
                     </a>
+
+                    <a href="https://youtube.com/@dnt_store?si=Ly9keylQE2Nny63I" target="_blank" class="flex items-center p-4 bg-red-600/5 border border-red-500/30 rounded-lg hover:bg-red-600/20 hover:border-red-400 hover:shadow-[0_0_15px_rgba(220,38,38,0.3)] transition-all group">
+                        <div class="w-12 h-12 flex items-center justify-center bg-red-600/20 rounded-lg mr-4 group-hover:scale-110 transition-transform border border-red-500/30">
+                            <i class="fab fa-youtube text-2xl text-red-400"></i>
+                        </div>
+                        <div>
+                            <div class="text-red-400 font-bold font-display tracking-wide group-hover:text-red-300">YOUTUBE</div>
+                            <div class="text-gray-500 text-xs font-mono group-hover:text-gray-400">DNT STORE Channel</div>
+                        </div>
+                        <i class="fas fa-external-link-alt ml-auto text-red-500/50 group-hover:text-red-400"></i>
+                    </a>
                     
-                    <a href="tel:0999888777" class="flex items-center p-4 bg-pink-600/5 border border-pink-500/30 rounded-lg hover:bg-pink-600/20 hover:border-pink-400 hover:shadow-[0_0_15px_rgba(219,39,119,0.3)] transition-all group">
+                    <a href="tel:0987833560" class="flex items-center p-4 bg-pink-600/5 border border-pink-500/30 rounded-lg hover:bg-pink-600/20 hover:border-pink-400 hover:shadow-[0_0_15px_rgba(219,39,119,0.3)] transition-all group">
                         <div class="w-12 h-12 flex items-center justify-center bg-pink-600/20 rounded-lg mr-4 group-hover:scale-110 transition-transform border border-pink-500/30">
                             <i class="fas fa-phone-alt text-2xl text-pink-400"></i>
                         </div>
                         <div>
                             <div class="text-pink-400 font-bold font-display tracking-wide group-hover:text-pink-300">HOTLINE</div>
-                            <div class="text-gray-500 text-xs font-mono group-hover:text-gray-400">0999.888.777</div>
+                            <div class="text-gray-500 text-xs font-mono group-hover:text-gray-400">0987.833.560</div>
                         </div>
                         <div class="ml-auto w-2 h-2 rounded-full bg-pink-500 animate-pulse"></div>
                     </a>
