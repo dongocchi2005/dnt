@@ -3,12 +3,8 @@
 @section('page-title','Sửa bài viết')
 
 @section('content')
-<div class="max-w-3xl text-bl">
-    <div class="mb-4 p-4 bg-blue-900/30 border border-blue-500/30 rounded text-blue-200 text-sm">
-        <strong>Server Info (Debug):</strong><br>
-        Upload Max Filesize: {{ ini_get('upload_max_filesize') }}<br>
-        Post Max Size: {{ ini_get('post_max_size') }}<br>
-    </div>
+<div class="bg-gray-900 rounded-lg shadow-lg p-6">
+    <h1 class="text-2xl font-bold text-white mb-6">Sửa bài viết</h1>
 
     @if($errors->any())
         <div class="mb-4 rounded border border-red-500/40 bg-red-500/10 p-3 text-sm text-red-300">

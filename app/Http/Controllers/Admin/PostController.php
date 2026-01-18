@@ -30,22 +30,6 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        // DEBUG: Kiểm tra lỗi upload PHP thuần
-        if (isset($_FILES['image']) && $_FILES['image']['error'] !== UPLOAD_ERR_OK) {
-            $phpErrorCode = $_FILES['image']['error'];
-            $phpErrorMessages = [
-                1 => 'The uploaded file exceeds the upload_max_filesize directive in php.ini',
-                2 => 'The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form',
-                3 => 'The uploaded file was only partially uploaded',
-                4 => 'No file was uploaded',
-                6 => 'Missing a temporary folder',
-                7 => 'Failed to write file to disk',
-                8 => 'A PHP extension stopped the file upload',
-            ];
-            $message = $phpErrorMessages[$phpErrorCode] ?? 'Unknown PHP upload error: ' . $phpErrorCode;
-            return back()->withErrors(['image' => $message])->withInput();
-        }
-
         $data = $request->validate([
             'title' => 'required|string|max:255',
             'slug' => 'nullable|string|max:255|unique:posts,slug',
@@ -90,22 +74,6 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        // DEBUG: Kiểm tra lỗi upload PHP thuần
-        if (isset($_FILES['image']) && $_FILES['image']['error'] !== UPLOAD_ERR_OK) {
-            $phpErrorCode = $_FILES['image']['error'];
-            $phpErrorMessages = [
-                1 => 'The uploaded file exceeds the upload_max_filesize directive in php.ini',
-                2 => 'The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form',
-                3 => 'The uploaded file was only partially uploaded',
-                4 => 'No file was uploaded',
-                6 => 'Missing a temporary folder',
-                7 => 'Failed to write file to disk',
-                8 => 'A PHP extension stopped the file upload',
-            ];
-            $message = $phpErrorMessages[$phpErrorCode] ?? 'Unknown PHP upload error: ' . $phpErrorCode;
-            return back()->withErrors(['image' => $message])->withInput();
-        }
-
         $data = $request->validate([
             'title' => 'required|string|max:255',
             'slug' => 'nullable|string|max:255|unique:posts,slug,' . $post->id,
