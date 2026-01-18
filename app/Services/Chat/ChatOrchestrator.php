@@ -87,7 +87,8 @@ class ChatOrchestrator
             $forceIntent = true;
 
             // Nếu NLU đã xác định rõ "order_lookup/booking_lookup/service_order_lookup" thì không override
-            $noOverrideIntents = ['order_lookup', 'booking_lookup', 'service_order_lookup'];
+            // Thêm 'service_quote' và 'booking_create' vào đây để tránh bị ép về product_buy
+            $noOverrideIntents = ['order_lookup', 'booking_lookup', 'service_order_lookup', 'service_quote', 'booking_create'];
             if ($intent && in_array($intent, $noOverrideIntents, true)) {
                 $forceIntent = false;
             }
