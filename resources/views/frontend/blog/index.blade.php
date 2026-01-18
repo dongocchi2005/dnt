@@ -28,13 +28,13 @@
                             [{{ $post->created_at->format('Y-m-d') ?? '2026-01-14' }}] // SYSTEM_LOG
                         </div>
                         <h3 class="text-xl font-bold mb-3 text-white hover:text-cyan-400 transition-colors">
-                            <a href="#">{{ $post->title ?? 'New Cyber-Implant Technology Released' }}</a>
+                            <a href="{{ route('blog.show', $post->slug) }}">{{ $post->title ?? 'New Cyber-Implant Technology Released' }}</a>
                         </h3>
                         <p class="text-gray-400 text-sm mb-4 line-clamp-3">
                             {{ $post->excerpt ?? 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' }}
                         </p>
                     </div>
-                    <a href="#" class="text-pink-500 hover:text-pink-400 font-bold text-sm tracking-wider mt-auto">
+                    <a href="{{ route('blog.show', $post->slug) }}" class="text-pink-500 hover:text-pink-400 font-bold text-sm tracking-wider mt-auto">
 XEM NGAY
                     </a>
                 </div>
