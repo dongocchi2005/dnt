@@ -175,8 +175,8 @@
 @endsection
 
 @push('scripts')
-{{-- TinyMCE CDN (dev/test). Khi dùng lâu dài: thay bằng API key --}}
-<script src="https://cdn.tiny.cloud/1/fkhf5zjmmq3j1l6vl22w620qwtp5zo40ei24y8rqictlfisw/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+{{-- TinyMCE CDN (no-api-key) --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/6.8.3/tinymce.min.js" referrerpolicy="origin"></script>
 
 <script>
 (() => {
