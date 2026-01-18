@@ -24,6 +24,17 @@
   <div class="bg-gray-900 rounded-lg shadow-lg p-6">
     <h1 class="text-2xl font-bold text-white mb-6">Sửa sản phẩm</h1>
 
+    @if ($errors->any())
+        <div class="bg-red-500/10 border border-red-500/50 text-red-500 p-4 rounded-lg mb-6">
+            <div class="font-bold mb-2">Vui lòng kiểm tra lại dữ liệu:</div>
+            <ul class="list-disc list-inside text-sm">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
     <form action="{{ route('admin.products.update', $product) }}"
           method="POST"
           enctype="multipart/form-data"
