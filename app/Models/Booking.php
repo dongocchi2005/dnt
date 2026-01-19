@@ -78,4 +78,9 @@ class Booking extends Model
     {
         return $this->belongsTo(Service::class);
     }
+
+    public function attachments()
+    {
+        return $this->hasMany(BookingAttachment::class);
+    }
 }
