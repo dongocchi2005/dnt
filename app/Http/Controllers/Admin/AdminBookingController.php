@@ -89,11 +89,12 @@ class AdminBookingController extends Controller
 
         $booking = Booking::findOrFail($id);
 
-        // If booking already completed, disallow further updates
+        // Chặn sửa nếu đặt lịch đã hoàn thành
         $alreadyCompleted = in_array($booking->status, ['completed', 'đã hoàn thành', 'Đã hoàn thành'], true);
         if ($alreadyCompleted) {
             return redirect()->back()->with('error', 'Đặt lịch đã hoàn thành, không thể cập nhật thêm.');
         }
+        
         $status = $request->input('status');
 
         // Normalize Vietnamese status values to canonical English values for storage
@@ -114,10 +115,19 @@ class AdminBookingController extends Controller
 
         // If marking completed, optionally store price (only if column exists)
         $completedStatuses = ['completed', 'đã hoàn thành', 'Đã hoàn thành'];
-        if (in_array($status, $completedStatuses, true) && Schema::hasColumn('bookings', 'price')) {
+        if (in_array($savedStatus, $completedStatuses, true) && Schema::hasColumn('bookings', 'price')) {
             $price = $request->input('price');
+            // Remove non-numeric chars before saving (e.g. "9,999,999" -> "9999999")
             if ($price !== null && $price !== '') {
-                $booking->price = $price;
+                // Hỗ trợ cả 9.999.999 hoặc 9,999,999
+                $cleanPrice = preg_replace('/[^0-9]/', '', $price);
+                
+                // Giới hạn giá trị tối đa để tránh lỗi Out of range (9.999.999.999)
+                if (strlen($cleanPrice) > 9) {
+                    $cleanPrice = substr($cleanPrice, 0, 9);
+                }
+                
+                $booking->price = (int)$cleanPrice;
             }
         }
 
@@ -160,50 +170,60 @@ class AdminBookingController extends Controller
  
 
 public function confirmPayment(Request $request, Booking $booking)
-{
-    // Nếu đã xác nhận rồi thì không ghi trùng doanh thu
-    if (($booking->payment_status ?? 'pending') === 'completed') {
-        return back()->with('info', 'Đặt lịch này đã được xác nhận trước đó.');
+    {
+        // Chặn nếu đặt lịch đã hoàn thành hoặc hủy
+        if (in_array($booking->status, ['completed', 'cancelled'])) {
+            return back()->with('error', 'Đặt lịch đã hoàn tất hoặc bị hủy, không thể thay đổi trạng thái.');
+        }
+
+        // Nếu đã xác nhận rồi thì không ghi trùng doanh thu
+        if (($booking->payment_status ?? 'pending') === 'completed') {
+            return back()->with('info', 'Đặt lịch này đã được xác nhận trước đó.');
+        }
+
+        $booking->update([
+            'payment_status' => 'completed',
+            'status' => 'confirmed',
+        ]);
+
+        // GHI DOANH THU (cho Dashboard)
+        Revenue::create([
+            'type' => 'booking',
+            'amount' => $booking->price ?? 0,
+        ]);
+
+        // THÔNG BÁO CHO KHÁCH
+        $booking->user?->notify(
+            new PaymentStatusUpdated('booking', $booking, 'completed')
+        );
+
+        return back()->with('success', 'Đã xác nhận thanh toán đặt lịch.');
     }
 
-    $booking->update([
-        'payment_status' => 'completed',
-        'status' => 'confirmed',
-    ]);
 
-    // GHI DOANH THU (cho Dashboard)
-    Revenue::create([
-        'type' => 'booking',
-        'amount' => $booking->price ?? 0,
-    ]);
+    public function rejectPayment(Request $request, Booking $booking)
+    {
+        // Chặn nếu đặt lịch đã hoàn thành hoặc hủy
+        if (in_array($booking->status, ['completed', 'cancelled'])) {
+            return back()->with('error', 'Đặt lịch đã hoàn tất hoặc bị hủy, không thể thay đổi trạng thái.');
+        }
 
-    // THÔNG BÁO CHO KHÁCH
-    $booking->user?->notify(
-        new PaymentStatusUpdated('booking', $booking, 'completed')
-    );
+        // Nếu đã xử lý rồi thì không làm lại
+        if (($booking->payment_status ?? 'pending') === 'failed') {
+            return back()->with('info', 'Thanh toán này đã bị từ chối trước đó.');
+        }
 
-    return back()->with('success', 'Đã xác nhận thanh toán đặt lịch.');
-}
+        $booking->update([
+            'payment_status' => 'failed',
+        ]);
 
+        // Thông báo cho khách
+        $booking->user?->notify(
+            new PaymentStatusUpdated('booking', $booking, 'failed')
+        );
 
-public function rejectPayment(Request $request, Booking $booking)
-{
-    // Nếu đã xử lý rồi thì không làm lại
-    if (($booking->payment_status ?? 'pending') === 'failed') {
-        return back()->with('info', 'Thanh toán này đã bị từ chối trước đó.');
+        return back()->with('success', 'Đã từ chối thanh toán đặt lịch.');
     }
-
-    $booking->update([
-        'payment_status' => 'failed',
-    ]);
-
-    // Thông báo cho khách
-    $booking->user?->notify(
-        new PaymentStatusUpdated('booking', $booking, 'failed')
-    );
-
-    return back()->with('success', 'Đã từ chối thanh toán đặt lịch.');
-}
 
 
 }
