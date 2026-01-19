@@ -25,25 +25,24 @@ class BookingController extends Controller
             return redirect()->route('login');
         }
 
+        $receiveMethodRaw = (string) $request->input('receive_method', '');
+        $isShipping = in_array($receiveMethodRaw, ['ship', 'shipping'], true);
+
         $request->validate([
             'name' => 'required|string|max:255',
             'phone' => 'required|string|max:20',
             'device' => 'required|string|max:255',
             'issue_description' => 'required|string|min:10',
-            'receive_method' => 'required|in:store,ship',
+            'receive_method' => 'required|in:store,ship,shipping',
             'appointment_at' => 'required_if:receive_method,store|nullable|date',
-            'shipping_provider' => 'required_if:receive_method,ship|nullable|string',
-            'pickup_address' => 'required_if:receive_method,ship|nullable|string|min:10',
+            'shipping_provider' => 'required_if:receive_method,ship,shipping|nullable|string',
+            'pickup_address' => 'nullable|string|min:10',
+            'shipping_code' => 'nullable|string|max:255',
             'photos' => 'array|max:5',
             'photos.*' => 'image|mimes:jpg,jpeg,png,webp|max:4096',
         ]);
 
-        // Additional validation for shipping code
-        if ($request->input('receive_method') === 'ship') {
-            $request->validate([
-                'shipping_code' => 'required|string|max:255',
-            ]);
-        }
+        $receiveMethod = $isShipping ? 'ship' : 'store';
 
         // Find a service to attach to the booking (fallback to first service)
         $service = Service::first();
@@ -65,7 +64,7 @@ class BookingController extends Controller
             'phone' => $phone,
             'device_name' => $request->input('device'),
             'device_issue' => $request->input('issue_description'),
-            'receive_method' => $request->input('receive_method'),
+            'receive_method' => $receiveMethod,
             'shipping_provider' => $request->input('shipping_provider'),
             'pickup_address' => $request->input('pickup_address'),
             'status' => 'pending',
@@ -95,13 +94,19 @@ class BookingController extends Controller
                 $dt = Carbon::parse($request->input('appointment_at'));
                 $data['time_slot'] = $dt->format('H:i');
             } else {
-                $data['time_slot'] = $request->input('receive_method') === 'ship' ? 'ship' : now()->format('H:i');
+                $data['time_slot'] = $receiveMethod === 'ship' ? 'ship' : now()->format('H:i');
             }
         }
 
         // Add notes if provided
         if ($request->input('notes')) {
             $data['notes'] = $request->input('notes');
+        }
+
+        if ($request->filled('shipping_code')) {
+            $existingNotes = (string) ($data['notes'] ?? '');
+            $prefix = $existingNotes !== '' ? $existingNotes . "\n" : '';
+            $data['notes'] = $prefix . 'shipping_code: ' . (string) $request->input('shipping_code');
         }
 
         $booking = Booking::create($data);
