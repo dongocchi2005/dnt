@@ -15,6 +15,29 @@
             Đặt lịch #{{ $booking->id }}
         </h2>
 
+        @if(session('success'))
+            <div class="mb-4 px-4 py-3 rounded border border-green-500/30 bg-green-500/10 text-green-200">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        @if(session('error'))
+            <div class="mb-4 px-4 py-3 rounded border border-red-500/30 bg-red-500/10 text-red-200">
+                {{ session('error') }}
+            </div>
+        @endif
+
+        @if($errors->any())
+            <div class="mb-4 px-4 py-3 rounded border border-red-500/30 bg-red-500/10 text-red-200">
+                <div class="font-semibold mb-1">Có lỗi khi cập nhật:</div>
+                <ul class="list-disc pl-5">
+                    @foreach($errors->all() as $err)
+                        <li>{{ $err }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
             {{-- Cột trái --}}
@@ -89,6 +112,7 @@
                             'completed' => 'Đã hoàn thành',
                             'cancelled' => 'Đã hủy',
                         ];
+                        $selectedStatus = old('status', $booking->status_key ?? ($booking->status ?? 'pending'));
                     @endphp
 
                     <div class="flex flex-wrap gap-2 items-center">
@@ -97,17 +121,17 @@
                             class="border border-white/30 bg-gray-800 text-bl px-2 py-1 rounded appearance-none"
                         >
                             @foreach($options as $val => $text)
-                                <option value="{{ $val }}" {{ $booking->status_key === $val ? 'selected' : '' }} class="bg-gray-800 text-bl">
+                                <option value="{{ $val }}" {{ $selectedStatus === $val ? 'selected' : '' }} class="bg-gray-800 text-bl">
                                     {{ $text }}
                                 </option>
                             @endforeach
                         </select>
 
                         <input
-                            type="number"
-                            step="0.01"
+                            type="text"
+                            inputmode="numeric"
                             name="price"
-                            value="{{ $booking->price ?? '' }}"
+                            value="{{ old('price', $booking->price ?? '') }}"
                             placeholder="Giá (VND)"
                             class="border border-white/30 bg-transparent text-bl px-2 py-1 rounded w-40 placeholder-white/50"
                         />
@@ -118,6 +142,14 @@
                             Cập nhật
                         </button>
                     </div>
+
+                    @error('status')
+                        <div class="mt-2 text-xs text-red-300">{{ $message }}</div>
+                    @enderror
+
+                    @error('price')
+                        <div class="mt-2 text-xs text-red-300">{{ $message }}</div>
+                    @enderror
 
                     <p class="mt-2 text-xs text-bl/60">
                         Lưu ý: Nhớ Nhập Giá nếu thay đổi trạng thái thành "Đã hoàn thành".

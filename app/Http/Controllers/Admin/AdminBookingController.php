@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Booking;
 use Illuminate\Support\Facades\Schema;
 use App\Notifications\PaymentStatusUpdated;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Validator;
 
 class AdminBookingController extends Controller
 {
@@ -80,21 +82,44 @@ class AdminBookingController extends Controller
             'status' => 'required|in:'.implode(',', $allowedStatuses),
         ];
 
-        // Only validate price if the bookings.price column exists
         if (Schema::hasColumn('bookings', 'price')) {
-            $rules['price'] = 'nullable|numeric|min:0';
+            $rules['price'] = 'required_if:status,completed|nullable|numeric|min:0';
         }
 
-        $request->validate($rules);
+        $rawPrice = $request->input('price');
+        $normalizedPrice = $this->normalizeMoneyInput($rawPrice);
+        if ($normalizedPrice !== null) {
+            $request->merge(['price' => $normalizedPrice]);
+        }
+
+        $validator = Validator::make($request->all(), $rules, [
+            'price.required_if' => 'Vui lòng nhập giá khi chuyển sang trạng thái "Đã hoàn thành".',
+            'price.numeric' => 'Giá không hợp lệ. Ví dụ hợp lệ: 200000 hoặc 200.000 hoặc 200,000',
+        ]);
+
+        if ($validator->fails()) {
+            Log::warning('Admin booking update validation failed', [
+                'booking_id' => $id,
+                'admin_user_id' => $request->user()?->id,
+                'status' => $request->input('status'),
+                'price_raw' => $rawPrice,
+                'price_normalized' => $normalizedPrice,
+                'errors' => $validator->errors()->toArray(),
+            ]);
+
+            return back()
+                ->withErrors($validator)
+                ->withInput()
+                ->with('error', 'Cập nhật thất bại. Vui lòng kiểm tra lại dữ liệu nhập.');
+        }
 
         $booking = Booking::findOrFail($id);
 
-        // Chặn sửa nếu đặt lịch đã hoàn thành
+        // If booking already completed, disallow further updates
         $alreadyCompleted = in_array($booking->status, ['completed', 'đã hoàn thành', 'Đã hoàn thành'], true);
         if ($alreadyCompleted) {
             return redirect()->back()->with('error', 'Đặt lịch đã hoàn thành, không thể cập nhật thêm.');
         }
-        
         $status = $request->input('status');
 
         // Normalize Vietnamese status values to canonical English values for storage
@@ -115,25 +140,63 @@ class AdminBookingController extends Controller
 
         // If marking completed, optionally store price (only if column exists)
         $completedStatuses = ['completed', 'đã hoàn thành', 'Đã hoàn thành'];
-        if (in_array($savedStatus, $completedStatuses, true) && Schema::hasColumn('bookings', 'price')) {
+        if (in_array($status, $completedStatuses, true) && Schema::hasColumn('bookings', 'price')) {
             $price = $request->input('price');
-            // Remove non-numeric chars before saving (e.g. "9,999,999" -> "9999999")
             if ($price !== null && $price !== '') {
-                // Hỗ trợ cả 9.999.999 hoặc 9,999,999
-                $cleanPrice = preg_replace('/[^0-9]/', '', $price);
-                
-                // Giới hạn giá trị tối đa để tránh lỗi Out of range (9.999.999.999)
-                if (strlen($cleanPrice) > 9) {
-                    $cleanPrice = substr($cleanPrice, 0, 9);
-                }
-                
-                $booking->price = (int)$cleanPrice;
+                $booking->price = $price;
             }
         }
 
         $booking->save();
 
         return redirect()->back()->with('success', 'Cập nhật trạng thái thành công');
+    }
+
+    private function normalizeMoneyInput(mixed $value): ?string
+    {
+        if ($value === null) {
+            return null;
+        }
+
+        if (is_int($value) || is_float($value)) {
+            return (string) $value;
+        }
+
+        if (!is_string($value)) {
+            return null;
+        }
+
+        $s = trim($value);
+        if ($s === '') {
+            return null;
+        }
+
+        $s = preg_replace('/[^\d\.,]/u', '', $s);
+        if ($s === null || $s === '') {
+            return null;
+        }
+
+        $hasDot = str_contains($s, '.');
+        $hasComma = str_contains($s, ',');
+
+        if ($hasDot && $hasComma) {
+            $s = str_replace('.', '', $s);
+            $s = str_replace(',', '.', $s);
+        } elseif ($hasComma) {
+            if (preg_match('/,\d{1,2}$/', $s) === 1) {
+                $s = str_replace(',', '.', $s);
+            } else {
+                $s = str_replace(',', '', $s);
+            }
+        } elseif ($hasDot) {
+            if (preg_match('/\.\d{1,2}$/', $s) !== 1) {
+                $s = str_replace('.', '', $s);
+            }
+        }
+
+        $s = preg_replace('/\.(?=.*\.)/', '', $s);
+
+        return $s ?: null;
     }
 
     /**
@@ -170,60 +233,50 @@ class AdminBookingController extends Controller
  
 
 public function confirmPayment(Request $request, Booking $booking)
-    {
-        // Chặn nếu đặt lịch đã hoàn thành hoặc hủy
-        if (in_array($booking->status, ['completed', 'cancelled'])) {
-            return back()->with('error', 'Đặt lịch đã hoàn tất hoặc bị hủy, không thể thay đổi trạng thái.');
-        }
-
-        // Nếu đã xác nhận rồi thì không ghi trùng doanh thu
-        if (($booking->payment_status ?? 'pending') === 'completed') {
-            return back()->with('info', 'Đặt lịch này đã được xác nhận trước đó.');
-        }
-
-        $booking->update([
-            'payment_status' => 'completed',
-            'status' => 'confirmed',
-        ]);
-
-        // GHI DOANH THU (cho Dashboard)
-        Revenue::create([
-            'type' => 'booking',
-            'amount' => $booking->price ?? 0,
-        ]);
-
-        // THÔNG BÁO CHO KHÁCH
-        $booking->user?->notify(
-            new PaymentStatusUpdated('booking', $booking, 'completed')
-        );
-
-        return back()->with('success', 'Đã xác nhận thanh toán đặt lịch.');
+{
+    // Nếu đã xác nhận rồi thì không ghi trùng doanh thu
+    if (($booking->payment_status ?? 'pending') === 'completed') {
+        return back()->with('info', 'Đặt lịch này đã được xác nhận trước đó.');
     }
 
+    $booking->update([
+        'payment_status' => 'completed',
+        'status' => 'confirmed',
+    ]);
 
-    public function rejectPayment(Request $request, Booking $booking)
-    {
-        // Chặn nếu đặt lịch đã hoàn thành hoặc hủy
-        if (in_array($booking->status, ['completed', 'cancelled'])) {
-            return back()->with('error', 'Đặt lịch đã hoàn tất hoặc bị hủy, không thể thay đổi trạng thái.');
-        }
+    // GHI DOANH THU (cho Dashboard)
+    Revenue::create([
+        'type' => 'booking',
+        'amount' => $booking->price ?? 0,
+    ]);
 
-        // Nếu đã xử lý rồi thì không làm lại
-        if (($booking->payment_status ?? 'pending') === 'failed') {
-            return back()->with('info', 'Thanh toán này đã bị từ chối trước đó.');
-        }
+    // THÔNG BÁO CHO KHÁCH
+    $booking->user?->notify(
+        new PaymentStatusUpdated('booking', $booking, 'completed')
+    );
 
-        $booking->update([
-            'payment_status' => 'failed',
-        ]);
+    return back()->with('success', 'Đã xác nhận thanh toán đặt lịch.');
+}
 
-        // Thông báo cho khách
-        $booking->user?->notify(
-            new PaymentStatusUpdated('booking', $booking, 'failed')
-        );
 
-        return back()->with('success', 'Đã từ chối thanh toán đặt lịch.');
+public function rejectPayment(Request $request, Booking $booking)
+{
+    // Nếu đã xử lý rồi thì không làm lại
+    if (($booking->payment_status ?? 'pending') === 'failed') {
+        return back()->with('info', 'Thanh toán này đã bị từ chối trước đó.');
     }
+
+    $booking->update([
+        'payment_status' => 'failed',
+    ]);
+
+    // Thông báo cho khách
+    $booking->user?->notify(
+        new PaymentStatusUpdated('booking', $booking, 'failed')
+    );
+
+    return back()->with('success', 'Đã từ chối thanh toán đặt lịch.');
+}
 
 
 }
