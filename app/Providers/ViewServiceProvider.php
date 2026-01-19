@@ -17,7 +17,7 @@ class ViewServiceProvider extends ServiceProvider
     {
         try {
             View::share('logo', Logo::first());
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             View::share('logo', null);
         }
     }

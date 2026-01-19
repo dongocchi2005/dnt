@@ -11,3 +11,4 @@ class Logo extends Model
 
     protected $fillable = ['path'];
 }
+
