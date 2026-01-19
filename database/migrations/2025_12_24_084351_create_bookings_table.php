@@ -21,6 +21,7 @@ return new class extends Migration
                 $table->string('device_name');
                 $table->text('device_issue');
                 $table->string('status')->default('pending');
+                $table->decimal('price', 10, 2)->nullable();
                 $table->timestamps();
             });
         }
