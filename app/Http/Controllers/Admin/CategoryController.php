@@ -13,7 +13,22 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::with('products')->paginate(10);
+        $q = trim((string)request('q', ''));
+        $hasProducts = request('has_products');
+
+        $query = Category::query()
+            ->with('products')
+            ->when($q !== '', function ($qq) use ($q) {
+                $like = '%' . $q . '%';
+                $qq->where(function ($sub) use ($like) {
+                    $sub->where('name', 'like', $like)
+                        ->orWhere('description', 'like', $like);
+                });
+            })
+            ->when($hasProducts === '1', fn($qq) => $qq->whereHas('products'))
+            ->when($hasProducts === '0', fn($qq) => $qq->whereDoesntHave('products'));
+
+        $categories = $query->paginate(10)->appends(request()->query());
         return view('admin.categories.index', compact('categories'));
     }
 

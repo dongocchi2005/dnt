@@ -29,13 +29,23 @@
       appointmentInput.min = local.toISOString().slice(0, 16);
     };
 
+    const toggleAppointment = () => {
+      const appointmentInput = $('#appointment_at', form);
+      if (!appointmentInput) return;
+      const method = getReceiveMethod();
+
+      const required = method === 'store';
+      appointmentInput.required = required;
+      appointmentInput.disabled = false;
+    };
+
     const toggleShipBlocks = () => {
-      const method = getReceiveMethod(); // store | pickup | shipping
+      const method = getReceiveMethod(); // store | ship
       const blocks = $$('.booking-ship-only', form);
       if (!blocks.length) return;
 
       blocks.forEach((el) => {
-        const mode = el.getAttribute('data-ship'); // pickup | shipping
+        const mode = el.getAttribute('data-ship'); // ship
         const show = (method === mode);
 
         el.style.display = show ? '' : 'none';
@@ -74,8 +84,7 @@
       wraps.forEach((row) => {
         const k = row.getAttribute('data-summary-wrap'); // shipping_provider | pickup_address | shipping_code
         const show =
-          (method === 'shipping' && (k === 'shipping_provider' || k === 'shipping_code')) ||
-          (method === 'pickup' && k === 'pickup_address');
+          method === 'ship' && (k === 'shipping_provider' || k === 'pickup_address' || k === 'shipping_code');
 
         row.style.display = show ? '' : 'none';
       });
@@ -94,9 +103,7 @@
       setSummary('appointment_at', formatDateTimeVi(appointment));
       setSummary(
         'receive_method',
-        method === 'store' ? 'Mang tới cửa hàng'
-          : method === 'pickup' ? 'Nhận tận nơi'
-          : 'Gửi ship'
+        method === 'store' ? 'Mang tới cửa hàng' : 'Gửi ship'
       );
 
       // ship extra
@@ -132,6 +139,7 @@
 
     // ==== Bind events (an toàn, không throw) ====
     setMinAppointment();
+    toggleAppointment();
     toggleShipBlocks();
     updateSummary();
     initAccordion();
@@ -139,6 +147,7 @@
     // Receive method change
     $$('input[name="receive_method"]', form).forEach((r) => {
       r.addEventListener('change', () => {
+        toggleAppointment();
         toggleShipBlocks();
         updateSummary();
       });

@@ -46,20 +46,21 @@ return new class extends Migration
             }
         }
 
-        $driver = DB::connection()->getDriverName();
-        if ($driver === 'sqlite') {
-            DB::statement("
-                UPDATE products
-                SET category_id = (SELECT id FROM categories WHERE categories.name = products.category)
-                WHERE category_id IS NULL
-            ");
-        } else {
+        if (DB::getDriverName() === 'mysql') {
             DB::statement("
                 UPDATE products p
                 JOIN categories c ON c.name = p.category
                 SET p.category_id = c.id
                 WHERE p.category_id IS NULL
             ");
+        } else {
+            $categoryIdsByName = DB::table('categories')->pluck('id', 'name');
+            foreach ($categoryIdsByName as $name => $id) {
+                DB::table('products')
+                    ->whereNull('category_id')
+                    ->where('category', $name)
+                    ->update(['category_id' => $id]);
+            }
         }
     }
 

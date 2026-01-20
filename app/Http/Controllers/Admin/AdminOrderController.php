@@ -24,11 +24,28 @@ class AdminOrderController extends Controller
     {
         $q = request('q');
         $status = request('status');
+        $paymentMethod = request('payment_method');
+        $orderStatus = request('order_status');
+        $dateFrom = request('date_from');
+        $dateTo = request('date_to');
+        $totalMin = request('total_min');
+        $totalMax = request('total_max');
 
         $query = Order::with('user')
-            ->when($q, fn($qq) => $qq->whereHas('user', fn($qUser) => $qUser->where('name', 'like', "%{$q}%"))
-                                ->orWhere('id', 'like', "%{$q}%"))
+            ->when($q, function ($qq) use ($q) {
+                $like = '%' . $q . '%';
+                $qq->where(function ($sub) use ($like) {
+                    $sub->whereHas('user', fn($qUser) => $qUser->where('name', 'like', $like))
+                        ->orWhere('id', 'like', $like);
+                });
+            })
             ->when($status, fn($qq) => $qq->where('payment_status', $status))
+            ->when($paymentMethod, fn($qq) => $qq->where('payment_method', $paymentMethod))
+            ->when($orderStatus, fn($qq) => $qq->where('order_status', $orderStatus))
+            ->when($dateFrom, fn($qq) => $qq->whereDate('created_at', '>=', $dateFrom))
+            ->when($dateTo, fn($qq) => $qq->whereDate('created_at', '<=', $dateTo))
+            ->when(is_numeric($totalMin), fn($qq) => $qq->where('total_amount', '>=', (float)$totalMin))
+            ->when(is_numeric($totalMax), fn($qq) => $qq->where('total_amount', '<=', (float)$totalMax))
             ->latest();
 
         $orders = $query->paginate(20)->appends(request()->query());

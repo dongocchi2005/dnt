@@ -6,27 +6,18 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::table('bookings', function (Blueprint $table) {
-            if (!Schema::hasColumn('bookings', 'price')) {
-                $table->decimal('price', 10, 2)->nullable()->after('status');
-            }
+            $table->text('repair_note')->nullable()->after('device_issue');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::table('bookings', function (Blueprint $table) {
-            if (Schema::hasColumn('bookings', 'price')) {
-                $table->dropColumn('price');
-            }
+            $table->dropColumn('repair_note');
         });
     }
 };
+

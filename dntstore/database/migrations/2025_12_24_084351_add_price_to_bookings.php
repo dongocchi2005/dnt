@@ -11,12 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        if (! Schema::hasTable('bookings')) {
-            return;
-        }
-
         Schema::table('bookings', function (Blueprint $table) {
-            if (! Schema::hasColumn('bookings', 'price')) {
+            if (!Schema::hasColumn('bookings', 'price')) {
                 $table->decimal('price', 10, 2)->nullable()->after('status');
             }
         });
@@ -27,10 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        if (! Schema::hasTable('bookings')) {
-            return;
-        }
-
         Schema::table('bookings', function (Blueprint $table) {
             if (Schema::hasColumn('bookings', 'price')) {
                 $table->dropColumn('price');

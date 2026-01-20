@@ -7,7 +7,7 @@
 
 @section('content')
 @php
-  $role = $user->role ?? ($user->is_admin ?? false ? 'admin' : 'user');
+  $role = $user->role ?? (($user->is_admin ?? false) ? 'admin' : 'user');
   $status = $user->status ?? ($user->is_locked ?? false ? 'locked' : 'active');
 @endphp
 
@@ -99,10 +99,11 @@
 
       {{-- Quick lock/unlock --}}
       <div class="mt-4">
-        <form method="POST" action="{{ route('admin.users.update', $user->id) }}">
+        <form method="POST"
+              action="{{ $status === 'locked'
+                ? route('admin.users.unlock', $user->id)
+                : route('admin.users.lock', $user->id) }}">
           @csrf
-          @method('PUT')
-          <input type="hidden" name="action" value="{{ $status === 'locked' ? 'unlock' : 'lock' }}">
           <button type="submit"
                   class="w-full px-4 py-2 rounded-xl border transition
                          {{ $status === 'locked'
@@ -128,7 +129,7 @@
       </div>
 
       @if(isset($orders) && $orders->count())
-        <div class="mt-4 overflow-x-auto">
+        <div class="admin-table-mobile-hide mt-4 overflow-x-auto">
           <table class="min-w-full text-sm">
             <thead class="bg-white/5">
               <tr class="text-left text-bl/70">
@@ -156,6 +157,40 @@
               @endforeach
             </tbody>
           </table>
+        </div>
+
+        <div class="admin-mobile-cards mt-4">
+          @foreach($orders as $o)
+            <div class="admin-mobile-card">
+              <div class="admin-mobile-card__head">
+                <div class="admin-mobile-card__title text-bl">
+                  #{{ $o->id }}
+                </div>
+                <div class="admin-mobile-card__meta">
+                  {{ optional($o->created_at)->format('d/m/Y H:i') }}
+                </div>
+              </div>
+
+              <div class="admin-mobile-card__body">
+                <div class="admin-mobile-field">
+                  <div class="admin-mobile-field__label">Tổng</div>
+                  <div class="admin-mobile-field__value text-bl/80">{{ number_format($o->total_amount) }} VND</div>
+                </div>
+                <div class="admin-mobile-field">
+                  <div class="admin-mobile-field__label">Thanh toán</div>
+                  <div class="admin-mobile-field__value text-bl/80">{{ $o->payment_status }}</div>
+                </div>
+              </div>
+
+              <div class="admin-mobile-actions">
+                <a href="{{ route('admin.orders.show', $o->id) }}"
+                   class="admin-action-btn border border-white/10 rounded-lg text-sm font-medium text-cyan-300 bg-white/5 hover:bg-white/10 transition-colors flex items-center justify-center gap-2 w-full">
+                  <i class="fa-solid fa-eye mr-1 text-cyan-200"></i>
+                  <span class="admin-action-label">Chi tiết</span>
+                </a>
+              </div>
+            </div>
+          @endforeach
         </div>
 
         @if(method_exists($orders, 'links'))

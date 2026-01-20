@@ -5,10 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Booking;
+use App\Models\Service;
+use App\Models\Revenue;
 use Illuminate\Support\Facades\Schema;
 use App\Notifications\PaymentStatusUpdated;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Validator;
 
 class AdminBookingController extends Controller
 {
@@ -24,15 +24,46 @@ class AdminBookingController extends Controller
     {
         $q = request('q');
         $status = request('status');
+        $receiveMethod = request('receive_method');
+        $serviceId = request('service_id');
+        $dateFrom = request('date_from');
+        $dateTo = request('date_to');
 
-        $query = Booking::with('user')
-            ->when($q, fn($qq) => $qq->search($q))
-            ->when($status, fn($qq) => $qq->status($status))
+        $query = Booking::query()
+            ->with(['user', 'service'])
+            ->when($q, function ($qq) use ($q) {
+                $like = '%' . $q . '%';
+                $qq->where(function ($sub) use ($like) {
+                    $sub->where('customer_name', 'like', $like)
+                        ->orWhere('phone', 'like', $like)
+                        ->orWhere('device_name', 'like', $like)
+                        ->orWhere('device_issue', 'like', $like)
+                        ->orWhereHas('user', function ($u) use ($like) {
+                            $u->where('name', 'like', $like)->orWhere('email', 'like', $like);
+                        });
+                });
+            })
+            ->when($status, function ($qq) use ($status) {
+                $normalized = strtolower((string)$status);
+                $statusMap = [
+                    'pending' => ['pending', 'đang chờ'],
+                    'confirmed' => ['confirmed', 'đã xác nhận'],
+                    'completed' => ['completed', 'đã hoàn thành', 'Đã hoàn thành'],
+                    'cancelled' => ['cancelled', 'đã hủy'],
+                ];
+                $values = $statusMap[$normalized] ?? [$status];
+                $qq->whereIn('status', $values);
+            })
+            ->when($receiveMethod, fn($qq) => $qq->where('receive_method', $receiveMethod))
+            ->when($serviceId, fn($qq) => $qq->where('service_id', $serviceId))
+            ->when($dateFrom, fn($qq) => $qq->whereDate('created_at', '>=', $dateFrom))
+            ->when($dateTo, fn($qq) => $qq->whereDate('created_at', '<=', $dateTo))
             ->latest();
 
         $bookings = $query->paginate(20)->appends(request()->query());
+        $services = Service::query()->select('id', 'name')->orderBy('name')->get();
 
-        return view('admin.bookings.index', compact('bookings'));
+        return view('admin.bookings.index', compact('bookings', 'services'));
     }
 
     /**
@@ -56,7 +87,7 @@ class AdminBookingController extends Controller
      */
     public function show(string $id)
     {
-        $booking = Booking::findOrFail($id);
+        $booking = Booking::with(['user', 'service', 'attachments'])->findOrFail($id);
         return view('admin.bookings.show', compact('booking'));
     }
 
@@ -73,53 +104,45 @@ class AdminBookingController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $booking = Booking::findOrFail($id);
+
+        $alreadyCompleted = in_array($booking->status, ['completed', 'đã hoàn thành', 'Đã hoàn thành'], true);
+
         $allowedStatuses = [
             'pending','confirmed','completed','cancelled',
             'đang chờ','đã xác nhận','đã hoàn thành','đã hủy'
         ];
 
+        if ($alreadyCompleted) {
+            $allowedStatuses = ['completed', 'đã hoàn thành', 'Đã hoàn thành'];
+        }
+
         $rules = [
             'status' => 'required|in:'.implode(',', $allowedStatuses),
+            'repair_note' => 'nullable|string',
         ];
 
+        // Only validate price if the bookings.price column exists
         if (Schema::hasColumn('bookings', 'price')) {
-            $rules['price'] = 'required_if:status,completed|nullable|numeric|min:0';
+            $rules['price'] = 'nullable|numeric|min:0';
         }
 
-        $rawPrice = $request->input('price');
-        $normalizedPrice = $this->normalizeMoneyInput($rawPrice);
-        if ($normalizedPrice !== null) {
-            $request->merge(['price' => $normalizedPrice]);
+        $request->validate($rules);
+
+        $repairNote = $request->input('repair_note');
+        if (is_string($repairNote)) {
+            $repairNote = trim($repairNote);
         }
+        $repairNote = ($repairNote === '' ? null : $repairNote);
 
-        $validator = Validator::make($request->all(), $rules, [
-            'price.required_if' => 'Vui lòng nhập giá khi chuyển sang trạng thái "Đã hoàn thành".',
-            'price.numeric' => 'Giá không hợp lệ. Ví dụ hợp lệ: 200000 hoặc 200.000 hoặc 200,000',
-        ]);
-
-        if ($validator->fails()) {
-            Log::warning('Admin booking update validation failed', [
-                'booking_id' => $id,
-                'admin_user_id' => $request->user()?->id,
-                'status' => $request->input('status'),
-                'price_raw' => $rawPrice,
-                'price_normalized' => $normalizedPrice,
-                'errors' => $validator->errors()->toArray(),
-            ]);
-
-            return back()
-                ->withErrors($validator)
-                ->withInput()
-                ->with('error', 'Cập nhật thất bại. Vui lòng kiểm tra lại dữ liệu nhập.');
-        }
-
-        $booking = Booking::findOrFail($id);
-
-        // If booking already completed, disallow further updates
-        $alreadyCompleted = in_array($booking->status, ['completed', 'đã hoàn thành', 'Đã hoàn thành'], true);
         if ($alreadyCompleted) {
-            return redirect()->back()->with('error', 'Đặt lịch đã hoàn thành, không thể cập nhật thêm.');
+            Booking::query()
+                ->whereKey($booking->id)
+                ->update(['repair_note' => $repairNote]);
+
+            return redirect()->back()->with('success', 'Cập nhật ghi chú kỹ thuật thành công');
         }
+
         $status = $request->input('status');
 
         // Normalize Vietnamese status values to canonical English values for storage
@@ -138,6 +161,8 @@ class AdminBookingController extends Controller
         $savedStatus = $statusMap[$status] ?? $status;
         $booking->status = $savedStatus;
 
+        $booking->repair_note = $repairNote;
+
         // If marking completed, optionally store price (only if column exists)
         $completedStatuses = ['completed', 'đã hoàn thành', 'Đã hoàn thành'];
         if (in_array($status, $completedStatuses, true) && Schema::hasColumn('bookings', 'price')) {
@@ -150,53 +175,6 @@ class AdminBookingController extends Controller
         $booking->save();
 
         return redirect()->back()->with('success', 'Cập nhật trạng thái thành công');
-    }
-
-    private function normalizeMoneyInput(mixed $value): ?string
-    {
-        if ($value === null) {
-            return null;
-        }
-
-        if (is_int($value) || is_float($value)) {
-            return (string) $value;
-        }
-
-        if (!is_string($value)) {
-            return null;
-        }
-
-        $s = trim($value);
-        if ($s === '') {
-            return null;
-        }
-
-        $s = preg_replace('/[^\d\.,]/u', '', $s);
-        if ($s === null || $s === '') {
-            return null;
-        }
-
-        $hasDot = str_contains($s, '.');
-        $hasComma = str_contains($s, ',');
-
-        if ($hasDot && $hasComma) {
-            $s = str_replace('.', '', $s);
-            $s = str_replace(',', '.', $s);
-        } elseif ($hasComma) {
-            if (preg_match('/,\d{1,2}$/', $s) === 1) {
-                $s = str_replace(',', '.', $s);
-            } else {
-                $s = str_replace(',', '', $s);
-            }
-        } elseif ($hasDot) {
-            if (preg_match('/\.\d{1,2}$/', $s) !== 1) {
-                $s = str_replace('.', '', $s);
-            }
-        }
-
-        $s = preg_replace('/\.(?=.*\.)/', '', $s);
-
-        return $s ?: null;
     }
 
     /**

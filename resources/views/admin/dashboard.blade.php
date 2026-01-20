@@ -205,7 +205,7 @@
         <p class="text-bl/60 text-sm mt-1">Chi tiết doanh thu theo tháng</p>
     </div>
 
-    <div class="overflow-x-auto">
+    <div class="admin-table-mobile-hide overflow-x-auto">
         <table class="min-w-full text-sm">
             <thead class="bg-white/5">
                 <tr>
@@ -240,6 +240,55 @@
                 </tr>
             </tbody>
         </table>
+    </div>
+
+    <div class="admin-mobile-cards">
+        @for($i = 0; $i < count($labels); $i++)
+            <div class="admin-mobile-card">
+                <div class="admin-mobile-card__head">
+                    <div class="admin-mobile-card__title text-bl">
+                        {{ $labels[$i] ?? '' }}
+                    </div>
+                    <div class="admin-mobile-card__meta">Doanh thu</div>
+                </div>
+
+                <div class="admin-mobile-card__body">
+                    <div class="admin-mobile-field">
+                        <div class="admin-mobile-field__label">Đặt lịch</div>
+                        <div class="admin-mobile-field__value text-blue-400 font-medium">{{ number_format((int)($bookingData[$i] ?? 0), 0, ',', '.') }} VND</div>
+                    </div>
+                    <div class="admin-mobile-field">
+                        <div class="admin-mobile-field__label">Bán hàng</div>
+                        <div class="admin-mobile-field__value text-emerald-400 font-medium">{{ number_format((int)($salesData[$i] ?? 0), 0, ',', '.') }} VND</div>
+                    </div>
+                    <div class="admin-mobile-field">
+                        <div class="admin-mobile-field__label">Tổng</div>
+                        <div class="admin-mobile-field__value text-purple-400 font-bold neon">{{ number_format((int)($totalData[$i] ?? 0), 0, ',', '.') }} VND</div>
+                    </div>
+                </div>
+            </div>
+        @endfor
+
+        <div class="admin-mobile-card">
+            <div class="admin-mobile-card__head">
+                <div class="admin-mobile-card__title text-bl">TỔNG CỘNG</div>
+                <div class="admin-mobile-card__meta"></div>
+            </div>
+            <div class="admin-mobile-card__body">
+                <div class="admin-mobile-field">
+                    <div class="admin-mobile-field__label">Đặt lịch</div>
+                    <div class="admin-mobile-field__value text-blue-400 font-medium">{{ number_format(array_sum($bookingData), 0, ',', '.') }} VND</div>
+                </div>
+                <div class="admin-mobile-field">
+                    <div class="admin-mobile-field__label">Bán hàng</div>
+                    <div class="admin-mobile-field__value text-emerald-400 font-medium">{{ number_format(array_sum($salesData), 0, ',', '.') }} VND</div>
+                </div>
+                <div class="admin-mobile-field">
+                    <div class="admin-mobile-field__label">Tổng</div>
+                    <div class="admin-mobile-field__value text-purple-400 font-bold neon">{{ number_format(array_sum($totalData), 0, ',', '.') }} VND</div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 

@@ -41,7 +41,7 @@
       ? max(0, round((($oldPrice - $price) / $oldPrice) * 100))
       : 0;
 
-  $stock = (int)($initialVariant?->stock ?? 0);
+  $stock = (int)($initialVariant?->stock ?? ($product->stock ?? 0));
   $sku = $initialVariant?->sku ?? null;
   $saleEndsAt = $product->sale_ends_at ?? null;
 @endphp

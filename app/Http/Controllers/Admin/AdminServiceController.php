@@ -10,7 +10,25 @@ class AdminServiceController extends Controller
 {
     public function index()
     {
-        $services = Service::paginate(15);
+        $q = trim((string)request('q', ''));
+        $status = request('status');
+        $priceMin = request('price_min');
+        $priceMax = request('price_max');
+
+        $query = Service::query()
+            ->when($q !== '', function ($qq) use ($q) {
+                $like = '%' . $q . '%';
+                $qq->where(function ($sub) use ($like) {
+                    $sub->where('name', 'like', $like)
+                        ->orWhere('description', 'like', $like);
+                });
+            })
+            ->when($status, fn($qq) => $qq->where('status', $status))
+            ->when(is_numeric($priceMin), fn($qq) => $qq->where('price', '>=', (float)$priceMin))
+            ->when(is_numeric($priceMax), fn($qq) => $qq->where('price', '<=', (float)$priceMax))
+            ->latest();
+
+        $services = $query->paginate(15)->appends(request()->query());
         return view('admin.services.index', compact('services'));
     }
 

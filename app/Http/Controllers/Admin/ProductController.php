@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -15,8 +17,36 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::latest()->paginate(15);
-        return view('admin.products.index', compact('products'));
+        $q = trim((string)request('q', ''));
+        $categoryId = request('category_id');
+        $isActive = request('is_active');
+        $isClearance = request('is_clearance');
+        $priceMin = request('price_min');
+        $priceMax = request('price_max');
+        $stock = request('stock');
+
+        $query = Product::query()
+            ->with('category')
+            ->when($q !== '', function ($qq) use ($q) {
+                $like = '%' . $q . '%';
+                $qq->where(function ($sub) use ($like) {
+                    $sub->where('name', 'like', $like)
+                        ->orWhere('slug', 'like', $like);
+                });
+            })
+            ->when($categoryId, fn($qq) => $qq->where('category_id', $categoryId))
+            ->when($isActive !== null && $isActive !== '', fn($qq) => $qq->where('is_active', (bool)$isActive))
+            ->when($isClearance !== null && $isClearance !== '', fn($qq) => $qq->where('is_clearance', (bool)$isClearance))
+            ->when(is_numeric($priceMin), fn($qq) => $qq->whereRaw('COALESCE(NULLIF(sale_price,0), original_price) >= ?', [(float)$priceMin]))
+            ->when(is_numeric($priceMax), fn($qq) => $qq->whereRaw('COALESCE(NULLIF(sale_price,0), original_price) <= ?', [(float)$priceMax]))
+            ->when($stock === 'in', fn($qq) => $qq->where('stock', '>', 0))
+            ->when($stock === 'out', fn($qq) => $qq->where('stock', '<=', 0))
+            ->latest();
+
+        $products = $query->paginate(15)->appends(request()->query());
+        $categories = Category::query()->select('id', 'name')->orderBy('name')->get();
+
+        return view('admin.products.index', compact('products', 'categories'));
     }
 
     /**

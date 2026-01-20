@@ -221,8 +221,7 @@
                        id="appointment_at"
                        name="appointment_at"
                        type="datetime-local"
-                       value="{{ old('appointment_at') }}"
-                       required>
+                       value="{{ old('appointment_at') }}">
                 @error('appointment_at') <div class="booking-error">{{ $message }}</div> @enderror
               </div>
 
@@ -241,7 +240,7 @@
                   </label> --}}
 
                   <label class="booking-radio">
-                    <input type="radio" name="receive_method" value="shipping" {{ old('receive_method') === 'shipping' ? 'checked' : '' }}>
+                    <input type="radio" name="receive_method" value="ship" {{ old('receive_method') === 'ship' ? 'checked' : '' }}>
                     <span>Gửi ship</span>
                   </label>
                 </div>
@@ -249,7 +248,7 @@
                 @error('receive_method') <div class="booking-error">{{ $message }}</div> @enderror
               </div>
 
-              <div class="booking-field booking-field-full booking-ship-only" data-ship="shipping">
+              <div class="booking-field booking-field-full booking-ship-only" data-ship="ship">
                 <label class="booking-label" for="shipping_provider">Đơn vị vận chuyển</label>
                 <input class="booking-input"
                        id="shipping_provider"
@@ -260,7 +259,7 @@
                 @error('shipping_provider') <div class="booking-error">{{ $message }}</div> @enderror
               </div>
 
-              <div class="booking-field booking-field-full booking-ship-only" data-ship="pickup">
+              <div class="booking-field booking-field-full booking-ship-only" data-ship="ship">
                 <label class="booking-label" for="pickup_address">Địa chỉ nhận</label>
                 <input class="booking-input"
                        id="pickup_address"
@@ -271,7 +270,7 @@
                 @error('pickup_address') <div class="booking-error">{{ $message }}</div> @enderror
               </div>
 
-              <div class="booking-field booking-field-full booking-ship-only" data-ship="shipping">
+              <div class="booking-field booking-field-full booking-ship-only" data-ship="ship">
                 <label class="booking-label" for="shipping_code">Mã vận đơn</label>
                 <input class="booking-input"
                        id="shipping_code"

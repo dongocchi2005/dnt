@@ -45,15 +45,7 @@ return new class extends Migration
             && Schema::hasColumn('product_variant_values', 'name')
             && Schema::hasColumn('product_variant_values', 'value')
         ) {
-            $driver = DB::connection()->getDriverName();
-            if ($driver === 'sqlite') {
-                DB::statement(
-                    "UPDATE product_variant_values
-                     SET name = COALESCE(name, (SELECT name FROM product_options WHERE product_options.id = product_variant_values.option_id)),
-                         value = COALESCE(value, (SELECT value FROM product_option_values WHERE product_option_values.id = product_variant_values.option_value_id))
-                     WHERE (name IS NULL OR value IS NULL)"
-                );
-            } else {
+            if (DB::getDriverName() === 'mysql') {
                 DB::statement(
                     "UPDATE product_variant_values pvv
                      JOIN product_options po ON po.id = pvv.option_id
@@ -77,4 +69,3 @@ return new class extends Migration
         // Non-destructive: keep columns/table
     }
 };
-

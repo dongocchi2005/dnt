@@ -13,8 +13,7 @@
             </div>
             
             <div class="flex items-center gap-3">
-      <a href="{{ route('admin.services.create') }}">
-
+                <a href="{{ route('admin.services.create') }}"
                    class="cyber-btn bg-blue-600 hover:bg-blue-500 text-white">
                     <i class="fa-solid fa-plus"></i> Thêm dịch vụ mới
                 </a>
@@ -27,8 +26,50 @@
         </div>
     </div>
 
+    <div class="cyber-panel">
+        <div class="admin-panel-head">
+            <div class="font-bold text-bl text-base">Bộ lọc</div>
+            <div class="admin-panel-head__meta text-bl/60 text-sm">Tìm theo tên/mô tả, lọc trạng thái & giá</div>
+        </div>
+        <div class="p-4">
+            <form method="GET" action="{{ route('admin.services.index') }}" class="admin-form-grid">
+                <div class="admin-form-field admin-form-field--full">
+                    <label class="sr-only" for="serviceSearch">Tìm dịch vụ</label>
+                    <input id="serviceSearch" type="text" name="q" value="{{ request('q') }}" placeholder="Tìm theo tên/mô tả..." class="admin-input" />
+                </div>
+                <div class="admin-form-field">
+                    <label class="sr-only" for="serviceStatus">Trạng thái</label>
+                    <select id="serviceStatus" name="status" class="admin-input">
+                        <option value="">Tất cả trạng thái</option>
+                        <option value="active" {{ request('status')==='active' ? 'selected' : '' }}>Hoạt động</option>
+                        <option value="inactive" {{ request('status')==='inactive' ? 'selected' : '' }}>Ngừng hoạt động</option>
+                    </select>
+                </div>
+                <div class="admin-form-field">
+                    <label class="sr-only" for="servicePriceMin">Giá từ</label>
+                    <input id="servicePriceMin" type="number" inputmode="numeric" name="price_min" value="{{ request('price_min') }}" placeholder="Giá từ..." class="admin-input" />
+                </div>
+                <div class="admin-form-field">
+                    <label class="sr-only" for="servicePriceMax">Giá đến</label>
+                    <input id="servicePriceMax" type="number" inputmode="numeric" name="price_max" value="{{ request('price_max') }}" placeholder="Giá đến..." class="admin-input" />
+                </div>
+                <div class="admin-form-field">
+                    <div class="admin-form-actions admin-form-actions--full">
+                        <button type="submit" class="cyber-btn admin-btn bg-blue-600 hover:bg-blue-500 text-white flex items-center justify-center gap-1">
+                            Lọc
+                        </button>
+                        <a href="{{ route('admin.services.index') }}"
+                           class="admin-btn admin-btn-full py-2 border border-white/10 rounded-lg text-sm text-bl/60 text-center hover:bg-white/5">
+                            Xóa
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <div class="cyber-panel overflow-hidden">
-        <div class="overflow-x-auto">
+        <div class="admin-table-mobile-hide overflow-x-auto">
             <table class="min-w-full text-sm">
                 <thead class="bg-white/5">
                     <tr>
@@ -128,6 +169,94 @@
                     @endforeach
                 </tbody>
             </table>
+        </div>
+
+        <div class="admin-mobile-cards px-4 py-4">
+            @foreach($services as $service)
+                <div class="admin-mobile-card">
+                    <div class="admin-mobile-card__head">
+                        <div class="admin-mobile-card__title text-bl">
+                            {{ $service->name }}
+                        </div>
+                        <div class="admin-mobile-card__meta">
+                            {{ $service->created_at->format('d/m/Y') }}
+                        </div>
+                    </div>
+
+                    <div class="admin-mobile-card__body">
+                        <div class="admin-mobile-field">
+                            <div class="admin-mobile-field__label">Mô tả</div>
+                            <div class="admin-mobile-field__value text-bl/80">{{ $service->description ?: '-' }}</div>
+                        </div>
+
+                        <div class="admin-mobile-field">
+                            <div class="admin-mobile-field__label">Giá</div>
+                            <div class="admin-mobile-field__value font-bold text-bl neon">
+                                {{ number_format($service->price, 0, ',', '.') }} VND
+                            </div>
+                        </div>
+
+                        <div class="admin-mobile-field">
+                            <div class="admin-mobile-field__label">Trạng thái</div>
+                            <div class="admin-mobile-field__value">
+                                @if($service->status === 'active')
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded text-xs font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 shadow-[0_0_10px_rgba(16,185,129,0.2)]">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 mr-1.5 shadow-[0_0_5px_rgba(16,185,129,0.8)]"></span>
+                                        Hoạt động
+                                    </span>
+                                @elseif($service->status === 'inactive')
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded text-xs font-bold bg-red-500/20 text-red-400 border border-red-500/30 shadow-[0_0_10px_rgba(239,68,68,0.2)]">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-red-400 mr-1.5 shadow-[0_0_5px_rgba(239,68,68,0.8)]"></span>
+                                        Ngừng hoạt động
+                                    </span>
+                                @else
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded text-xs font-bold bg-yellow-500/20 text-yellow-400 border border-yellow-500/30 shadow-[0_0_10px_rgba(234,179,8,0.2)]">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-yellow-400 mr-1.5 shadow-[0_0_5px_rgba(234,179,8,0.8)]"></span>
+                                        {{ $service->status }}
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="admin-mobile-actions">
+                        <a href="{{ route('admin.services.show', $service->id) }}"
+                           class="admin-action-btn border border-white/10 rounded-lg text-sm font-medium text-bl/80 bg-white/5 hover:bg-white/10 hover:text-blue-400 transition-colors flex items-center justify-center gap-2 w-full">
+                            <i class="fas fa-eye text-bl/40"></i>
+                            <span class="admin-action-label">Xem</span>
+                        </a>
+                        <a href="{{ route('admin.services.edit', $service->id) }}"
+                           class="admin-action-btn border border-white/10 rounded-lg text-sm font-medium text-bl/80 bg-white/5 hover:bg-white/10 hover:text-blue-400 transition-colors flex items-center justify-center gap-2 w-full">
+                            <i class="fas fa-pen text-bl/40"></i>
+                            <span class="admin-action-label">Sửa</span>
+                        </a>
+                        <form action="{{ route('admin.services.update', $service->id) }}"
+                              method="POST"
+                              class="w-full">
+                            @csrf
+                            @method('PUT')
+                            <input type="hidden" name="status" value="{{ $service->status === 'active' ? 'inactive' : 'active' }}">
+                            <button type="submit"
+                                    class="admin-action-btn border border-white/10 rounded-lg text-sm font-medium text-bl/80 bg-white/5 hover:bg-white/10 transition-colors flex items-center justify-center gap-2 w-full">
+                                <i class="fas fa-power-off text-bl/40"></i>
+                                <span class="admin-action-label">{{ $service->status === 'active' ? 'Tắt' : 'Bật' }}</span>
+                            </button>
+                        </form>
+                        <form action="{{ route('admin.services.destroy', $service->id) }}"
+                              method="POST"
+                              class="w-full"
+                              onsubmit="return confirm('Bạn có chắc muốn xóa dịch vụ này?')">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit"
+                                    class="admin-action-btn border border-white/10 rounded-lg text-sm font-medium text-red-300 bg-white/5 hover:bg-white/10 transition-colors flex items-center justify-center gap-2 w-full">
+                                <i class="fas fa-trash text-red-300/70"></i>
+                                <span class="admin-action-label">Xóa</span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            @endforeach
         </div>
 
         @if($services->hasPages())

@@ -25,11 +25,39 @@
           >
         </div>
         <div class="admin-form-field">
+          <label class="sr-only" for="userRole">Role</label>
+          <select id="userRole" name="role" class="admin-input">
+            <option value="">Tất cả role</option>
+            <option value="admin" {{ request('role')==='admin' ? 'selected' : '' }}>Admin</option>
+            <option value="user" {{ request('role')==='user' ? 'selected' : '' }}>User</option>
+          </select>
+        </div>
+        <div class="admin-form-field">
+          <label class="sr-only" for="userStatus">Trạng thái</label>
+          <select id="userStatus" name="status" class="admin-input">
+            <option value="">Tất cả trạng thái</option>
+            <option value="active" {{ request('status')==='active' ? 'selected' : '' }}>Active</option>
+            <option value="locked" {{ request('status')==='locked' ? 'selected' : '' }}>Locked</option>
+          </select>
+        </div>
+        <div class="admin-form-field">
+          <label class="sr-only" for="userDateFrom">Từ ngày</label>
+          <input id="userDateFrom" type="date" name="date_from" value="{{ request('date_from') }}" class="admin-input">
+        </div>
+        <div class="admin-form-field">
+          <label class="sr-only" for="userDateTo">Đến ngày</label>
+          <input id="userDateTo" type="date" name="date_to" value="{{ request('date_to') }}" class="admin-input">
+        </div>
+        <div class="admin-form-field">
           <div class="admin-form-actions">
             <button type="submit" class="cyber-btn admin-btn admin-btn-full bg-blue-600 text-white hover:bg-blue-500 flex items-center justify-center">
               <i class="fa-solid fa-magnifying-glass"></i>
               <span class="admin-action-label">Tìm</span>
             </button>
+            <a href="{{ route('admin.users.index') }}"
+               class="admin-btn admin-btn-full py-2 border border-white/10 rounded-lg text-sm text-bl/60 text-center hover:bg-white/5">
+              Xóa
+            </a>
           </div>
         </div>
       </form>
@@ -158,6 +186,96 @@
           @endforelse
         </tbody>
       </table>
+    </div>
+
+    <div class="admin-mobile-cards">
+      @forelse($users as $u)
+        @php
+          $role = $u->role ?? ($u->is_admin ?? false ? 'admin' : 'user');
+        @endphp
+
+        <div class="admin-mobile-card">
+          <div class="admin-mobile-card__head">
+            <div class="admin-mobile-card__title text-bl">
+              {{ $u->name }}
+            </div>
+            <div class="admin-mobile-card__meta">
+              {{ optional($u->created_at)->format('d/m/Y H:i') }}
+            </div>
+          </div>
+
+          <div class="admin-mobile-card__body">
+            <div class="admin-mobile-field">
+              <div class="admin-mobile-field__label">Email</div>
+              <div class="admin-mobile-field__value text-bl/80">{{ $u->email }}</div>
+            </div>
+
+            <div class="admin-mobile-field">
+              <div class="admin-mobile-field__label">Role</div>
+              <div class="admin-mobile-field__value">
+                @if($role === 'admin')
+                  <span class="px-3 py-1 rounded text-xs font-bold bg-purple-500/20 text-purple-400 border border-purple-500/30 shadow-[0_0_10px_rgba(168,85,247,0.2)]">
+                    ADMIN
+                  </span>
+                @else
+                  <span class="px-3 py-1 rounded text-xs font-bold bg-blue-500/20 text-blue-400 border border-blue-500/30">
+                    USER
+                  </span>
+                @endif
+              </div>
+            </div>
+
+            <div class="admin-mobile-field">
+              <div class="admin-mobile-field__label">Trạng thái</div>
+              <div class="admin-mobile-field__value">
+                @if($u->isLocked())
+                  <span class="px-3 py-1 rounded text-xs font-bold bg-red-500/20 text-red-400 border border-red-500/30 shadow-[0_0_10px_rgba(239,68,68,0.2)]">
+                    LOCKED
+                  </span>
+                @else
+                  <span class="px-3 py-1 rounded text-xs font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 shadow-[0_0_10px_rgba(16,185,129,0.2)]">
+                    ACTIVE
+                  </span>
+                @endif
+              </div>
+            </div>
+          </div>
+
+          <div class="admin-mobile-actions">
+            <a href="{{ route('admin.users.show', $u->id) }}"
+               class="admin-action-btn border border-white/10 rounded-lg text-sm font-medium text-bl/80 bg-white/5 hover:bg-white/10 hover:text-blue-400 transition-colors flex items-center justify-center gap-2 w-full">
+              <i class="fa-solid fa-eye"></i>
+              <span class="admin-action-label">Xem</span>
+            </a>
+
+            @if($u->isLocked())
+              <form method="POST" action="{{ route('admin.users.unlock', $u->id) }}" class="w-full">
+                @csrf
+                <button type="submit"
+                        class="admin-action-btn border border-emerald-500/20 rounded-lg text-sm font-medium text-emerald-300 bg-emerald-500/10 hover:bg-emerald-500/20 transition-colors flex items-center justify-center gap-2 w-full"
+                        onclick="return confirm('Bạn có chắc muốn mở khóa người dùng này?')">
+                  <i class="fa-solid fa-lock-open"></i>
+                  <span class="admin-action-label">Mở khóa</span>
+                </button>
+              </form>
+            @else
+              <form method="POST" action="{{ route('admin.users.lock', $u->id) }}" class="w-full">
+                @csrf
+                <button type="submit"
+                        class="admin-action-btn border border-red-500/20 rounded-lg text-sm font-medium text-red-300 bg-red-500/10 hover:bg-red-500/20 transition-colors flex items-center justify-center gap-2 w-full"
+                        onclick="return confirm('Bạn có chắc muốn khóa người dùng này?')">
+                  <i class="fa-solid fa-lock"></i>
+                  <span class="admin-action-label">Khóa</span>
+                </button>
+              </form>
+            @endif
+          </div>
+        </div>
+      @empty
+        <div class="admin-mobile-card">
+          <div class="text-center text-bl/40 italic">Chưa có người dùng nào.</div>
+        </div>
+      @endforelse
     </div>
 
     @if(method_exists($users, 'links'))

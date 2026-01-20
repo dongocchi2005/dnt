@@ -82,7 +82,7 @@
                 @php
                     $initialPrice = $initialVariant?->effective_price ?? ($product->display_price ?? $product->price ?? 0);
                     $initialOld = $initialVariant?->price ?? ($product->display_original_price ?? $product->original_price ?? null);
-                    $initialStock = (int)($initialVariant?->stock ?? 0);
+                    $initialStock = (int)($initialVariant?->stock ?? ($product->stock ?? 0));
                     $initialSku = $initialVariant?->sku ?? null;
                 @endphp
                 <h1 class="product-title text-white">{{ $product->name }}</h1>

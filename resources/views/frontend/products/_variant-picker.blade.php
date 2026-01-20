@@ -15,7 +15,7 @@
   $initialPayload = [
       'variant_id' => $initialVariant?->id,
       'price' => $initialVariant?->effective_price,
-      'stock' => (int)($initialVariant?->stock ?? 0),
+      'stock' => (int)($initialVariant?->stock ?? ($product->stock ?? 0)),
       'sku' => $initialVariant?->sku,
   ];
 @endphp

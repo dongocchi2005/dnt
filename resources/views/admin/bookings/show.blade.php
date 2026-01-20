@@ -15,29 +15,6 @@
             Đặt lịch #{{ $booking->id }}
         </h2>
 
-        @if(session('success'))
-            <div class="mb-4 px-4 py-3 rounded border border-green-500/30 bg-green-500/10 text-green-200">
-                {{ session('success') }}
-            </div>
-        @endif
-
-        @if(session('error'))
-            <div class="mb-4 px-4 py-3 rounded border border-red-500/30 bg-red-500/10 text-red-200">
-                {{ session('error') }}
-            </div>
-        @endif
-
-        @if($errors->any())
-            <div class="mb-4 px-4 py-3 rounded border border-red-500/30 bg-red-500/10 text-red-200">
-                <div class="font-semibold mb-1">Có lỗi khi cập nhật:</div>
-                <ul class="list-disc pl-5">
-                    @foreach($errors->all() as $err)
-                        <li>{{ $err }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
             {{-- Cột trái --}}
@@ -112,7 +89,6 @@
                             'completed' => 'Đã hoàn thành',
                             'cancelled' => 'Đã hủy',
                         ];
-                        $selectedStatus = old('status', $booking->status_key ?? ($booking->status ?? 'pending'));
                     @endphp
 
                     <div class="flex flex-wrap gap-2 items-center">
@@ -121,17 +97,17 @@
                             class="border border-white/30 bg-gray-800 text-bl px-2 py-1 rounded appearance-none"
                         >
                             @foreach($options as $val => $text)
-                                <option value="{{ $val }}" {{ $selectedStatus === $val ? 'selected' : '' }} class="bg-gray-800 text-bl">
+                                <option value="{{ $val }}" {{ $booking->status_key === $val ? 'selected' : '' }} class="bg-gray-800 text-bl">
                                     {{ $text }}
                                 </option>
                             @endforeach
                         </select>
 
                         <input
-                            type="text"
-                            inputmode="numeric"
+                            type="number"
+                            step="0.01"
                             name="price"
-                            value="{{ old('price', $booking->price ?? '') }}"
+                            value="{{ $booking->price ?? '' }}"
                             placeholder="Giá (VND)"
                             class="border border-white/30 bg-transparent text-bl px-2 py-1 rounded w-40 placeholder-white/50"
                         />
@@ -143,13 +119,17 @@
                         </button>
                     </div>
 
-                    @error('status')
-                        <div class="mt-2 text-xs text-red-300">{{ $message }}</div>
-                    @enderror
-
-                    @error('price')
-                        <div class="mt-2 text-xs text-red-300">{{ $message }}</div>
-                    @enderror
+                    <div class="mt-4">
+                        <label class="block mb-2 text-bl/80">
+                            Ghi chú kỹ thuật / Lỗi đã sửa
+                        </label>
+                        <textarea
+                            name="repair_note"
+                            rows="4"
+                            class="w-full border border-white/30 bg-transparent text-bl px-3 py-2 rounded placeholder-white/50"
+                            placeholder="Ví dụ: Thay pin, vệ sinh socket sạc, fix lỗi loa rè, cập nhật firmware..."
+                        >{{ old('repair_note', $booking->repair_note) }}</textarea>
+                    </div>
 
                     <p class="mt-2 text-xs text-bl/60">
                         Lưu ý: Nhớ Nhập Giá nếu thay đổi trạng thái thành "Đã hoàn thành".
@@ -160,6 +140,26 @@
         </div>
     </div>
 </div>
+<div class="mt-6 p-4 border border-white/20 rounded bg-white/5">
+    <h3 class="font-bold mb-2 text-bl">Ảnh thiết bị</h3>
+    @if($booking->attachments && $booking->attachments->count())
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+            @foreach($booking->attachments as $attachment)
+                @php $url = \App\Support\MediaHelper::mediaUrl($attachment->path); @endphp
+                <a href="{{ $url }}" target="_blank" class="block">
+                    <img
+                        src="{{ $url }}"
+                        alt="{{ $attachment->original_name ?? 'Ảnh thiết bị' }}"
+                        class="w-full h-32 object-cover rounded border border-white/20"
+                    />
+                </a>
+            @endforeach
+        </div>
+    @else
+        <div class="text-bl/50">Chưa có ảnh thiết bị.</div>
+    @endif
+</div>
+
 <div class="mt-6 p-4 border border-white/20 rounded bg-white/5">
     <h3 class="font-bold mb-2 text-bl">Xác nhận thanh toán</h3>
 
@@ -180,8 +180,9 @@
         <div class="mt-3">
             <div class="mb-2 text-bl/70">Ảnh chuyển khoản:</div>
 
-            <a href="{{ asset($booking->payment_proof) }}" target="_blank">
-                <img src="{{ asset($booking->payment_proof) }}"
+            @php $paymentProofUrl = \App\Support\MediaHelper::mediaUrl($booking->payment_proof); @endphp
+            <a href="{{ $paymentProofUrl }}" target="_blank">
+                <img src="{{ $paymentProofUrl }}"
                      style="max-width:520px;border-radius:10px;border:1px solid rgba(255,255,255,.2)">
             </a>
         </div>

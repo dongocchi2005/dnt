@@ -34,8 +34,42 @@
         </div>
     </div>
 
+    <div class="cyber-panel">
+        <div class="admin-panel-head">
+            <div class="font-bold text-bl text-base">Bộ lọc</div>
+            <div class="admin-panel-head__meta text-bl/60 text-sm">Tìm theo tên/mô tả, lọc danh mục có sản phẩm</div>
+        </div>
+        <div class="p-4">
+            <form method="GET" action="{{ route('admin.categories.index') }}" class="admin-form-grid">
+                <div class="admin-form-field admin-form-field--full">
+                    <label class="sr-only" for="categorySearch">Tìm danh mục</label>
+                    <input id="categorySearch" type="text" name="q" value="{{ request('q') }}" placeholder="Tìm theo tên/mô tả..." class="admin-input" />
+                </div>
+                <div class="admin-form-field">
+                    <label class="sr-only" for="categoryHasProducts">Sản phẩm</label>
+                    <select id="categoryHasProducts" name="has_products" class="admin-input">
+                        <option value="">Tất cả</option>
+                        <option value="1" {{ request('has_products')==='1' ? 'selected' : '' }}>Có sản phẩm</option>
+                        <option value="0" {{ request('has_products')==='0' ? 'selected' : '' }}>Chưa có sản phẩm</option>
+                    </select>
+                </div>
+                <div class="admin-form-field">
+                    <div class="admin-form-actions admin-form-actions--full">
+                        <button type="submit" class="cyber-btn admin-btn bg-blue-600 hover:bg-blue-500 text-white flex items-center justify-center gap-1">
+                            Lọc
+                        </button>
+                        <a href="{{ route('admin.categories.index') }}"
+                           class="admin-btn admin-btn-full py-2 border border-white/10 rounded-lg text-sm text-bl/60 text-center hover:bg-white/5">
+                            Xóa
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <div class="cyber-panel overflow-hidden">
-        <div class="overflow-x-auto">
+        <div class="admin-table-mobile-hide overflow-x-auto">
             <table class="min-w-full text-sm">
                 <thead class="bg-white/5">
                     <tr>
@@ -80,6 +114,63 @@
                     @endforelse
                 </tbody>
             </table>
+        </div>
+
+        <div class="admin-mobile-cards px-4 py-4">
+            @forelse($categories as $category)
+                <div class="admin-mobile-card">
+                    <div class="admin-mobile-card__head">
+                        <div class="admin-mobile-card__title text-bl">
+                            {{ $category->name }}
+                        </div>
+                        <div class="admin-mobile-card__meta">
+                            #{{ $category->id }}
+                        </div>
+                    </div>
+
+                    <div class="admin-mobile-card__body">
+                        <div class="admin-mobile-field">
+                            <div class="admin-mobile-field__label">Mô tả</div>
+                            <div class="admin-mobile-field__value text-bl/80">{{ $category->description ?: '-' }}</div>
+                        </div>
+
+                        <div class="admin-mobile-field">
+                            <div class="admin-mobile-field__label">Sản phẩm</div>
+                            <div class="admin-mobile-field__value">
+                                <span class="px-2 py-1 rounded bg-blue-500/10 text-blue-400 border border-blue-500/20 font-bold text-xs">
+                                    {{ $category->products->count() }} sản phẩm
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="admin-mobile-actions">
+                        <a href="{{ route('admin.categories.show', $category) }}"
+                           class="admin-action-btn border border-white/10 rounded-lg text-sm font-medium text-bl/80 bg-white/5 hover:bg-white/10 hover:text-blue-400 transition-colors flex items-center justify-center gap-2 w-full">
+                            <i class="fas fa-eye text-bl/40"></i>
+                            <span class="admin-action-label">Xem</span>
+                        </a>
+                        <a href="{{ route('admin.categories.edit', $category) }}"
+                           class="admin-action-btn border border-white/10 rounded-lg text-sm font-medium text-bl/80 bg-white/5 hover:bg-white/10 hover:text-blue-400 transition-colors flex items-center justify-center gap-2 w-full">
+                            <i class="fas fa-pen text-bl/40"></i>
+                            <span class="admin-action-label">Sửa</span>
+                        </a>
+                        <form method="POST" action="{{ route('admin.categories.destroy', $category) }}" class="w-full" onsubmit="return confirm('Bạn có chắc chắn muốn xóa danh mục này?')">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit"
+                                    class="admin-action-btn border border-white/10 rounded-lg text-sm font-medium text-red-300 bg-white/5 hover:bg-white/10 transition-colors flex items-center justify-center gap-2 w-full">
+                                <i class="fas fa-trash text-red-300/70"></i>
+                                <span class="admin-action-label">Xóa</span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            @empty
+                <div class="admin-mobile-card">
+                    <div class="text-center text-bl/40 italic">Không có danh mục nào.</div>
+                </div>
+            @endforelse
         </div>
 
         @if($categories->hasPages())

@@ -13,7 +13,25 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::latest()->paginate(15);
+        $q = trim((string)request('q', ''));
+        $isActive = request('is_active');
+        $dateFrom = request('date_from');
+        $dateTo = request('date_to');
+
+        $query = Post::query()
+            ->when($q !== '', function ($qq) use ($q) {
+                $like = '%' . $q . '%';
+                $qq->where(function ($sub) use ($like) {
+                    $sub->where('title', 'like', $like)
+                        ->orWhere('slug', 'like', $like);
+                });
+            })
+            ->when($isActive !== null && $isActive !== '', fn($qq) => $qq->where('is_active', (bool)$isActive))
+            ->when($dateFrom, fn($qq) => $qq->whereDate('created_at', '>=', $dateFrom))
+            ->when($dateTo, fn($qq) => $qq->whereDate('created_at', '<=', $dateTo))
+            ->latest();
+
+        $posts = $query->paginate(15)->appends(request()->query());
         return view('admin.posts.index', compact('posts'));
     }
 

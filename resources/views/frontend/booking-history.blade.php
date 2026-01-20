@@ -157,6 +157,17 @@
                                         <p class="mt-1 bh-notes-text">{{ $booking->notes }}</p>
                                     </div>
                                 @endif
+
+                                @php
+                                    $repairNote = trim((string)($booking->repair_note ?? ''));
+                                @endphp
+
+                                @if($repairNote !== '')
+                                    <div class="bh-notes mt-4 p-3 bg-white/5 rounded-lg">
+                                        <span class="text-sm bh-notes-label">Ghi chú kỹ thuật / Lỗi đã sửa:</span>
+                                        <p class="mt-1 bh-notes-text whitespace-pre-line">{{ $repairNote }}</p>
+                                    </div>
+                                @endif
                             </div>
 
                             {{-- Actions --}}

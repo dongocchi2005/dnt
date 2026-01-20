@@ -5,6 +5,19 @@
 
 @section('content')
 <div class="space-y-6">
+    @php
+        $paymentMethodLabels = [
+            'cash_on_delivery' => 'COD',
+            'vietqr' => 'VietQR',
+        ];
+        $orderStatusLabels = [
+            'pending' => 'Chờ xử lý',
+            'processing' => 'Đang xử lý',
+            'shipping' => 'Đang giao',
+            'delivered' => 'Đã giao',
+            'cancelled' => 'Đã hủy',
+        ];
+    @endphp
     <div class="cyber-panel">
         <div class="admin-panel-head">
             <div>
@@ -35,6 +48,49 @@
                         <option value="completed" {{ request('status')=='completed' ? 'selected' : '' }}>Đã thanh toán</option>
                         <option value="failed" {{ request('status')=='failed' ? 'selected' : '' }}>Thất bại</option>
                     </select>
+                </div>
+                <div class="admin-form-field">
+                    <label class="sr-only" for="orderPaymentMethod">Phương thức thanh toán</label>
+                    <select
+                        id="orderPaymentMethod"
+                        name="payment_method"
+                        class="admin-input"
+                    >
+                        <option value="">Tất cả phương thức</option>
+                        <option value="cash_on_delivery" {{ request('payment_method')==='cash_on_delivery' ? 'selected' : '' }}>Thanh toán khi nhận hàng (COD)</option>
+                        <option value="vietqr" {{ request('payment_method')==='vietqr' ? 'selected' : '' }}>Chuyển khoản (VietQR)</option>
+                    </select>
+                </div>
+                <div class="admin-form-field">
+                    <label class="sr-only" for="orderOrderStatus">Trạng thái xử lý</label>
+                    <select
+                        id="orderOrderStatus"
+                        name="order_status"
+                        class="admin-input"
+                    >
+                        <option value="">Tất cả trạng thái xử lý</option>
+                        <option value="pending" {{ request('order_status')==='pending' ? 'selected' : '' }}>{{ $orderStatusLabels['pending'] }}</option>
+                        <option value="processing" {{ request('order_status')==='processing' ? 'selected' : '' }}>{{ $orderStatusLabels['processing'] }}</option>
+                        <option value="shipping" {{ request('order_status')==='shipping' ? 'selected' : '' }}>{{ $orderStatusLabels['shipping'] }}</option>
+                        <option value="delivered" {{ request('order_status')==='delivered' ? 'selected' : '' }}>{{ $orderStatusLabels['delivered'] }}</option>
+                        <option value="cancelled" {{ request('order_status')==='cancelled' ? 'selected' : '' }}>{{ $orderStatusLabels['cancelled'] }}</option>
+                    </select>
+                </div>
+                <div class="admin-form-field">
+                    <label class="sr-only" for="orderDateFrom">Từ ngày</label>
+                    <input id="orderDateFrom" type="date" name="date_from" value="{{ request('date_from') }}" class="admin-input" />
+                </div>
+                <div class="admin-form-field">
+                    <label class="sr-only" for="orderDateTo">Đến ngày</label>
+                    <input id="orderDateTo" type="date" name="date_to" value="{{ request('date_to') }}" class="admin-input" />
+                </div>
+                <div class="admin-form-field">
+                    <label class="sr-only" for="orderTotalMin">Tổng tiền từ</label>
+                    <input id="orderTotalMin" type="number" inputmode="numeric" name="total_min" value="{{ request('total_min') }}" placeholder="Tổng từ..." class="admin-input" />
+                </div>
+                <div class="admin-form-field">
+                    <label class="sr-only" for="orderTotalMax">Tổng tiền đến</label>
+                    <input id="orderTotalMax" type="number" inputmode="numeric" name="total_max" value="{{ request('total_max') }}" placeholder="Tổng đến..." class="admin-input" />
                 </div>
                 <div class="admin-form-field">
                     <div class="admin-form-actions admin-form-actions--full">
@@ -111,7 +167,7 @@
                             </td>
 
                             <td class="text-bl/80">
-                                {{ $order->payment_method ?? '-' }}
+                                {{ $paymentMethodLabels[$order->payment_method] ?? ($order->payment_method ?? '-') }}
                             </td>
 
                             <td class="text-bl/60">
@@ -148,6 +204,77 @@
                     @endforeach
                 </tbody>
             </table>
+        </div>
+
+        <div class="admin-mobile-cards">
+            @foreach($orders as $order)
+                <div class="admin-mobile-card">
+                    <div class="admin-mobile-card__head">
+                        <div class="admin-mobile-card__title text-bl">
+                            #{{ $order->id }} · {{ $order->user->name ?? 'Khách vãng lai' }}
+                        </div>
+                        <div class="admin-mobile-card__meta">
+                            {{ $order->created_at->format('d/m/Y H:i') }}
+                        </div>
+                    </div>
+
+                    <div class="admin-mobile-card__body">
+                        <div class="admin-mobile-field">
+                            <div class="admin-mobile-field__label">Email</div>
+                            <div class="admin-mobile-field__value text-bl/80">{{ $order->user->email ?? '-' }}</div>
+                        </div>
+
+                        <div class="admin-mobile-field">
+                            <div class="admin-mobile-field__label">Sản phẩm</div>
+                            <div class="admin-mobile-field__value text-bl/80">
+                                @foreach($order->items as $item)
+                                    <div>{{ $item->product_name }} <span class="text-bl/50">(x{{ $item->quantity }})</span></div>
+                                @endforeach
+                            </div>
+                        </div>
+
+                        <div class="admin-mobile-field">
+                            <div class="admin-mobile-field__label">Tổng tiền</div>
+                            <div class="admin-mobile-field__value font-bold text-bl neon">{{ number_format($order->total_amount) }} VND</div>
+                        </div>
+
+                        <div class="admin-mobile-field">
+                            <div class="admin-mobile-field__label">Phương thức</div>
+                            <div class="admin-mobile-field__value text-bl/80">{{ $paymentMethodLabels[$order->payment_method] ?? ($order->payment_method ?? '-') }}</div>
+                        </div>
+
+                        <div class="admin-mobile-field">
+                            <div class="admin-mobile-field__label">Trạng thái</div>
+                            <div class="admin-mobile-field__value">
+                                @if($order->payment_status === 'completed')
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded text-xs font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 shadow-[0_0_10px_rgba(16,185,129,0.2)]">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 mr-1.5 shadow-[0_0_5px_rgba(16,185,129,0.8)]"></span>
+                                        Đã thanh toán
+                                    </span>
+                                @elseif($order->payment_status === 'failed')
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded text-xs font-bold bg-red-500/20 text-red-400 border border-red-500/30 shadow-[0_0_10px_rgba(239,68,68,0.2)]">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-red-400 mr-1.5 shadow-[0_0_5px_rgba(239,68,68,0.8)]"></span>
+                                        Thất bại
+                                    </span>
+                                @else
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded text-xs font-bold bg-yellow-500/20 text-yellow-400 border border-yellow-500/30 shadow-[0_0_10px_rgba(234,179,8,0.2)]">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-yellow-400 mr-1.5 shadow-[0_0_5px_rgba(234,179,8,0.8)]"></span>
+                                        Chờ xác nhận
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="admin-mobile-actions">
+                        <a href="{{ route('admin.orders.show', $order->id) }}"
+                           class="admin-action-btn border border-white/10 rounded-lg text-sm font-medium text-bl/80 bg-white/5 hover:bg-white/10 hover:text-blue-400 transition-colors flex items-center justify-center gap-2 w-full">
+                            <i class="fas fa-eye text-bl/40"></i>
+                            <span class="admin-action-label">Xem</span>
+                        </a>
+                    </div>
+                </div>
+            @endforeach
         </div>
 
         <div class="admin-panel-footer">

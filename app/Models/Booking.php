@@ -3,14 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 class Booking extends Model
 {
-    protected $casts = [
-        'booking_date' => 'datetime',
-        'price' => 'decimal:2',
-    ];
-
     protected $appends = [
         'status_key',
         'status_label',
@@ -19,54 +15,85 @@ class Booking extends Model
     protected $fillable = [
         'user_id',
         'service_id',
+        'booking_date',
+        'time_slot',
         'customer_name',
         'phone',
         'device_name',
         'device_issue',
-        'booking_date',
-        'time_slot',
+        'repair_note',
         'appointment_at',
         'receive_method',
         'status',
-        'price',
         'notes',
+        'price',
+        'payment_proof',
+        'payment_status',
+        'payment_method',
+        'transaction_id',
         'shipping_provider',
         'pickup_address',
     ];
 
+    protected $casts = [
+        'appointment_at' => 'datetime',
+        'booking_date' => 'date',
+    ];
+
+    protected static function booted(): void
+    {
+        static::saving(function (self $booking) {
+            $appointmentAt = $booking->appointment_at instanceof \DateTimeInterface
+                ? Carbon::instance($booking->appointment_at)
+                : ($booking->appointment_at ? Carbon::parse($booking->appointment_at) : now());
+
+            $booking->appointment_at = $appointmentAt;
+            $booking->booking_date = $appointmentAt->toDateString();
+
+            if (($booking->time_slot ?? '') === '') {
+                $booking->time_slot = ($booking->receive_method ?? null) === 'ship'
+                    ? 'ship'
+                    : $appointmentAt->format('H:i');
+            }
+        });
+    }
+
     public function getStatusKeyAttribute(): string
     {
         $raw = $this->attributes['status'] ?? null;
-        $normalized = is_string($raw) ? mb_strtolower(trim($raw)) : null;
 
         $map = [
-            'pending' => 'pending',
-            'confirmed' => 'confirmed',
-            'completed' => 'completed',
-            'cancelled' => 'cancelled',
             'đang chờ' => 'pending',
+            'pending' => 'pending',
             'đã xác nhận' => 'confirmed',
+            'confirmed' => 'confirmed',
             'đã hoàn thành' => 'completed',
+            'Đã hoàn thành' => 'completed',
+            'completed' => 'completed',
             'đã hủy' => 'cancelled',
+            'cancelled' => 'cancelled',
         ];
 
-        if (!$normalized) {
-            return 'pending';
+        $normalized = $map[$raw] ?? null;
+        if ($normalized) {
+            return $normalized;
         }
 
-        return $map[$normalized] ?? $normalized;
+        return in_array($raw, ['pending', 'confirmed', 'completed', 'cancelled'], true)
+            ? $raw
+            : 'pending';
     }
 
     public function getStatusLabelAttribute(): string
     {
         $labels = [
             'pending' => 'Đang chờ',
-            'confirmed' => 'Đang sửa chữa',
+            'confirmed' => 'Đang Sửa Chữa',
             'completed' => 'Đã hoàn thành',
             'cancelled' => 'Đã hủy',
         ];
 
-        return $labels[$this->status_key] ?? ($this->attributes['status'] ?? 'Đang chờ');
+        return $labels[$this->status_key] ?? 'Đang chờ';
     }
 
     public function user()

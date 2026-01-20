@@ -14,12 +14,32 @@ class ServiceOrderController extends Controller
 {
     public function index(Request $request)
     {
+        $q = trim((string)$request->query('q', ''));
         $status = $request->query('status');
+        $isFullyPaid = $request->query('is_fully_paid');
+        $dateFrom = $request->query('date_from');
+        $dateTo = $request->query('date_to');
+        $totalMin = $request->query('total_min');
+        $totalMax = $request->query('total_max');
 
         $orders = ServiceOrder::query()
+            ->when($q !== '', function ($qq) use ($q) {
+                $like = '%' . $q . '%';
+                $qq->where(function ($sub) use ($like) {
+                    $sub->where('code', 'like', $like)
+                        ->orWhere('customer_name', 'like', $like)
+                        ->orWhere('customer_phone', 'like', $like);
+                });
+            })
             ->when($status, fn($q) => $q->where('status', $status))
+            ->when($isFullyPaid !== null && $isFullyPaid !== '', fn($qq) => $qq->where('is_fully_paid', (bool)$isFullyPaid))
+            ->when($dateFrom, fn($qq) => $qq->whereDate('created_at', '>=', $dateFrom))
+            ->when($dateTo, fn($qq) => $qq->whereDate('created_at', '<=', $dateTo))
+            ->when(is_numeric($totalMin), fn($qq) => $qq->where('total_amount', '>=', (float)$totalMin))
+            ->when(is_numeric($totalMax), fn($qq) => $qq->where('total_amount', '<=', (float)$totalMax))
             ->latest()
-            ->paginate(15);
+            ->paginate(15)
+            ->appends($request->query());
 
         $statuses = ServiceOrderWorkflow::STATUSES;
 

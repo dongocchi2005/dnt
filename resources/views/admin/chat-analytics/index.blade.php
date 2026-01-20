@@ -77,7 +77,7 @@
 
     <div class="cyber-panel p-6 mt-6 overflow-hidden">
         <h3 class="text-lg font-bold text-bl mb-4">Phiên chat gần đây</h3>
-        <div class="overflow-x-auto">
+        <div class="admin-table-mobile-hide overflow-x-auto">
             <table class="min-w-full text-sm">
                 <thead class="bg-white/5">
                     <tr>
@@ -106,6 +106,46 @@
                     @endforelse
                 </tbody>
             </table>
+        </div>
+
+        <div class="admin-mobile-cards">
+            @forelse($recentSessions as $s)
+                <div class="admin-mobile-card">
+                    <div class="admin-mobile-card__head">
+                        <div class="admin-mobile-card__title text-bl">
+                            {{ $s->session_id }}
+                        </div>
+                        <div class="admin-mobile-card__meta">
+                            {{ optional($s->last_activity)->format('d/m/Y H:i') }}
+                        </div>
+                    </div>
+
+                    <div class="admin-mobile-card__body">
+                        <div class="admin-mobile-field">
+                            <div class="admin-mobile-field__label">Intent</div>
+                            <div class="admin-mobile-field__value text-bl/80">{{ $s->last_intent ?? '-' }}</div>
+                        </div>
+
+                        <div class="admin-mobile-field">
+                            <div class="admin-mobile-field__label">Status</div>
+                            <div class="admin-mobile-field__value">
+                                <span class="px-2 py-1 rounded text-xs font-bold bg-white/10 text-bl/80 border border-white/10">
+                                    {{ $s->status }}
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="admin-mobile-field">
+                            <div class="admin-mobile-field__label">Conversion</div>
+                            <div class="admin-mobile-field__value text-bl/80">{{ $s->conversion_type ?? '-' }}</div>
+                        </div>
+                    </div>
+                </div>
+            @empty
+                <div class="admin-mobile-card">
+                    <div class="text-center text-bl/40 italic">Chưa có dữ liệu.</div>
+                </div>
+            @endforelse
         </div>
     </div>
 </div>

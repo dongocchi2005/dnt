@@ -21,11 +21,18 @@ class KnowledgeBaseController extends Controller
                 'items' => $items,
                 'search' => '',
                 'tableMissing' => true,
+                'categories' => [],
+                'sourceTypes' => [],
             ]);
         }
 
         $query = KnowledgeBase::query();
         $search = trim((string)$request->query('q', ''));
+        $category = $request->query('category');
+        $sourceType = $request->query('source_type');
+        $isActive = $request->query('is_active');
+        $dateFrom = $request->query('date_from');
+        $dateTo = $request->query('date_to');
 
         if ($search !== '') {
             $query->where(function ($q) use ($search) {
@@ -35,12 +42,38 @@ class KnowledgeBaseController extends Controller
             });
         }
 
+        $query->when($category, fn($qq) => $qq->where('category', $category))
+            ->when($sourceType, fn($qq) => $qq->where('source_type', $sourceType))
+            ->when($isActive !== null && $isActive !== '', fn($qq) => $qq->where('is_active', (bool)$isActive))
+            ->when($dateFrom, fn($qq) => $qq->whereDate('created_at', '>=', $dateFrom))
+            ->when($dateTo, fn($qq) => $qq->whereDate('created_at', '<=', $dateTo));
+
+        $categories = KnowledgeBase::query()
+            ->select('category')
+            ->whereNotNull('category')
+            ->distinct()
+            ->orderBy('category')
+            ->pluck('category')
+            ->values()
+            ->all();
+
+        $sourceTypes = KnowledgeBase::query()
+            ->select('source_type')
+            ->whereNotNull('source_type')
+            ->distinct()
+            ->orderBy('source_type')
+            ->pluck('source_type')
+            ->values()
+            ->all();
+
         $items = $query->latest()->paginate(15)->appends($request->query());
 
         return view('admin.knowledge-base.index', [
             'items' => $items,
             'search' => $search,
             'tableMissing' => false,
+            'categories' => $categories,
+            'sourceTypes' => $sourceTypes,
         ]);
     }
 
