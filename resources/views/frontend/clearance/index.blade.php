@@ -21,7 +21,7 @@
         <!-- Decorative Elements -->
         <div class="absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden">
              <div class="absolute top-1/4 left-10 w-32 h-32 bg-[var(--cy-accent)] opacity-10 blur-3xl rounded-full"></div>
-             <div class="absolute bottom-1/4 right-10 w-40 h-40 bg-pink-600 opacity-10 blur-3xl rounded-full"></div>
+             <div class="absolute bottom-1/4 right-10 w-40 h-40 bg-[rgb(var(--cyber-orange-rgb))] opacity-10 blur-3xl rounded-full"></div>
         </div>
     </div>
 

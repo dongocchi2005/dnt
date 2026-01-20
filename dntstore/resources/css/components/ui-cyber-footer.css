@@ -10,7 +10,7 @@
     --cf-text-muted: #8892b0;
     --cf-accent-cyan: #00f3ff;
     --cf-accent-orange: #ff6600;
-    --cf-accent-pink: #ff00ff;
+    --cf-accent-pink: var(--cf-accent-orange);
     --cf-border: rgba(0, 243, 255, 0.2);
     --cf-glow: rgba(0, 243, 255, 0.15);
     --cf-font-title: 'DM Sans', sans-serif;

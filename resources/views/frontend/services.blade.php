@@ -30,7 +30,7 @@
 
         <!-- Service 2 -->
         <div class="cyber-card text-center group">
-            <div class="mb-6 text-6xl text-pink-500 neon-text-pink group-hover:scale-110 transition-transform">
+            <div class="mb-6 text-6xl text-[rgb(var(--cyber-orange-rgb))] neon-text-pink group-hover:scale-110 transition-transform">
                 <i class="fas fa-code-branch"></i>
             </div>
             <h3 class="text-2xl font-bold mb-4 text-white">SOFTWARE FLASH</h3>

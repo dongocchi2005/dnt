@@ -50,7 +50,7 @@
   .pd-frame::after {
     inset: 6px;
     border: 1px solid rgba(0, 243, 255, 0.18);
-    box-shadow: inset 0 0 0 1px rgba(255, 0, 255, 0.04);
+    box-shadow: inset 0 0 0 1px rgba(255, 102, 0, 0.04);
   }
 
   .pd-card:hover {
@@ -110,9 +110,9 @@
   }
 
   .pd-badge--new {
-    background: rgba(255, 43, 214, 0.92);
+    background: rgba(255, 102, 0, 0.92);
     color: #13050f;
-    box-shadow: 0 0 16px rgba(255, 43, 214, 0.22);
+    box-shadow: 0 0 16px rgba(255, 102, 0, 0.22);
   }
 
   .pd-badge--muted {
@@ -175,8 +175,8 @@
   .pd-price__now {
     font-weight: 900;
     font-size: 1.15rem;
-    color: #ff2bd6;
-    text-shadow: 0 0 10px rgba(255, 43, 214, 0.35);
+    color: var(--cyber-orange);
+    text-shadow: 0 0 10px rgba(255, 102, 0, 0.35);
     line-height: 1.1;
     white-space: nowrap;
   }
@@ -219,17 +219,17 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid rgba(255, 43, 214, 0.35);
-    background: rgba(255, 43, 214, 0.06);
-    color: rgba(255, 43, 214, 0.95);
+    border: 1px solid rgba(255, 102, 0, 0.35);
+    background: rgba(255, 102, 0, 0.06);
+    color: rgba(255, 102, 0, 0.95);
     transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
     clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
   }
 
   .pd-cart:hover {
     transform: translateY(-1px);
-    border-color: rgba(255, 43, 214, 0.7);
-    box-shadow: 0 0 14px rgba(255, 43, 214, 0.18);
+    border-color: rgba(255, 102, 0, 0.7);
+    box-shadow: 0 0 14px rgba(255, 102, 0, 0.18);
   }
 
   .pd-cart__icon {

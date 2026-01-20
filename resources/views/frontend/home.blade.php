@@ -19,7 +19,7 @@
                 <span class="glitch" data-text="STORE">STORE</span>
             </h1>
             <p class="text-xl md:text-2xl text-cyan-100 mb-8 font-light tracking-widest uppercase">
-                Công nghệ tương lai <span class="text-pink-500 mx-2">/</span> Dịch vụ đỉnh cao
+                Công nghệ tương lai <span class="text-[rgb(var(--cyber-orange-rgb))] mx-2">/</span> Dịch vụ đỉnh cao
             </p>
             <div class="flex justify-center gap-6 flex-wrap">
                 <a href="{{ route('clearance.index') }}" class="cyber-btn">
@@ -40,7 +40,7 @@
         <div class="categories-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
             <!-- Laptop -->
             <a href="{{ route('clearance.index') }}" class="cyber-card p-6 flex flex-col items-center text-center group">
-                <div class="text-6xl mb-4 text-cyan-400 group-hover:text-pink-500 transition-colors duration-300">
+                <div class="text-6xl mb-4 text-cyan-400 group-hover:text-[rgb(var(--cyber-orange-rgb))] transition-colors duration-300">
                     <i class="fas fa-laptop-code"></i>
                 </div>
                 <h3 class="text-2xl font-bold mb-2">TAI NGHE</h3>
@@ -48,7 +48,7 @@
             </a>
             <!-- Phone -->
             <a href="{{ route('clearance.index') }}" class="cyber-card p-6 flex flex-col items-center text-center group">
-                <div class="text-6xl mb-4 text-cyan-400 group-hover:text-pink-500 transition-colors duration-300">
+                <div class="text-6xl mb-4 text-cyan-400 group-hover:text-[rgb(var(--cyber-orange-rgb))] transition-colors duration-300">
                     <i class="fas fa-mobile-alt"></i>
                 </div>
                 <h3 class="text-2xl font-bold mb-2">Smartphones</h3>
@@ -56,7 +56,7 @@
             </a>
             <!-- PC -->
             <a href="{{ route('clearance.index') }}" class="cyber-card p-6 flex flex-col items-center text-center group">
-                <div class="text-6xl mb-4 text-cyan-400 group-hover:text-pink-500 transition-colors duration-300">
+                <div class="text-6xl mb-4 text-cyan-400 group-hover:text-[rgb(var(--cyber-orange-rgb))] transition-colors duration-300">
                     <i class="fas fa-microchip"></i>
                 </div>
                 <h3 class="text-2xl font-bold mb-2">PC Gaming</h3>
@@ -64,7 +64,7 @@
             </a>
             <!-- Accessories -->
             <a href="{{ route('clearance.index') }}" class="cyber-card p-6 flex flex-col items-center text-center group">
-                <div class="text-6xl mb-4 text-cyan-400 group-hover:text-pink-500 transition-colors duration-300">
+                <div class="text-6xl mb-4 text-cyan-400 group-hover:text-[rgb(var(--cyber-orange-rgb))] transition-colors duration-300">
                     <i class="fas fa-headset"></i>
                 </div>
                 <h3 class="text-2xl font-bold mb-2">Gear & Audio</h3>
@@ -76,7 +76,7 @@
     <!-- 3. Best Sellers -->
     <section class="cyber-section relative">
         <div class="absolute -left-20 top-1/4 w-96 h-96 bg-cyan-500 rounded-full mix-blend-screen filter blur-[128px] opacity-20 pointer-events-none"></div>
-        <div class="absolute -right-20 bottom-1/4 w-96 h-96 bg-pink-500 rounded-full mix-blend-screen filter blur-[128px] opacity-20 pointer-events-none"></div>
+        <div class="absolute -right-20 bottom-1/4 w-96 h-96 bg-[rgb(var(--cyber-orange-rgb))] rounded-full mix-blend-screen filter blur-[128px] opacity-20 pointer-events-none"></div>
 
         <h2 class="section-title text-4xl text-center mb-12 neon-text-pink">
             Sản phẩm Hot
@@ -111,7 +111,7 @@
                     <p class="text-gray-400 mb-6 line-clamp-3">{{ $service->description }}</p>
                     <div class="flex items-center justify-between mt-auto">
                         <span class="text-cyan-400 font-bold text-xl">{{ $service->price ? number_format($service->price) . 'đ' : 'Liên hệ' }}</span>
-                        <a href="{{ route('booking.create') }}" class="text-sm uppercase tracking-widest text-white hover:text-pink-500 transition-colors">
+                        <a href="{{ route('booking.create') }}" class="text-sm uppercase tracking-widest text-white hover:text-[rgb(var(--cyber-orange-rgb))] transition-colors">
                             Đặt lịch <i class="fas fa-arrow-right ml-1"></i>
                         </a>
                     </div>
@@ -164,7 +164,7 @@
     <section class="cyber-footer-cta py-20 px-4 text-center">
         <div class="relative z-10 max-w-4xl mx-auto">
             <h2 class="text-4xl md:text-5xl font-black mb-6 uppercase tracking-widest">
-                Sẵn sàng nâng cấp <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-pink-500">trải nghiệm?</span>
+                Sẵn sàng nâng cấp <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-[rgb(var(--cyber-orange-rgb))]">trải nghiệm?</span>
             </h2>
             <p class="text-gray-400 mb-10 text-lg max-w-2xl mx-auto">
                 Tham gia vào hệ sinh thái công nghệ của DNT Store ngay hôm nay.

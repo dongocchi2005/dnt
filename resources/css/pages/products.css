@@ -12,7 +12,7 @@
         --cy-text-sub: #9ca3af;
         --cy-accent: #00f3ff;
         --cy-accent-glow: 0 0 10px rgba(0, 243, 255, 0.5);
-        --cy-badge-bg: #ff0055;
+        --cy-badge-bg: #ff6600;
         --cy-badge-text: #fff;
         --cy-card-hover-transform: translateY(-5px);
         
@@ -270,8 +270,8 @@
     }
     
     html[data-theme="dark"] .cy-price-current {
-        @apply text-pink-500;
-        text-shadow: 0 0 5px rgba(236, 72, 153, 0.5);
+        color: var(--cyber-orange);
+        text-shadow: 0 0 5px rgba(255, 102, 0, 0.5);
     }
     
     .cy-price-old {

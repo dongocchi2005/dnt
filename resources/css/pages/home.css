@@ -1,7 +1,7 @@
 :root {
     --cyber-black: #050505;
     --cyber-cyan: #00f3ff;
-    --cyber-pink: #ff00ff;
+    --cyber-pink: var(--cyber-orange);
     --cyber-text: #ffffff;
     --cyber-grid: rgba(0, 243, 255, 0.1);
 }
@@ -168,7 +168,7 @@ body[data-page="dashboard"] .section-title {
 }
 
 .cyber-btn-pink::before {
-    background: linear-gradient(90deg, transparent, rgba(255, 0, 255, 0.5), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255, 102, 0, 0.5), transparent);
 }
 
 .cyber-btn-pink:hover {
@@ -274,14 +274,14 @@ color: orange;
     font-size: 3rem;
     color: var(--cyber-orange);
     margin-bottom: 1.5rem;
-    filter: drop-shadow(0 0 5px var(--cyber-pink));
+    filter: drop-shadow(0 0 5px var(--cyber-orange));
 }
 
 /* Footer CTA */
 .cyber-footer-cta {
     background: linear-gradient(45deg, rgba(0, 0, 0, 0.9), rgba(10, 10, 10, 0.9));
     border-top: 2px solid var(--cyber-cyan);
-    border-bottom: 2px solid var(--cyber-pink);
+    border-bottom: 2px solid var(--cyber-orange);
     position: relative;
     overflow: hidden;
 }
@@ -369,11 +369,6 @@ html[data-theme="light"] .categories-grid .text-cyan-400 {
 
 html[data-theme="light"] .categories-grid .text-gray-400 {
     color: var(--text-muted);
-}
-
-/* Fix Product Price Colors */
-html[data-theme="light"] .product-grid .text-pink-500 {
-    color: #E55C12; /* Darker orange for price */
 }
 
 html[data-theme="light"] .product-grid .text-cyan-400 {

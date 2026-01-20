@@ -12,8 +12,9 @@
 :root{
   --cyber-black:#050505;
   --cyber-cyan:#00f3ff;
-  --cyber-pink:#ff00ff;
-  --cyber-orange:#ff6600; /* dark chỉ để phụ, không ảnh hưởng nhiều */
+  --cyber-orange:#ff6600;
+  --cyber-orange-rgb:255 102 0;
+  --cyber-pink:var(--cyber-orange);
   --cyber-text:#ffffff;
 
   --cyber-grid:rgba(0,243,255,.10);
@@ -37,7 +38,8 @@ html[data-theme="light"]{
   /* Brand oranges (soft) */
   --cyber-cyan:#F37021;           /* cam chủ đạo (dùng lại token cyan để reuse class) */
   --cyber-orange:#F37021;
-  --cyber-pink:#FF9A5C;           /* cam nhạt phụ */
+  --cyber-orange-rgb:243 112 33;
+  --cyber-pink:var(--cyber-orange);
 
   /* Text */
   --cyber-text:#2E1F17;           /* nâu đậm (giống ảnh) */
@@ -282,7 +284,7 @@ html[data-theme="light"] .neon-text-pink{
   font-weight:900;
 }
 html[data-theme="light"] .neon-text-cyan{ color:var(--cyber-orange) !important; }
-html[data-theme="light"] .neon-text-pink{ color:#E55C12 !important; }
+html[data-theme="light"] .neon-text-pink{ color:var(--cyber-orange) !important; }
 
 /* Glitch (dark only). Light mode tắt hoàn toàn */
 .glitch{

@@ -2,7 +2,7 @@
 
 :root {
     --cyber-neon-blue: #00f3ff;
-    --cyber-neon-pink: #ff00ff;
+    --cyber-neon-pink: var(--cyber-orange);
     --cyber-neon-green: #0aff00;
     --cyber-bg-dark: #050505;
     --cyber-bg-card: rgba(20, 20, 25, 0.7);

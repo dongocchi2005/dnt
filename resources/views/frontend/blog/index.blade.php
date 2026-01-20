@@ -34,7 +34,7 @@
                             {{ $post->excerpt ?? 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' }}
                         </p>
                     </div>
-                    <a href="{{ route('blog.show', $post->slug) }}" class="text-pink-500 hover:text-pink-400 font-bold text-sm tracking-wider mt-auto">
+                    <a href="{{ route('blog.show', $post->slug) }}" class="text-[rgb(var(--cyber-orange-rgb))] hover:text-[rgb(var(--cyber-orange-rgb))] font-bold text-sm tracking-wider mt-auto">
 XEM NGAY
                     </a>
                 </div>

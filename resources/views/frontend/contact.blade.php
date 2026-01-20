@@ -83,15 +83,15 @@
                         <i class="fas fa-external-link-alt ml-auto text-red-500/50 group-hover:text-red-400"></i>
                     </a>
                     
-                    <a href="tel:0987833560" class="flex items-center p-4 bg-pink-600/5 border border-pink-500/30 rounded-lg hover:bg-pink-600/20 hover:border-pink-400 hover:shadow-[0_0_15px_rgba(219,39,119,0.3)] transition-all group">
-                        <div class="w-12 h-12 flex items-center justify-center bg-pink-600/20 rounded-lg mr-4 group-hover:scale-110 transition-transform border border-pink-500/30">
-                            <i class="fas fa-phone-alt text-2xl text-pink-400"></i>
+                    <a href="tel:0987833560" class="flex items-center p-4 bg-[rgb(var(--cyber-orange-rgb)/0.05)] border border-[rgb(var(--cyber-orange-rgb)/0.3)] rounded-lg hover:bg-[rgb(var(--cyber-orange-rgb)/0.2)] hover:border-[rgb(var(--cyber-orange-rgb))] hover:shadow-[0_0_15px_rgb(var(--cyber-orange-rgb)_/_0.3)] transition-all group">
+                        <div class="w-12 h-12 flex items-center justify-center bg-[rgb(var(--cyber-orange-rgb)/0.2)] rounded-lg mr-4 group-hover:scale-110 transition-transform border border-[rgb(var(--cyber-orange-rgb)/0.3)]">
+                            <i class="fas fa-phone-alt text-2xl text-[rgb(var(--cyber-orange-rgb))]"></i>
                         </div>
                         <div>
-                            <div class="text-pink-400 font-bold font-display tracking-wide group-hover:text-pink-300">HOTLINE</div>
+                            <div class="text-[rgb(var(--cyber-orange-rgb))] font-bold font-display tracking-wide group-hover:text-[rgb(var(--cyber-orange-rgb))]">HOTLINE</div>
                             <div class="text-gray-500 text-xs font-mono group-hover:text-gray-400">0987.833.560</div>
                         </div>
-                        <div class="ml-auto w-2 h-2 rounded-full bg-pink-500 animate-pulse"></div>
+                        <div class="ml-auto w-2 h-2 rounded-full bg-[rgb(var(--cyber-orange-rgb))] animate-pulse"></div>
                     </a>
                 </div>
             </div>
@@ -104,17 +104,17 @@
 
                 <div class="space-y-4 text-gray-300">
                     <p class="flex items-start">
-                        <i class="fas fa-map-marker-alt mt-1 mr-3 text-pink-500"></i>
+                        <i class="fas fa-map-marker-alt mt-1 mr-3 text-[rgb(var(--cyber-orange-rgb))]"></i>
                         <span>DNT STORE HCM — Sửa tai nghe, lấy liền và sửa đổi chính hãng</span>
                     </p>
 
                     <p class="flex items-center">
-                        <i class="fas fa-phone-alt mr-3 text-pink-500"></i>
+                        <i class="fas fa-phone-alt mr-3 text-[rgb(var(--cyber-orange-rgb))]"></i>
                         <span>+84 999 888 777</span>
                     </p>
 
                     <p class="flex items-center">
-                        <i class="fas fa-envelope mr-3 text-pink-500"></i>
+                        <i class="fas fa-envelope mr-3 text-[rgb(var(--cyber-orange-rgb))]"></i>
                         <span>admin@dntstore.cyber</span>
                     </p>
                 </div>
@@ -139,7 +139,7 @@
                     <div class="pointer-events-none absolute inset-0"
                          style="background:
                             radial-gradient(900px 520px at 70% 20%, rgba(0,243,255,.18), transparent 60%),
-                            linear-gradient(180deg, rgba(255,0,255,.10), transparent 45%);
+                            linear-gradient(180deg, rgb(var(--cyber-orange-rgb) / .10), transparent 45%);
                             mix-blend-mode: screen;">
                     </div>
 
@@ -156,7 +156,7 @@
                     <div class="font-mono text-cyan-300/90">
                         SATELLITE LINK: <span class="text-gray-300">ACTIVE</span>
                     </div>
-                    <a class="font-mono text-pink-300 hover:text-pink-200 underline underline-offset-4"
+                    <a class="font-mono text-[rgb(var(--cyber-orange-rgb))] hover:text-[rgb(var(--cyber-orange-rgb))] underline underline-offset-4"
                        href="https://www.google.com/maps"
                        target="_blank" rel="noopener">
                         OPEN MAP

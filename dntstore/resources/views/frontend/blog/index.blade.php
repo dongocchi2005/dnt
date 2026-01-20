@@ -34,7 +34,7 @@
                             {{ $post->excerpt ?? 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' }}
                         </p>
                     </div>
-                    <a href="#" class="text-pink-500 hover:text-pink-400 font-bold text-sm tracking-wider mt-auto">
+                    <a href="#" class="text-[rgb(var(--cyber-orange-rgb))] hover:text-[rgb(var(--cyber-orange-rgb))] font-bold text-sm tracking-wider mt-auto">
 XEM NGAY
                     </a>
                 </div>
@@ -48,7 +48,7 @@ XEM NGAY
                             <h3 class="text-xl font-bold mb-3 text-white">System Update v{{ $i }}.0 Released</h3>
                             <p class="text-gray-400 text-sm mb-4">Critical security patches and performance enhancements for all neural link interfaces.</p>
                         </div>
-                        <a href="#" class="text-pink-500 hover:text-pink-400 font-bold text-sm tracking-wider mt-auto">READ_LOG >></a>
+                        <a href="#" class="text-[rgb(var(--cyber-orange-rgb))] hover:text-[rgb(var(--cyber-orange-rgb))] font-bold text-sm tracking-wider mt-auto">READ_LOG >></a>
                     </div>
                  @endfor
             @endforelse
