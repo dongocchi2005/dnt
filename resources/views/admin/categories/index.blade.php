@@ -69,7 +69,7 @@
     </div>
 
     <div class="cyber-panel overflow-hidden">
-        <div class="admin-table-mobile-hide overflow-x-auto">
+        <div class="admin-table-mobile-hide overflow-x-auto hidden md:block">
             <table class="min-w-full text-sm">
                 <thead class="bg-white/5">
                     <tr>
@@ -116,7 +116,7 @@
             </table>
         </div>
 
-        <div class="admin-mobile-cards px-4 py-4">
+        <div class="admin-mobile-cards px-4 py-4 block md:hidden">
             @forelse($categories as $category)
                 <div class="admin-mobile-card">
                     <div class="admin-mobile-card__head">
