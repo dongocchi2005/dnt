@@ -116,7 +116,7 @@
             </div>
         </div>
 
-        <div class="admin-table-wrap">
+        <div class="admin-table-wrap hidden md:block">
             <table class="admin-table">
                 <thead class="bg-white/5">
                     <tr>
@@ -206,7 +206,7 @@
             </table>
         </div>
 
-        <div class="admin-mobile-cards">
+        <div class="admin-mobile-cards block md:hidden">
             @foreach($orders as $order)
                 <div class="admin-mobile-card">
                     <div class="admin-mobile-card__head">

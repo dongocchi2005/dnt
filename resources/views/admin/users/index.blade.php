@@ -87,7 +87,7 @@
       </div>
     </div>
 
-    <div class="admin-table-wrap">
+    <div class="admin-table-wrap hidden md:block">
       <table class="admin-table">
         <thead class="bg-white/5">
           <tr class="text-left text-bl/50">
@@ -188,7 +188,7 @@
       </table>
     </div>
 
-    <div class="admin-mobile-cards">
+    <div class="admin-mobile-cards block md:hidden">
       @forelse($users as $u)
         @php
           $role = $u->role ?? ($u->is_admin ?? false ? 'admin' : 'user');
