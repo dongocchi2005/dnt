@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use App\Models\Logo;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -15,14 +14,24 @@ class ViewServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
-        try {
-            if (class_exists(Logo::class)) {
-                View::share('logo', Logo::query()->first());
-            } else {
-                View::share('logo', null);
-            }
-        } catch (\Throwable $e) {
+        if ($this->app->runningInConsole()) {
             View::share('logo', null);
+
+            return;
         }
+
+        $logo = null;
+
+        try {
+            $logoClass = 'App\\Models\\Logo';
+
+            if (class_exists($logoClass)) {
+                $logo = $logoClass::query()->first();
+            }
+        } catch (\Throwable) {
+            $logo = null;
+        }
+
+        View::share('logo', $logo);
     }
 }
