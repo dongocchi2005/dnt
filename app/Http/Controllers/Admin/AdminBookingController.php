@@ -136,9 +136,11 @@ class AdminBookingController extends Controller
         $repairNote = ($repairNote === '' ? null : $repairNote);
 
         if ($alreadyCompleted) {
-            Booking::query()
-                ->whereKey($booking->id)
-                ->update(['repair_note' => $repairNote]);
+            if (Schema::hasColumn('bookings', 'repair_note')) {
+                Booking::query()
+                    ->whereKey($booking->id)
+                    ->update(['repair_note' => $repairNote]);
+            }
 
             return redirect()->back()->with('success', 'Cập nhật ghi chú kỹ thuật thành công');
         }
@@ -161,7 +163,9 @@ class AdminBookingController extends Controller
         $savedStatus = $statusMap[$status] ?? $status;
         $booking->status = $savedStatus;
 
-        $booking->repair_note = $repairNote;
+        if (Schema::hasColumn('bookings', 'repair_note')) {
+            $booking->repair_note = $repairNote;
+        }
 
         // If marking completed, optionally store price (only if column exists)
         $completedStatuses = ['completed', 'đã hoàn thành', 'Đã hoàn thành'];
