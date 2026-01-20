@@ -16,8 +16,12 @@ class ViewServiceProvider extends ServiceProvider
     public function boot(): void
     {
         try {
-            View::share('logo', Logo::first());
-        } catch (\Exception $e) {
+            if (class_exists(Logo::class)) {
+                View::share('logo', Logo::query()->first());
+            } else {
+                View::share('logo', null);
+            }
+        } catch (\Throwable $e) {
             View::share('logo', null);
         }
     }
