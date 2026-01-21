@@ -205,7 +205,7 @@
         <p class="text-bl/60 text-sm mt-1">Chi tiết doanh thu theo tháng</p>
     </div>
 
-    <div class="admin-table-mobile-hide overflow-x-auto hidden sm:block">
+    <div class="admin-table-mobile-hide overflow-x-auto">
         <table class="min-w-full text-sm">
             <thead class="bg-white/5">
                 <tr>
@@ -242,7 +242,7 @@
         </table>
     </div>
 
-    <div class="admin-mobile-cards block sm:hidden">
+    <div class="admin-mobile-cards">
         @for($i = 0; $i < count($labels); $i++)
             <div class="admin-mobile-card">
                 <div class="admin-mobile-card__head">
