@@ -1193,9 +1193,15 @@ body.admin-sidebar-open {
 }
 @media (min-width: 1024px) {
   .admin-sidebar {
-    position: relative;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
     transform: none;
     box-shadow: none;
+  }
+  .admin-main {
+    margin-left: 16rem;
   }
   .admin-content {
     padding: 2rem 2.5rem 2.75rem;

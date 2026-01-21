@@ -33,8 +33,8 @@ class ProductUpdateRequest extends FormRequest
             'slug' => ['nullable','string','max:255', Rule::unique('products','slug')->ignore($productId)],
             'description' => ['nullable','string'],
             'category_id' => ['nullable','exists:categories,id'],
-            'original_price' => ['required','numeric'],
-            'sale_price' => ['required','numeric'],
+            'original_price' => ['required','numeric','min:0','max:999999999999.99'],
+            'sale_price' => ['required','numeric','min:0','max:999999999999.99'],
             'image' => ['nullable','file','mimes:jpeg,png,jpg,gif,webp','max:10240'],
             'gallery' => ['array'],
             'gallery.*' => ['file','mimes:jpeg,png,jpg,gif,webp','max:10240'],
@@ -49,7 +49,7 @@ class ProductUpdateRequest extends FormRequest
             'variants' => ['array'],
             'variants.*.combo' => ['required','string','max:1000'],
             'variants.*.sku' => ['nullable','string','max:255'],
-            'variants.*.price' => ['required','numeric'],
+            'variants.*.price' => ['required','numeric','min:0','max:999999999999.99'],
             // no stock
             'variants.*.is_default' => ['nullable','boolean'],
         ];
