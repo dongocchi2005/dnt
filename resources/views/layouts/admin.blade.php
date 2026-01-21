@@ -24,7 +24,24 @@
 
     {{-- Font Awesome --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    @vite(['resources/css/app.css', 'resources/css/pages/admin.css', 'resources/js/app.js'])
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    @php
+        $manifestPath = public_path('build/manifest.json');
+        $manifest = is_file($manifestPath) ? json_decode(file_get_contents($manifestPath), true) : [];
+        $adminCssFile = $manifest['resources/css/pages/admin.css']['file'] ?? null;
+    @endphp
+    @if($adminCssFile)
+        <link rel="stylesheet" href="{{ asset('build/' . $adminCssFile) }}">
+    @endif
+
+    <style>
+        .admin-mobile-cards{display:none}
+        @media (max-width:639px){
+            .admin-table-wrap,.admin-table-mobile-hide{display:none!important}
+            .admin-mobile-cards{display:flex;flex-direction:column;gap:.75rem}
+        }
+    </style>
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
