@@ -6,6 +6,7 @@ export default defineConfig({
         laravel({
             input: [
                 'resources/css/app.css', 
+                'resources/css/pages/admin.css',
                 'resources/js/app.js', 
                 'resources/css/pages/booking.css', 
                 'resources/js/pages/booking.js', 
