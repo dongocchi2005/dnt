@@ -55,7 +55,7 @@
       </a>
     </form>
 
-    <div class="admin-table-mobile-hide overflow-x-auto hidden md:block">
+    <div class="admin-table-mobile-hide overflow-x-auto hidden sm:block">
       <table class="w-full text-sm">
         <thead>
           <tr class="text-left text-bl/70">
@@ -99,7 +99,7 @@
       </table>
     </div>
 
-    <div class="admin-mobile-cards block md:hidden">
+    <div class="admin-mobile-cards block sm:hidden">
       @forelse($orders as $order)
         <div class="admin-mobile-card">
           <div class="admin-mobile-card__head">

@@ -1262,7 +1262,7 @@ body.admin-sidebar-open {
 .admin-mobile-cards {
   display: none;
 }
-@media (max-width: 767px) {
+@media (max-width: 639px) {
   .ui-admin .admin-content .flex,
   .ui-admin .admin-content .grid {
     min-width: 0;

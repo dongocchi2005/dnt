@@ -94,7 +94,7 @@
             </div>
         </div>
 
-        <div class="admin-table-wrap hidden md:block">
+        <div class="admin-table-wrap hidden sm:block">
             <table class="admin-table">
                 <thead class="bg-white/5">
                     <tr>
@@ -181,7 +181,7 @@
             </table>
         </div>
 
-        <div class="admin-mobile-cards block md:hidden">
+        <div class="admin-mobile-cards block sm:hidden">
             @forelse($products as $product)
                 <div class="admin-mobile-card">
                     <div class="admin-mobile-card__head">

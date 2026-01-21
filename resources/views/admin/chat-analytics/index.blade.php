@@ -77,7 +77,7 @@
 
     <div class="cyber-panel p-6 mt-6 overflow-hidden">
         <h3 class="text-lg font-bold text-bl mb-4">Phiên chat gần đây</h3>
-        <div class="admin-table-mobile-hide overflow-x-auto hidden md:block">
+        <div class="admin-table-mobile-hide overflow-x-auto hidden sm:block">
             <table class="min-w-full text-sm">
                 <thead class="bg-white/5">
                     <tr>
@@ -108,7 +108,7 @@
             </table>
         </div>
 
-        <div class="admin-mobile-cards block md:hidden">
+        <div class="admin-mobile-cards block sm:hidden">
             @forelse($recentSessions as $s)
                 <div class="admin-mobile-card">
                     <div class="admin-mobile-card__head">

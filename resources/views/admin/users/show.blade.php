@@ -129,7 +129,7 @@
       </div>
 
       @if(isset($orders) && $orders->count())
-        <div class="admin-table-mobile-hide mt-4 overflow-x-auto hidden md:block">
+        <div class="admin-table-mobile-hide mt-4 overflow-x-auto hidden sm:block">
           <table class="min-w-full text-sm">
             <thead class="bg-white/5">
               <tr class="text-left text-bl/70">
@@ -159,7 +159,7 @@
           </table>
         </div>
 
-        <div class="admin-mobile-cards mt-4 block md:hidden">
+        <div class="admin-mobile-cards mt-4 block sm:hidden">
           @foreach($orders as $o)
             <div class="admin-mobile-card">
               <div class="admin-mobile-card__head">
