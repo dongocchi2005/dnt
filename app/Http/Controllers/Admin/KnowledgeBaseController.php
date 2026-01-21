@@ -11,16 +11,33 @@ use Illuminate\Support\Str;
 
 class KnowledgeBaseController extends Controller
 {
+    private function schemaReady(): bool
+    {
+        if (!Schema::hasTable('knowledge_base')) {
+            return false;
+        }
+
+        return Schema::hasColumns('knowledge_base', [
+            'title',
+            'slug',
+            'category',
+            'source_type',
+            'content',
+            'is_active',
+        ]);
+    }
+
     public function index(Request $request)
     {
-        $tableMissing = !Schema::hasTable('knowledge_base');
-        if ($tableMissing) {
+        $schemaReady = $this->schemaReady();
+        if (!$schemaReady) {
             $items = new LengthAwarePaginator([], 0, 15);
             $items->withPath($request->url());
             return view('admin.knowledge-base.index', [
                 'items' => $items,
                 'search' => '',
                 'tableMissing' => true,
+                'missingReason' => 'Bảng `knowledge_base` chưa sẵn sàng (thiếu cột). Vui lòng chạy `php artisan migrate`.',
                 'categories' => [],
                 'sourceTypes' => [],
             ]);
@@ -79,18 +96,18 @@ class KnowledgeBaseController extends Controller
 
     public function create()
     {
-        if (!Schema::hasTable('knowledge_base')) {
+        if (!$this->schemaReady()) {
             return redirect()->route('admin.knowledge-base.index')
-                ->with('error', 'Chưa có bảng knowledge_base. Vui lòng chạy migration.');
+                ->with('error', 'Bảng `knowledge_base` chưa sẵn sàng. Vui lòng chạy migration.');
         }
         return view('admin.knowledge-base.form');
     }
 
     public function store(Request $request)
     {
-        if (!Schema::hasTable('knowledge_base')) {
+        if (!$this->schemaReady()) {
             return redirect()->route('admin.knowledge-base.index')
-                ->with('error', 'Chưa có bảng knowledge_base. Vui lòng chạy migration.');
+                ->with('error', 'Bảng `knowledge_base` chưa sẵn sàng. Vui lòng chạy migration.');
         }
         $data = $this->validateData($request);
         KnowledgeBase::create($data);
@@ -100,18 +117,18 @@ class KnowledgeBaseController extends Controller
 
     public function edit(KnowledgeBase $knowledgeBase)
     {
-        if (!Schema::hasTable('knowledge_base')) {
+        if (!$this->schemaReady()) {
             return redirect()->route('admin.knowledge-base.index')
-                ->with('error', 'Chưa có bảng knowledge_base. Vui lòng chạy migration.');
+                ->with('error', 'Bảng `knowledge_base` chưa sẵn sàng. Vui lòng chạy migration.');
         }
         return view('admin.knowledge-base.form', ['item' => $knowledgeBase]);
     }
 
     public function update(Request $request, KnowledgeBase $knowledgeBase)
     {
-        if (!Schema::hasTable('knowledge_base')) {
+        if (!$this->schemaReady()) {
             return redirect()->route('admin.knowledge-base.index')
-                ->with('error', 'Chưa có bảng knowledge_base. Vui lòng chạy migration.');
+                ->with('error', 'Bảng `knowledge_base` chưa sẵn sàng. Vui lòng chạy migration.');
         }
         $data = $this->validateData($request, true);
         $knowledgeBase->update($data);
@@ -121,9 +138,9 @@ class KnowledgeBaseController extends Controller
 
     public function destroy(KnowledgeBase $knowledgeBase)
     {
-        if (!Schema::hasTable('knowledge_base')) {
+        if (!$this->schemaReady()) {
             return redirect()->route('admin.knowledge-base.index')
-                ->with('error', 'Chưa có bảng knowledge_base. Vui lòng chạy migration.');
+                ->with('error', 'Bảng `knowledge_base` chưa sẵn sàng. Vui lòng chạy migration.');
         }
         $knowledgeBase->delete();
         return back()->with('success', 'Đã xoá mục kiến thức.');

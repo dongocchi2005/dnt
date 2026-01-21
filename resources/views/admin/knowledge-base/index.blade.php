@@ -25,7 +25,7 @@
 
         @if(!empty($tableMissing))
             <div class="mb-4 rounded-xl border border-yellow-500/20 bg-yellow-500/10 p-4 text-sm text-yellow-400 flex items-center gap-2">
-                <i class="fa-solid fa-triangle-exclamation"></i> Bảng `knowledge_base` chưa tồn tại. Vui lòng chạy `php artisan migrate`.
+                <i class="fa-solid fa-triangle-exclamation"></i> {{ $missingReason ?? 'Bảng `knowledge_base` chưa tồn tại. Vui lòng chạy `php artisan migrate`.' }}
             </div>
         @endif
 
